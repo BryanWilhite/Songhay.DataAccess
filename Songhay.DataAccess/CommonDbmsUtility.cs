@@ -111,6 +111,8 @@ namespace Songhay.DataAccess
             return i;
         }
 
+#if !NETSTANDARD2_0
+
         /// <summary>
         /// Returns a <see cref="Common.DbDataAdapter"/>.
         /// </summary>
@@ -146,6 +148,8 @@ namespace Songhay.DataAccess
             var adapter = GetAdapter(factory, connectionConfiguration, query);
             return adapter;
         }
+
+#endif
 
         /// <summary>
         /// Gets the adapter.
@@ -188,6 +192,8 @@ namespace Songhay.DataAccess
             return adapter;
         }
 
+#if !NETSTANDARD2_0
+
         /// <summary>
         /// Gets the command.
         /// </summary>
@@ -204,6 +210,8 @@ namespace Songhay.DataAccess
             var command = GetCommand(factory, commandType, commandText);
             return command;
         }
+
+#endif
 
         /// <summary>
         /// Gets the command.
@@ -223,6 +231,9 @@ namespace Songhay.DataAccess
             return command;
         }
 
+
+#if !NETSTANDARD2_0
+
         /// <summary>
         /// Returns a <see cref="Common.DbConnection"/>.
         /// </summary>
@@ -241,6 +252,8 @@ namespace Songhay.DataAccess
             return connection;
         }
 
+#endif
+
         /// <summary>
         /// Gets the connection.
         /// </summary>
@@ -258,6 +271,8 @@ namespace Songhay.DataAccess
             return connection;
         }
 
+#if !NETSTANDARD2_0
+
         /// <summary>
         /// Gets the provider factory.
         /// </summary>
@@ -270,6 +285,8 @@ namespace Songhay.DataAccess
             DbProviderFactory factory = DbProviderFactories.GetFactory(invariantProviderName);
             return factory;
         }
+
+#endif
 
         /// <summary>
         /// Removes the key value pair from connection string.

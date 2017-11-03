@@ -11,6 +11,8 @@ namespace Songhay.DataAccess.Extensions
     /// </summary>
     public static class DataSetExtensions
     {
+#if !NETSTANDARD2_0
+
         /// <summary>
         /// Loads the specified command.
         /// </summary>
@@ -70,6 +72,8 @@ namespace Songhay.DataAccess.Extensions
 
             return set;
         }
+
+#endif
 
         /// <summary>
         /// Converts the <see cref="IEnumerable{System.String}"/> into a data table mappings.

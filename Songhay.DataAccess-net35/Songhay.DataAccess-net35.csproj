@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{12E755B2-5C53-4B90-A80F-87E6F56E6BA8}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Songhay.DataAccess</RootNamespace>
+    <AssemblyName>Songhay.DataAccess</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;NET35</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net35\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Songhay, Version=2.0.0.29709, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SonghayCore.2.3.1\lib\net35\Songhay.dll</HintPath>
+    </Reference>
+    <Reference Include="SonghayCore, Version=1.0.0.29717, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SonghayCore.2.3.1\lib\net35\SonghayCore.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\Songhay.DataAccess-net452\Extensions\EncryptionMetadataExtensions.cs">
+      <Link>Extensions\EncryptionMetadataExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\Songhay.DataAccess-net452\Extensions\RegistryKeyExtensions.cs">
+      <Link>Extensions\RegistryKeyExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\Songhay.DataAccess\CommonDbmsUtility.cs">
+      <Link>CommonDbmsUtility.cs</Link>
+    </Compile>
+    <Compile Include="..\Songhay.DataAccess\CommonParameterUtility.cs">
+      <Link>CommonParameterUtility.cs</Link>
+    </Compile>
+    <Compile Include="..\Songhay.DataAccess\CommonReaderUtility.cs">
+      <Link>CommonReaderUtility.cs</Link>
+    </Compile>
+    <Compile Include="..\Songhay.DataAccess\CommonReaderUtility.XPathDocument.cs">
+      <Link>CommonReaderUtility.XPathDocument.cs</Link>
+    </Compile>
+    <Compile Include="..\Songhay.DataAccess\CommonScalarUtility.cs">
+      <Link>CommonScalarUtility.cs</Link>
+    </Compile>
+    <Compile Include="..\songhay.dataaccess\extensions\DataSetExtensions.cs">
+      <Link>Extensions\DataSetExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\songhay.dataaccess\extensions\DbCommandExtensions.cs">
+      <Link>Extensions\DbCommandExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\songhay.dataaccess\extensions\IDataReaderExtensions.cs">
+      <Link>Extensions\IDataReaderExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\songhay.dataaccess\extensions\IDataReaderExtensions.JObject.cs">
+      <Link>Extensions\IDataReaderExtensions.JObject.cs</Link>
+    </Compile>
+    <Compile Include="..\songhay.dataaccess\extensions\IDataReaderExtensions.XObject.cs">
+      <Link>Extensions\IDataReaderExtensions.XObject.cs</Link>
+    </Compile>
+    <Compile Include="..\songhay.dataaccess\extensions\StringExtensions.cs">
+      <Link>Extensions\StringExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\songhay.dataaccess\models\CommonDbmsConstants.cs">
+      <Link>Models\CommonDbmsConstants.cs</Link>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
