@@ -72,12 +72,12 @@ namespace Songhay.DataAccess.Tests
         }
 
         [TestMethod]
-        [TestProperty("chocolateyPath", @"tools\sqlite\sqlite3.dll")]
+        [TestProperty("chocolateyPath", @"chocolatey\lib\SQLite\tools\sqlite3.dll")]
         public void ShouldFindSQLiteDll()
         {
             var chocolateyPath = this.TestContext.Properties["chocolateyPath"].ToString();
 
-            var systemDrive = Path.GetPathRoot(Environment.SystemDirectory);
+            var systemDrive = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
             var path = Path.Combine(systemDrive, chocolateyPath);
             this.TestContext.ShouldFindFile(path);
         }
