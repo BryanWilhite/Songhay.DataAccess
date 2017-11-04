@@ -56,7 +56,9 @@ namespace Songhay.DataAccess.Tests
         [TestProperty("sql", "SELECT * FROM [Employee];")]
         public void ShouldFetchData()
         {
-            var projectsFolder = this.TestContext.ShouldGetProjectsFolder(this.GetType());
+            var projectsFolder = this.TestContext.ShouldGetAssemblyDirectory(this.GetType());
+            projectsFolder = FrameworkFileUtility.GetParentDirectory(projectsFolder, 2);
+            this.TestContext.ShouldFindFolder(projectsFolder);
 
             var sql = this.TestContext.Properties["sql"].ToString();
 
