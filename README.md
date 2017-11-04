@@ -24,4 +24,9 @@ With respect to the list above, these `Common*` utilities are:
 
 The [extension method classes](https://github.com/BryanWilhite/Songhay.DataAccess/tree/master/Songhay.DataAccess/Extensions) of this Solution, feature routines around `IDbDataReader` for `XObject` and `JObject`.
 
+## related links
+
+* ADO.NET [[docs](https://docs.microsoft.com/en-us/dotnet/framework/data/adonet/)]
+* Entity Framework Overview [[docs](https://docs.microsoft.com/en-us/dotnet/framework/data/adonet/ef/overview)]
+
 @[BryanWilhite](https://twitter.com/bryanwilhite)
