@@ -7,11 +7,25 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Include="Chinook.sdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ChinookDatabase.Sqlite" Version="1.4.0" />
+    <PackageReference Include="ChinookDatabase.SqlServerCompact" Version="1.4.2" />
+    <PackageReference Include="EntityFrameworkCore.SqlServerCompact40" Version="2.0.0.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="2.0.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.3.0" />
     <PackageReference Include="MSTest.TestAdapter" Version="1.2.0" />
     <PackageReference Include="MSTest.TestFramework" Version="1.2.0" />
     <PackageReference Include="SonghayCore" Version="2.4.0" />
     <PackageReference Include="SonghayCore.MSTest" Version="2.2.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Songhay.DataAccess\Songhay.DataAccess.csproj" />
   </ItemGroup>
 
 </Project>
