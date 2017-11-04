@@ -28,10 +28,8 @@ namespace Songhay.DataAccess.Tests
         [TestProperty("invariantProviderName", "System.Data.SQLite")]
         public void ShouldConnectToChinook()
         {
-            var projectsFolder = this.TestContext.ShouldGetProjectsFolder(this.GetType());
-
-            var dbFolder = Path.Combine(projectsFolder, this.GetType().Namespace);
-            this.TestContext.ShouldOpenConnection(dbFolder);
+            var projectsFolder = this.TestContext.ShouldGetAssemblyDirectoryParent(this.GetType(), expectedLevels: 2);
+            this.TestContext.ShouldOpenConnection(projectsFolder);
         }
 
         [TestCategory("Integration")]
@@ -39,10 +37,8 @@ namespace Songhay.DataAccess.Tests
         [TestProperty("connectionString", @"Data Source=""{0}\Chinook.sqlite""")]
         public void ShouldConnectToChinookWithSQLiteConnection()
         {
-            var projectsFolder = this.TestContext.ShouldGetProjectsFolder(this.GetType());
-
-            var dbFolder = Path.Combine(projectsFolder, this.GetType().Namespace);
-            var connectionString = this.TestContext.ShouldGetConnectionString(dbFolder);
+            var projectsFolder = this.TestContext.ShouldGetAssemblyDirectoryParent(this.GetType(), expectedLevels: 2);
+            var connectionString = this.TestContext.ShouldGetConnectionString(projectsFolder);
             using (var connection = new SQLiteConnection(connectionString))
             {
                 connection.Open();
@@ -56,14 +52,10 @@ namespace Songhay.DataAccess.Tests
         [TestProperty("sql", "SELECT * FROM [Employee];")]
         public void ShouldFetchData()
         {
-            var projectsFolder = this.TestContext.ShouldGetAssemblyDirectory(this.GetType());
-            projectsFolder = FrameworkFileUtility.GetParentDirectory(projectsFolder, 2);
-            this.TestContext.ShouldFindFolder(projectsFolder);
-
             var sql = this.TestContext.Properties["sql"].ToString();
 
-            var dbFolder = Path.Combine(projectsFolder, this.GetType().Namespace);
-            var connectionString = this.TestContext.ShouldGetConnectionString(dbFolder);
+            var projectsFolder = this.TestContext.ShouldGetAssemblyDirectoryParent(this.GetType(), expectedLevels: 2);
+            var connectionString = this.TestContext.ShouldGetConnectionString(projectsFolder);
             using (var connection = new SQLiteConnection(connectionString))
             {
                 connection.Open();

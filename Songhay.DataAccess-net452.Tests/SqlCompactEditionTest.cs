@@ -1,7 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Songhay.DataAccess.Tests.Extensions;
 using Songhay.Extensions;
-using System.IO;
 
 namespace Songhay.DataAccess.Tests
 {
@@ -23,10 +22,8 @@ namespace Songhay.DataAccess.Tests
         [TestProperty("invariantProviderName", "System.Data.SqlServerCe.4.0")]
         public void ShouldConnectToChinook()
         {
-            var projectsFolder = this.TestContext.ShouldGetProjectsFolder(this.GetType());
-
-            var dbFolder = Path.Combine(projectsFolder, this.GetType().Namespace);
-            this.TestContext.ShouldOpenConnection(dbFolder);
+            var projectsFolder = this.TestContext.ShouldGetAssemblyDirectoryParent(this.GetType(), expectedLevels: 2);
+            this.TestContext.ShouldOpenConnection(projectsFolder);
         }
 
         [TestCategory("Integration")]
@@ -35,10 +32,8 @@ namespace Songhay.DataAccess.Tests
         [TestProperty("invariantProviderName", "System.Data.SqlServerCe.4.0")]
         public void ShouldConnectToNorthwind()
         {
-            var projectsFolder = this.TestContext.ShouldGetProjectsFolder(this.GetType());
-
-            var dbFolder = Path.Combine(projectsFolder, this.GetType().Namespace);
-            this.TestContext.ShouldOpenConnection(dbFolder);
+            var projectsFolder = this.TestContext.ShouldGetAssemblyDirectoryParent(this.GetType(), expectedLevels: 2);
+            this.TestContext.ShouldOpenConnection(projectsFolder);
         }
     }
 }
