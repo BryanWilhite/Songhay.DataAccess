@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Songhay.DataAccess</id>
-    <version>2.0.0</version>
+    <version>2.1.0</version>
     <title>Songhay Data Access</title>
     <authors>bryan.wilhite@gmail.com</authors>
     <owners>rasx@songhaysystem.com</owners>
@@ -11,7 +11,7 @@
     <licenseUrl>https://raw.github.com/BryanWilhite/Songhay.DataAccess/master/LICENSE.md</licenseUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Reusable definitions for System.Data.Common (ADO.NET)</description>
-    <releaseNotes>initial release</releaseNotes>
+    <releaseNotes>Migrated Repository routines for net452</releaseNotes>
     <copyright>Copyright 2001-2017 Bryan D. Wilhite</copyright>
     <tags>Data Access Songhay LINQ SQL Server SQLite Compact</tags>
     <frameworkAssemblies>
@@ -43,8 +43,14 @@
     <file src="Songhay.DataAccess-net452\bin\Release\Songhay.DataAccess*.config" target="lib\net452" />
     <file src="Songhay.DataAccess-net452\bin\Release\Songhay.DataAccess*.xml" target="lib\net452" />
 
+    <file src="Songhay.DataAccess.Repository-net452\bin\Release\Songhay.DataAccess.Repository*.dll" target="lib\net452" />
+    <file src="Songhay.DataAccess.Repository-net452\bin\Release\Songhay.DataAccess.Repository*.config" target="lib\net452" />
+    <file src="Songhay.DataAccess.Repository-net452\bin\Release\Songhay.DataAccess.Repository*.xml" target="lib\net452" />
+
+    <file src="Songhay.DataAccess.Repository-net452\**\*.cs" exclude="Songhay.DataAccess.Repository-net452\**\obj\**" target="src" />
+
     <file src="Songhay.DataAccess\bin\Release\netstandard2.0\Songhay.DataAccess*.dll" target="lib\netstandard2.0" />
-    <file src="Songhay.DataAccess\bin\Release\netstandard2.0\Songhay.DataAccess*.config" target="lib\netstandard2.0" />
+    <file src="Songhay.DataAccess\bin\Release\netstandard2.0\Songhay.DataAccess*.json" target="lib\netstandard2.0" />
     <file src="Songhay.DataAccess\bin\Release\netstandard2.0\Songhay.DataAccess*.xml" target="lib\netstandard2.0" />
 
     <file src="Songhay.DataAccess\**\*.cs" exclude="Songhay.DataAccess\**\obj\**" target="src" />
