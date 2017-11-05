@@ -1,15 +1,20 @@
 {
-    "version": "0.1.0",
-    "command": "dotnet",
-    "isShellCommand": true,
-    "args": [],
+    "version": "2.0.0",
     "tasks": [
         {
-            "taskName": "build",
+            "command": "nuget",
+            "taskName": "NuGet pack",
+            "isBackground": false,
+            "type": "shell",
             "args": [
-                "${workspaceRoot}/Songhay.DataAccess.Tests/Songhay.DataAccess.Tests.csproj"
+                "pack",
+                "Songhay.DataAccess.nuspec",
+                "-Verbosity",
+                "detailed"
             ],
-            "isBuildCommand": true,
+            "options": {
+                "cwd": "${workspaceRoot}"
+            },
             "problemMatcher": "$msCompile"
         }
     ]

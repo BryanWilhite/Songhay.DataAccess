@@ -1,0 +1,45 @@
+﻿<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Songhay.DataAccess</id>
+    <version>2.0.0</version>
+    <title>Songhay Data Access</title>
+    <authors>bryan.wilhite@gmail.com</authors>
+    <owners>rasx@songhaysystem.com</owners>
+    <projectUrl>https://github.com/BryanWilhite/Songhay.DataAccess</projectUrl>
+    <iconUrl>http://songhaysystem.com/Content/images/songhay_icon.png</iconUrl>
+    <licenseUrl>https://raw.github.com/BryanWilhite/Songhay.DataAccess/master/LICENSE.md</licenseUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Reusable definitions for System.Data.Common (ADO.NET)</description>
+    <releaseNotes>initial release</releaseNotes>
+    <copyright>Copyright 2001-2017 Bryan D. Wilhite</copyright>
+    <tags>Data Access Songhay LINQ SQL Server SQLite Compact</tags>
+    <dependencies>
+      <group targetFramework=".NETFramework4.5.2">
+        <dependency id="SonghayCore" version="2.3.1" />
+      </group>
+      <group targetFramework=".NETFramework3.5">
+        <dependency id="SonghayCore" version="2.3.1" />
+      </group>
+      <group targetFramework=".NETStandard2.0">
+        <dependency id="SonghayCore" version="2.3.1" />
+        <dependency id="System.ComponentModel.Annotations" version="4.4.0" />
+      </group>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="Songhay.DataAccess-net35\bin\Release\Songhay.DataAccess*.dll" target="lib\net35" />
+    <file src="Songhay.DataAccess-net35\bin\Release\Songhay.DataAccess*.config" target="lib\net35" />
+    <file src="Songhay.DataAccess-net35\bin\Release\Songhay.DataAccess*.xml" target="lib\net35" />
+
+    <file src="Songhay.DataAccess-net452\bin\Release\Songhay.DataAccess*.dll" target="lib\net452" />
+    <file src="Songhay.DataAccess-net452\bin\Release\Songhay.DataAccess*.config" target="lib\net452" />
+    <file src="Songhay.DataAccess-net452\bin\Release\Songhay.DataAccess*.xml" target="lib\net452" />
+
+    <file src="Songhay.DataAccess\bin\Release\netstandard2.0\Songhay.DataAccess*.dll" target="lib\netstandard2.0" />
+    <file src="Songhay.DataAccess\bin\Release\netstandard2.0\Songhay.DataAccess*.config" target="lib\netstandard2.0" />
+    <file src="Songhay.DataAccess\bin\Release\netstandard2.0\Songhay.DataAccess*.xml" target="lib\netstandard2.0" />
+
+    <file src="Songhay.DataAccess\**\*.cs" exclude="Songhay.DataAccess\**\obj\**" target="src" />
+  </files>
+</package>
