@@ -42,7 +42,6 @@ namespace Songhay.DataAccess.Extensions
             return builder.ConnectionString;
         }
 
-#if !NET35
         /// <summary>
         /// Gets the connection string with decrypted value.
         /// </summary>
@@ -57,6 +56,5 @@ namespace Songhay.DataAccess.Extensions
 
             return encryptionMeta.GetConnectionStringWithDecryptedValue(settings.ConnectionString, connectionStringKey);
         }
-#endif
     }
 }

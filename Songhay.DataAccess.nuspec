@@ -14,6 +14,13 @@
     <releaseNotes>initial release</releaseNotes>
     <copyright>Copyright 2001-2017 Bryan D. Wilhite</copyright>
     <tags>Data Access Songhay LINQ SQL Server SQLite Compact</tags>
+    <frameworkAssemblies>
+      <frameworkAssembly assemblyName="System.configuration" />
+      <frameworkAssembly assemblyName="System.Data" />
+      <frameworkAssembly assemblyName="System.Data.DataSetExtensions" />
+      <frameworkAssembly assemblyName="System.Xml" />
+      <frameworkAssembly assemblyName="System.Xml.Linq" />
+    </frameworkAssemblies>
     <dependencies>
       <group targetFramework=".NETFramework4.5.2">
         <dependency id="SonghayCore" version="2.3.1" />

@@ -40,6 +40,7 @@
       <HintPath>..\packages\SonghayCore.2.4.0\lib\net35\SonghayCore.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -47,6 +48,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\Songhay.DataAccess-net452\Extensions\ConnectionStringSettingsExtensions.cs">
+      <Link>Extensions\ConnectionStringSettingsExtensions.cs</Link>
+    </Compile>
     <Compile Include="..\Songhay.DataAccess-net452\Extensions\EncryptionMetadataExtensions.cs">
       <Link>Extensions\EncryptionMetadataExtensions.cs</Link>
     </Compile>
