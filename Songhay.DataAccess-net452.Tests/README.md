@@ -6,6 +6,10 @@ Since `System.Data.Common` is pretty much useless without [providers](https://do
 
 The SQLite database engine is available as a download [manually](http://sqlite.org/download.html) or [through Chocolatey](https://chocolatey.org/packages/SQLite) (on Windows). The [unit test](https://github.com/BryanWilhite/Songhay.DataAccess/blob/master/Songhay.DataAccess-net452.Tests/SQLiteTest.cs#L70), `ShouldFindSQLiteDll()`, is a cryptic reminder of this need for the engine.
 
+## testing of `OracleTableMetadata`
+
+The testing around `OracleTableMetadata` is detailed in [additional notes](../Songhay.DataAccess-net452/README.md).
+
 ## related links
 
 * “[Installing and Deploying on a Desktop (SQL Server Compact)](https://technet.microsoft.com/en-us/library/bb190958(v=sql.110).aspx)”

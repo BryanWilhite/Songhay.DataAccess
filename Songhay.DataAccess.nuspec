@@ -18,12 +18,14 @@
       <frameworkAssembly assemblyName="System.configuration" />
       <frameworkAssembly assemblyName="System.Data" />
       <frameworkAssembly assemblyName="System.Data.DataSetExtensions" />
+      <frameworkAssembly assemblyName="System.Runtime.CompilerServices" />
       <frameworkAssembly assemblyName="System.Xml" />
       <frameworkAssembly assemblyName="System.Xml.Linq" />
     </frameworkAssemblies>
     <dependencies>
       <group targetFramework=".NETFramework4.5.2">
         <dependency id="SonghayCore" version="2.3.1" />
+        <dependency id="System.ComponentModel.Annotations" version="4.4.0" />
       </group>
       <group targetFramework=".NETFramework3.5">
         <dependency id="SonghayCore" version="2.3.1" />

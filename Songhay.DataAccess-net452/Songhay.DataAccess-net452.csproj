@@ -40,6 +40,7 @@
       <HintPath>..\packages\SonghayCore.2.4.0\lib\net452\SonghayCore.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -86,14 +87,37 @@
     <Compile Include="..\Songhay.DataAccess\Models\CommonDbmsConstants.cs">
       <Link>Models\CommonDbmsConstants.cs</Link>
     </Compile>
+    <Compile Include="..\Songhay.DataAccess\Models\DataParameterMetadata.cs">
+      <Link>Models\DataParameterMetadata.cs</Link>
+    </Compile>
     <Compile Include="Extensions\ConnectionStringSettingsExtensions.cs" />
+    <Compile Include="Extensions\DataSetExtensions.Load.cs" />
     <Compile Include="Extensions\EncryptionMetadataExtensions.cs" />
+    <Compile Include="Extensions\OracleTableMetadataExtensions.cs" />
     <Compile Include="Extensions\RegistryKeyExtensions.cs" />
+    <Compile Include="Extensions\ValidationContextExtensions.cs" />
     <Compile Include="Models\CommonDbms.cs" />
+    <Compile Include="Models\OracleTableMetadata.Constants.cs" />
+    <Compile Include="Models\OracleTableMetadata.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TextTemplating\OracleEntityGenerator.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OracleEntityGenerator.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TextTemplating\OracleEntityGenerator.ctor.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TextTemplating\OracleEntityGenerator.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>OracleEntityGenerator.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

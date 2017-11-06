@@ -51,6 +51,9 @@
     <Compile Include="..\Songhay.DataAccess-net452\Extensions\ConnectionStringSettingsExtensions.cs">
       <Link>Extensions\ConnectionStringSettingsExtensions.cs</Link>
     </Compile>
+    <Compile Include="..\Songhay.DataAccess-net452\Extensions\DataSetExtensions.Load.cs">
+      <Link>Extensions\DataSetExtensions.Load.cs</Link>
+    </Compile>
     <Compile Include="..\Songhay.DataAccess-net452\Extensions\EncryptionMetadataExtensions.cs">
       <Link>Extensions\EncryptionMetadataExtensions.cs</Link>
     </Compile>
@@ -92,6 +95,9 @@
     </Compile>
     <Compile Include="..\songhay.dataaccess\models\CommonDbmsConstants.cs">
       <Link>Models\CommonDbmsConstants.cs</Link>
+    </Compile>
+    <Compile Include="..\Songhay.DataAccess\Models\DataParameterMetadata.cs">
+      <Link>Models\DataParameterMetadata.cs</Link>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

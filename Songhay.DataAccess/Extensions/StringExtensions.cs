@@ -1,9 +1,11 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace Songhay.DataAccess.Extensions
-{    /// <summary>
-     /// Extensions of <see cref="System.String"/>
-     /// </summary>
+{
+    /// <summary>
+    /// Extensions of <see cref="System.String"/>
+    /// </summary>
     public static class StringExtensions
     {
         /// <summary>
@@ -25,6 +27,33 @@ namespace Songhay.DataAccess.Extensions
         public static bool ToBoolean(this string data)
         {
             return data.ToNullableBoolean().GetValueOrDefault();
+        }
+
+        /// <summary>
+        /// Converts the <see cref="String"/> to camelcase from underscores.
+        /// </summary>
+        /// <param name="name">The name.</param>
+        public static string ToCamelCaseFromUnderscores(this string name)
+        {
+            if (string.IsNullOrEmpty(name)) return null;
+
+            var words = name
+                .Split('_')
+                .Select(i =>
+                {
+                    if (i.Length <= 2) return i.ToUpperInvariant();
+
+                    var chars = i
+                        .ToLowerInvariant()
+                        .ToCharArray()
+                        .Select((j, index) => (index == 0) ? char.ToUpperInvariant(j) : j)
+                        .ToArray();
+                    var s = new string(chars);
+                    return s;
+                })
+                .ToArray();
+
+            return string.Join(string.Empty, words);
         }
 
         /// <summary>

@@ -91,6 +91,7 @@
     <Compile Include="SqlCompactEditionTest.cs" />
     <Compile Include="SQLiteTest.cs" />
     <Compile Include="SQLiteTest.EF.cs" />
+    <Compile Include="OracleTableMetadataTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
