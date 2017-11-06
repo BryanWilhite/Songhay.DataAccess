@@ -1,6 +1,6 @@
 # `Songhay.DataAccess net452`
 
-Currently `net452` support has exclusive support for auto-generating POCO .NET classes from metadata for Oracle tables and views. We can see this support in action by looking at the integration tests in the `OracleTableMetadataTest` [class](./Songhay.DataAccess-net452.Tests/OracleTableMetadataTest.cs).
+Currently `net452` support has exclusive support for auto-generating POCO .NET classes from metadata for Oracle tables and views. We can see this support in action by looking at the integration tests in the `OracleTableMetadataTest` [class](../Songhay.DataAccess-net452.Tests/OracleTableMetadataTest.cs).
 
 ## file properties for `OracleEntityGenerator.tt`
 
