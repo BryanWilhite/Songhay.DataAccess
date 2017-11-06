@@ -32,7 +32,7 @@ namespace Songhay.DataAccess.Tests
         [TestMethod]
         [TestProperty("csFileTemplate", @"OracleTableMetadata\{tableName}.cs")]
         [TestProperty("metaJsonFileTemplate", @"OracleTableMetadata\{tableName}.json")]
-        [TestProperty("tableName", "OPS_PARTY")]
+        [TestProperty("tableName", "ORACLE_BIZ_TABLE")]
         public void ShouldGenerateClass()
         {
             var projectsFolder = this.TestContext.ShouldGetAssemblyDirectoryParent(this.GetType(), expectedLevels: 2);
@@ -56,10 +56,10 @@ namespace Songhay.DataAccess.Tests
             var metadata = JsonConvert.DeserializeObject<IEnumerable<OracleTableMetadata>>(File.ReadAllText(outputJsonFile));
             Assert.IsTrue(metadata.Any(), "The expected table metadata is not here.");
 
-            //var t4 = new OracleEntityGenerator(metadata);
-            //var cs = t4.TransformText();
-            //File.WriteAllText(csFile, cs);
-            //this.TestContext.ShouldFindFile(csFile);
+            var t4 = new OracleEntityGenerator(metadata);
+            var cs = t4.TransformText();
+            File.WriteAllText(csFile, cs);
+            this.TestContext.ShouldFindFile(csFile);
         }
     }
 }
