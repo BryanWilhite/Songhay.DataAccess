@@ -87,9 +87,6 @@
     <Compile Include="..\Songhay.DataAccess\Models\CommonDbmsConstants.cs">
       <Link>Models\CommonDbmsConstants.cs</Link>
     </Compile>
-    <Compile Include="..\Songhay.DataAccess\Models\DataParameterMetadata.cs">
-      <Link>Models\DataParameterMetadata.cs</Link>
-    </Compile>
     <Compile Include="Extensions\ConnectionStringSettingsExtensions.cs" />
     <Compile Include="Extensions\DataSetExtensions.Load.cs" />
     <Compile Include="Extensions\EncryptionMetadataExtensions.cs" />
