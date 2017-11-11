@@ -53,14 +53,14 @@
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="Songhay, Version=2.0.0.31876, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SonghayCore.2.4.0\lib\net452\Songhay.dll</HintPath>
+    <Reference Include="Songhay, Version=2.0.0.31974, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SonghayCore.2.5.2\lib\net452\Songhay.dll</HintPath>
     </Reference>
-    <Reference Include="SonghayCore, Version=1.0.0.31878, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SonghayCore.2.4.0\lib\net452\SonghayCore.dll</HintPath>
+    <Reference Include="SonghayCore, Version=1.0.0.31975, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SonghayCore.2.5.2\lib\net452\SonghayCore.dll</HintPath>
     </Reference>
     <Reference Include="SonghayCore.MSTest, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SonghayCore.MSTest.2.2.1\lib\net452\SonghayCore.MSTest.dll</HintPath>
+      <HintPath>..\packages\SonghayCore.MSTest.2.3.0\lib\net452\SonghayCore.MSTest.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
