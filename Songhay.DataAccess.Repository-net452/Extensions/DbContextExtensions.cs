@@ -16,9 +16,12 @@ namespace Songhay.DataAccess.Repository.Extensions
         static DbContextExtensions()
         {
             traceSource = TraceSources.Instance
-                .GetConfiguredTraceSource()
-                .WithAllSourceLevels();
+                .GetTraceSourceFromConfiguredName()
+                .WithAllSourceLevels()
+                .EnsureTraceSource();
         }
+
+        static readonly TraceSource traceSource;
 
         /// <summary>
         /// Detaches the specified entity.
@@ -160,7 +163,5 @@ namespace Songhay.DataAccess.Repository.Extensions
                 ex.EntityValidationErrors.ForEachInEnumerable(i => i.ValidationErrors.ForEachInEnumerable(handleValidationError));
             }
         }
-
-        static readonly TraceSource traceSource;
     }
 }

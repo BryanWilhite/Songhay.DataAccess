@@ -7,7 +7,7 @@ namespace Songhay.DataAccess.Tests.Extensions
     {
         public static string ShouldGetConnectionString(this TestContext context, string dbFolder)
         {
-            context.ShouldFindFolder(dbFolder);
+            context.ShouldFindDirectory(dbFolder);
             var connectionString = context.Properties["connectionString"].ToString();
             connectionString = string.Format(connectionString, dbFolder);
             context.WriteLine("connecting to {0}...", connectionString);
