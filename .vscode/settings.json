@@ -1,4 +1,27 @@
 {
     "cSpell.enabled": true,
+    "cSpell.words": [
+        "anders",
+        "aspnet",
+        "aspnetcore",
+        "bootstrapper",
+        "cors",
+        "eisenberg",
+        "eperm",
+        "filip",
+        "gitignore",
+        "hejlsberg",
+        "hwapp",
+        "linq",
+        "netcoreapp",
+        "newtonsoft",
+        "nocache",
+        "preprocessors",
+        "prerendering",
+        "scriptcs",
+        "strahl",
+        "xbuild",
+        "zaefferer"
+    ],
     "eslint.enable": true
 }
