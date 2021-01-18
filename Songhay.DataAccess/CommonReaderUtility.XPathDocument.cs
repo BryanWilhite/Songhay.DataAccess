@@ -117,7 +117,7 @@ namespace Songhay.DataAccess
 
         /// <summary>
         /// Returns a <see cref="XPathDocument"/>
-        /// based on the data of the type <see cref="DbDataReader"/>.
+        /// based on the data of the type <see cref="IDataReader"/>.
         /// </summary>
         /// <param name="documentElement">Document element name of the XML set.</param>
         /// <param name="reader">Data of the type <see cref="IDataReader"/>.</param>
@@ -159,7 +159,7 @@ namespace Songhay.DataAccess
 
         /// <summary>
         /// Returns a <see cref="XPathDocument"/>
-        /// based on the data of the type <see cref="DbDataReader"/>.
+        /// based on the data of the type <see cref="IDataReader"/>.
         /// </summary>
         /// <param name="documentElement">Document element name of the XML set.</param>
         /// <param name="rowElement">Row element name of the XML set.</param>

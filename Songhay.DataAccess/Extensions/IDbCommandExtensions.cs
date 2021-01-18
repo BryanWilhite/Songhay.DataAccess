@@ -4,9 +4,9 @@ using System.Data;
 namespace Songhay.DataAccess.Extensions
 {
     /// <summary>
-    /// Extensions of <see cref="DbCommand"/>
+    /// Extensions of <see cref="IDbCommand"/>
     /// </summary>
-    public static class DbCommandExtensions
+    public static class IDbCommandExtensions
     {
         /// <summary>
         /// Withes the connection.

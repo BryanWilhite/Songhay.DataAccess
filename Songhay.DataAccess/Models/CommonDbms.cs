@@ -1,9 +1,10 @@
+#if NET5_0
+
 using Songhay.DataAccess.Extensions;
 using Songhay.Extensions;
 using Songhay.Models;
 using Newtonsoft.Json;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Data.Common;
 using System.IO;
@@ -89,7 +90,7 @@ namespace Songhay.DataAccess.Models
         /// <returns></returns>
         protected virtual Exception GetProviderNotSupportedException()
         {
-            return new NotSupportedException(string.Format("Provider “{0}” is not supported.", this._invariantProviderName));
+            return new NotSupportedException(string.Format("Provider ï¿½{0}ï¿½ is not supported.", this._invariantProviderName));
         }
 
         /// <summary>
@@ -132,3 +133,5 @@ namespace Songhay.DataAccess.Models
         Dictionary<string, string> _sql;
     }
 }
+
+#endif

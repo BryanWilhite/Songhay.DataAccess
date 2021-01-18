@@ -20,7 +20,7 @@ namespace Songhay.DataAccess.Extensions
         }
 
         /// <summary>
-        /// Converts the <see cref="String"/> into a boolean.
+        /// Converts the <see cref="string"/> into a boolean.
         /// </summary>
         /// <param name="data">The data.</param>
         /// <returns></returns>
@@ -30,7 +30,7 @@ namespace Songhay.DataAccess.Extensions
         }
 
         /// <summary>
-        /// Converts the <see cref="String"/> to camelcase from underscores.
+        /// Converts the <see cref="string"/> to camelcase from underscores.
         /// </summary>
         /// <param name="name">The name.</param>
         public static string ToCamelCaseFromUnderscores(this string name)
@@ -57,7 +57,7 @@ namespace Songhay.DataAccess.Extensions
         }
 
         /// <summary>
-        /// Converts the <see cref="String"/> into a nullable boolean.
+        /// Converts the <see cref="string"/> into a nullable boolean.
         /// </summary>
         /// <param name="data">The data.</param>
         /// <returns></returns>

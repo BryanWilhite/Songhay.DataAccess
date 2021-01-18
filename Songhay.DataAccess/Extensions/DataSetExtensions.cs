@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Common;
 using System.Linq;
 
@@ -11,7 +12,7 @@ namespace Songhay.DataAccess.Extensions
     public static partial class DataSetExtensions
     {
         /// <summary>
-        /// Converts the <see cref="IEnumerable{System.String}"/> into a data table mappings.
+        /// Converts the <see cref="IEnumerable{string}"/> into a data table mappings.
         /// </summary>
         /// <param name="setTableNames">The set table names.</param>
         /// <returns></returns>
@@ -23,7 +24,7 @@ namespace Songhay.DataAccess.Extensions
         }
 
         /// <summary>
-        /// Converts the <see cref="IEnumerable{KeyValuePair{System.String, System.String}}"/> into a data table mappings.
+        /// Converts the <see cref="IEnumerable{KeyValuePair{string, string}}"/> into a data table mappings.
         /// </summary>
         /// <param name="pairs">The pairs.</param>
         /// <returns></returns>

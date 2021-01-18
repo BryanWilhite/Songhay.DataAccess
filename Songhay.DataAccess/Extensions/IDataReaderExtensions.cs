@@ -10,7 +10,7 @@ namespace Songhay.DataAccess.Extensions
     public static partial class IDataReaderExtensions
     {
         /// <summary>
-        /// Converts the <see cref="String"/> into a date time.
+        /// Converts the <see cref="string"/> into a date time.
         /// </summary>
         /// <param name="reader">The reader.</param>
         /// <param name="key">The key.</param>
@@ -23,7 +23,7 @@ namespace Songhay.DataAccess.Extensions
         }
 
         /// <summary>
-        /// Converts the <see cref="String"/> into a decimal.
+        /// Converts the <see cref="string"/> into a decimal.
         /// </summary>
         /// <param name="reader">The reader.</param>
         /// <param name="key">The key.</param>
@@ -36,7 +36,7 @@ namespace Songhay.DataAccess.Extensions
         }
 
         /// <summary>
-        /// Converts the <see cref="String"/> into a int.
+        /// Converts the <see cref="string"/> into a int.
         /// </summary>
         /// <param name="reader">The reader.</param>
         /// <param name="key">The key.</param>
@@ -49,7 +49,7 @@ namespace Songhay.DataAccess.Extensions
         }
 
         /// <summary>
-        /// Converts the <see cref="String"/> into a long.
+        /// Converts the <see cref="string"/> into a long.
         /// </summary>
         /// <param name="reader">The reader.</param>
         /// <param name="key">The key.</param>
@@ -62,7 +62,7 @@ namespace Songhay.DataAccess.Extensions
         }
 
         /// <summary>
-        /// Converts the <see cref="String"/> into a nullable boolean.
+        /// Converts the <see cref="string"/> into a nullable boolean.
         /// </summary>
         /// <param name="reader">The reader.</param>
         /// <param name="key">The key.</param>
@@ -81,7 +81,7 @@ namespace Songhay.DataAccess.Extensions
         }
 
         /// <summary>
-        /// Converts the <see cref="String"/> into a nullable date time.
+        /// Converts the <see cref="string"/> into a nullable date time.
         /// </summary>
         /// <param name="reader">The reader.</param>
         /// <param name="key">The key.</param>
@@ -95,7 +95,7 @@ namespace Songhay.DataAccess.Extensions
         }
 
         /// <summary>
-        /// Converts the <see cref="String"/> into a nullable decimal.
+        /// Converts the <see cref="string"/> into a nullable decimal.
         /// </summary>
         /// <param name="reader">The reader.</param>
         /// <param name="key">The key.</param>
@@ -109,7 +109,7 @@ namespace Songhay.DataAccess.Extensions
         }
 
         /// <summary>
-        /// Converts the <see cref="String"/> into a nullable int.
+        /// Converts the <see cref="string"/> into a nullable int.
         /// </summary>
         /// <param name="reader">The reader.</param>
         /// <param name="key">The key.</param>
@@ -122,7 +122,7 @@ namespace Songhay.DataAccess.Extensions
         }
 
         /// <summary>
-        /// Converts the <see cref="String"/> into a nullable long.
+        /// Converts the <see cref="string"/> into a nullable long.
         /// </summary>
         /// <param name="reader">The reader.</param>
         /// <param name="key">The key.</param>
@@ -156,7 +156,7 @@ namespace Songhay.DataAccess.Extensions
         }
 
         /// <summary>
-        /// Converts the <see cref="String"/> into a string.
+        /// Converts the <see cref="string"/> into a string.
         /// </summary>
         /// <param name="reader">The reader.</param>
         /// <param name="key">The key.</param>
@@ -170,7 +170,7 @@ namespace Songhay.DataAccess.Extensions
         }
 
         /// <summary>
-        /// Converts the <see cref="String"/> into a value.
+        /// Converts the <see cref="string"/> into a value.
         /// </summary>
         /// <param name="reader">The reader.</param>
         /// <param name="key">The key.</param>

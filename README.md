@@ -4,21 +4,27 @@ These reusable definitions for `System.Data.Common` ([ADO.NET](https://en.wikipe
 
 This repository represents the work horse that I have driven for over 15 years (depending on my other work horse, `SonghayCore` [[GitHub](https://github.com/BryanWilhite/SonghayCore), [NuGet](https://www.nuget.org/packages/SonghayCore/)]). It is quite a pleasure to finally share this work here on relatively newfangled GitHub.
 
+## breaking changes
+
+- support for `ConnectionStringSettings` dropped
+- `RegistryKeyExtensions` dropped
+- Oracle-related `TextTemplating` dropped
+
 ## the `Common*` utilities
 
 This Solution features the `Common*` utilities of reusable routines around:
 
-* `System.Data.IDbConnection` [[docs](https://docs.microsoft.com/en-us/dotnet/api/system.data.IDbConnection?view=netcore-2.0)]
-* `System.Data.Common.DbParameter` [[docs](https://docs.microsoft.com/en-us/dotnet/api/system.data.common.dbparameter?view=netcore-2.0)]
-* `System.Data.IDataReader` [[docs](https://docs.microsoft.com/en-us/dotnet/api/system.data.IDataReader?view=netcore-2.0)]
+- `System.Data.IDbConnection` [[docs](https://docs.microsoft.com/en-us/dotnet/api/system.data.IDbConnection?view=netcore-2.0)]
+- `System.Data.Common.DbParameter` [[docs](https://docs.microsoft.com/en-us/dotnet/api/system.data.common.dbparameter?view=netcore-2.0)]
+- `System.Data.IDataReader` [[docs](https://docs.microsoft.com/en-us/dotnet/api/system.data.IDataReader?view=netcore-2.0)]
 
 The interfaces `IDbConnection` and `IDataReader` are implemented in .NET as `System.Data.Common.DbConnection` [[docs](https://docs.microsoft.com/en-us/dotnet/api/system.data.common.dbconnection?view=netcore-2.0)] and `System.Data.Common.DbDataReader` [[docs](https://docs.microsoft.com/en-us/dotnet/api/system.data.common.dbdatareader?view=netcore-2.0)], respectively.
 
 With respect to the list above, these `Common*` utilities are:
 
-* the `CommonDbmsUtility` [class](https://github.com/BryanWilhite/Songhay.DataAccess/blob/master/Songhay.DataAccess/CommonDbmsUtility.cs) and the `CommonScalarUtility` [class](https://github.com/BryanWilhite/Songhay.DataAccess/blob/master/Songhay.DataAccess/CommonScalarUtility.cs)
-* the `CommonParameterUtility` [class](https://github.com/BryanWilhite/Songhay.DataAccess/blob/master/Songhay.DataAccess/CommonParameterUtility.cs)
-* the `CommonReaderUtility` [class](https://github.com/BryanWilhite/Songhay.DataAccess/blob/master/Songhay.DataAccess/CommonReaderUtility.cs)
+- the `CommonDbmsUtility` [class](https://github.com/BryanWilhite/Songhay.DataAccess/blob/master/Songhay.DataAccess/CommonDbmsUtility.cs) and the `CommonScalarUtility` [class](https://github.com/BryanWilhite/Songhay.DataAccess/blob/master/Songhay.DataAccess/CommonScalarUtility.cs)
+- the `CommonParameterUtility` [class](https://github.com/BryanWilhite/Songhay.DataAccess/blob/master/Songhay.DataAccess/CommonParameterUtility.cs)
+- the `CommonReaderUtility` [class](https://github.com/BryanWilhite/Songhay.DataAccess/blob/master/Songhay.DataAccess/CommonReaderUtility.cs)
 
 ## the Extensions
 
@@ -26,7 +32,7 @@ The [extension method classes](https://github.com/BryanWilhite/Songhay.DataAcces
 
 ## related links
 
-* ADO.NET [[docs](https://docs.microsoft.com/en-us/dotnet/framework/data/adonet/)]
-* Entity Framework Overview [[docs](https://docs.microsoft.com/en-us/dotnet/framework/data/adonet/ef/overview)]
+- ADO.NET [[docs](https://docs.microsoft.com/en-us/dotnet/framework/data/adonet/)]
+- Entity Framework Overview [[docs](https://docs.microsoft.com/en-us/dotnet/framework/data/adonet/ef/overview)]
 
 @[BryanWilhite](https://twitter.com/bryanwilhite)

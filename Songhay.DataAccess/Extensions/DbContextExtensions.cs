@@ -1,4 +1,6 @@
-﻿using Songhay.Diagnostics;
+﻿#if NET5_0
+
+using Songhay.Diagnostics;
 using Songhay.Extensions;
 using System;
 using System.Data.Entity;
@@ -165,3 +167,5 @@ namespace Songhay.DataAccess.Repository.Extensions
         }
     }
 }
+
+#endif

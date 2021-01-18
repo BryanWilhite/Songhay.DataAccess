@@ -86,7 +86,7 @@ namespace Songhay.DataAccess
             param.Direction = parameterMeta.ParameterDirection;
             param.SourceColumn = parameterMeta.SourceColumn;
             param.SourceVersion = parameterMeta.DataRowVersion;
-            param.Value = parameterMeta.ParameterValue ?? FrameworkTypeUtility.SqlDatabaseNull();
+            param.Value = parameterMeta.ParameterValue ?? ProgramTypeUtility.SqlDatabaseNull();
 
             return param;
         }
@@ -114,7 +114,7 @@ namespace Songhay.DataAccess
             if (m != null) return m.Select(i => GetParameterFromParameterMetadata(dbmsCommand, i)).ToArray();
 
             var d = parameterCollection as Dictionary<string, object>;
-            if (d != null) return d.Select(i => GetParameter(dbmsCommand, i.Key, i.Value ?? FrameworkTypeUtility.SqlDatabaseNull())).ToArray();
+            if (d != null) return d.Select(i => GetParameter(dbmsCommand, i.Key, i.Value ?? ProgramTypeUtility.SqlDatabaseNull())).ToArray();
 
             throw new NotSupportedException(@"
 The parameter collection is not supported.
@@ -151,18 +151,18 @@ Supported collections:
 
             if (parameterValue == null)
             {
-                o = FrameworkTypeUtility.SqlDatabaseNull();
+                o = ProgramTypeUtility.SqlDatabaseNull();
             }
             else if (t.Equals(typeof(DateTime)))
             {
                 DateTime dt = (DateTime)parameterValue;
 
                 //CONVENTION: return DbNull for default DateTime (Jan 1900):
-                if (dt == default(DateTime)) o = FrameworkTypeUtility.SqlDatabaseNull();
+                if (dt == default(DateTime)) o = ProgramTypeUtility.SqlDatabaseNull();
             }
             else if (t.IsValueType)
             {
-                if ((default(TypeOfValue).Equals(parameterValue)) && returnDbNullForZero) o = FrameworkTypeUtility.SqlDatabaseNull();
+                if ((default(TypeOfValue).Equals(parameterValue)) && returnDbNullForZero) o = ProgramTypeUtility.SqlDatabaseNull();
             }
 
             return o;

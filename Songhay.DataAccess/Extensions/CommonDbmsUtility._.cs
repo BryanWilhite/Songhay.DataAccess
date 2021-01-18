@@ -8,7 +8,7 @@ namespace Songhay.DataAccess
     /// <summary>
     /// Generic procedures for data access.
     /// </summary>
-    public static class CommonDbmsUtility
+    public static partial class CommonDbmsUtility
     {
         /// <summary>
         /// Closes a database connection.
@@ -111,46 +111,6 @@ namespace Songhay.DataAccess
             return i;
         }
 
-#if !NETSTANDARD2_0
-
-        /// <summary>
-        /// Returns a <see cref="Common.DbDataAdapter"/>.
-        /// </summary>
-        /// <param name="invariantProviderName">
-        /// The invariant name of the data provider.
-        /// </param>
-        public static DbDataAdapter GetAdapter(string invariantProviderName)
-        {
-            if (string.IsNullOrEmpty(invariantProviderName)) throw new ArgumentException("The Invariant Provider Name was not specified.");
-
-            DbProviderFactory factory = DbProviderFactories.GetFactory(invariantProviderName);
-            return factory.CreateDataAdapter();
-        }
-
-        /// <summary>
-        /// Returns a <see cref="Common.DbDataAdapter"/>.
-        /// </summary>
-        /// <param name="invariantProviderName">
-        /// The invariant name of the data provider.
-        /// </param>
-        /// <param name="connectionConfiguration">
-        /// The provider connection string.
-        /// </param>
-        /// <param name="query">
-        /// The SELECT statement used to generate SELECT, INSERT, UPDATE, DELETE
-        /// <see cref="Common.DbCommand"/> commands.
-        /// </param>
-        public static DbDataAdapter GetAdapter(string invariantProviderName, string connectionConfiguration, string query)
-        {
-            if (string.IsNullOrEmpty(invariantProviderName)) throw new ArgumentException("The Invariant Provider Name was not specified.");
-
-            DbProviderFactory factory = GetProviderFactory(invariantProviderName);
-            var adapter = GetAdapter(factory, connectionConfiguration, query);
-            return adapter;
-        }
-
-#endif
-
         /// <summary>
         /// Gets the adapter.
         /// </summary>
@@ -192,27 +152,6 @@ namespace Songhay.DataAccess
             return adapter;
         }
 
-#if !NETSTANDARD2_0
-
-        /// <summary>
-        /// Gets the command.
-        /// </summary>
-        /// <param name="invariantProviderName">Name of the invariant provider.</param>
-        /// <param name="commandType">Type of the command.</param>
-        /// <param name="commandText">The command text.</param>
-        /// <returns></returns>
-        /// <exception cref="System.ArgumentException">The Invariant Provider Name was not specified.</exception>
-        public static DbCommand GetCommand(string invariantProviderName, CommandType commandType, string commandText)
-        {
-            if (string.IsNullOrEmpty(invariantProviderName)) throw new ArgumentException("The Invariant Provider Name was not specified.");
-
-            DbProviderFactory factory = GetProviderFactory(invariantProviderName);
-            var command = GetCommand(factory, commandType, commandText);
-            return command;
-        }
-
-#endif
-
         /// <summary>
         /// Gets the command.
         /// </summary>
@@ -231,29 +170,6 @@ namespace Songhay.DataAccess
             return command;
         }
 
-
-#if !NETSTANDARD2_0
-
-        /// <summary>
-        /// Returns a <see cref="Common.DbConnection"/>.
-        /// </summary>
-        /// <param name="invariantProviderName">
-        /// The invariant name of the data provider.
-        /// </param>
-        /// <param name="connectionConfiguration">
-        /// The provider connection string.
-        /// </param>
-        public static DbConnection GetConnection(string invariantProviderName, string connectionConfiguration)
-        {
-            if (string.IsNullOrEmpty(invariantProviderName)) throw new ArgumentException("The Invariant Provider Name was not specified.");
-
-            DbProviderFactory factory = GetProviderFactory(invariantProviderName);
-            var connection = GetConnection(factory, connectionConfiguration);
-            return connection;
-        }
-
-#endif
-
         /// <summary>
         /// Gets the connection.
         /// </summary>
@@ -270,23 +186,6 @@ namespace Songhay.DataAccess
             connection.ConnectionString = connectionConfiguration;
             return connection;
         }
-
-#if !NETSTANDARD2_0
-
-        /// <summary>
-        /// Gets the provider factory.
-        /// </summary>
-        /// <param name="invariantProviderName">Name of the invariant provider.</param>
-        /// <returns></returns>
-        /// <exception cref="System.ArgumentException">The Invariant Provider Name was not specified.</exception>
-        public static DbProviderFactory GetProviderFactory(string invariantProviderName)
-        {
-            if (string.IsNullOrEmpty(invariantProviderName)) throw new ArgumentException("The Invariant Provider Name was not specified.");
-            DbProviderFactory factory = DbProviderFactories.GetFactory(invariantProviderName);
-            return factory;
-        }
-
-#endif
 
         /// <summary>
         /// Removes the key value pair from connection string.
