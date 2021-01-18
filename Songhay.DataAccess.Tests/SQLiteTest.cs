@@ -17,7 +17,7 @@ namespace Songhay.DataAccess.Tests
             using (var connection = new SQLiteConnection(connectionString))
             {
                 connection.Open();
-                Assert.Equal(connection.State, ConnectionState.Open);
+                Assert.Equal(ConnectionState.Open, connection.State);
             }
         }
 

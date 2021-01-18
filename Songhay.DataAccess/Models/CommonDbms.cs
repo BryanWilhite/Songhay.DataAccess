@@ -31,16 +31,16 @@ namespace Songhay.DataAccess.Models
         /// <param name="invariantProviderName">Name of the invariant provider.</param>
         /// <param name="connectionString">The connection string.</param>
         /// <param name="connectionStringKey">The connection string key.</param>
-        /// <param name="encryptionMetaJson">The encryption meta json.</param>
-        /// <exception cref="System.ArgumentNullException">
+        /// <param name="encryptionMetaJson">The encryption meta JSON.</param>
+        /// <exception cref="ArgumentNullException">
         /// invariantProviderName;The expected provider name is not here.
         /// or
         /// connectionString;The expected connection string is not here.
         /// </exception>
         public CommonDbms(string invariantProviderName, string connectionString, string connectionStringKey, string encryptionMetaJson)
         {
-            if (string.IsNullOrEmpty(invariantProviderName)) throw new ArgumentNullException("invariantProviderName", "The expected provider name is not here.");
-            if (string.IsNullOrEmpty(connectionString)) throw new ArgumentNullException("connectionString", "The expected connection string is not here.");
+            if (string.IsNullOrEmpty(invariantProviderName)) throw new ArgumentNullException(nameof(invariantProviderName), "The expected provider name is not here.");
+            if (string.IsNullOrEmpty(connectionString)) throw new ArgumentNullException(nameof(connectionString), "The expected connection string is not here.");
 
             this._invariantProviderName = invariantProviderName;
             this._factory = CommonDbmsUtility.GetProviderFactory(this._invariantProviderName);
@@ -94,7 +94,7 @@ namespace Songhay.DataAccess.Models
         }
 
         /// <summary>
-        /// Gets the SQL by the specified key or <see cref="CallerMemberName"/>.
+        /// Gets the SQL by the specified key or <see cref="CallerMemberNameAttribute"/>.
         /// </summary>
         /// <param name="key">The key.</param>
         protected virtual string GetSql([CallerMemberName] string key = null)
@@ -127,9 +127,9 @@ namespace Songhay.DataAccess.Models
             this._sql = sqlSetter.Invoke();
         }
 
-        string _invariantProviderName;
-        DbConnection _connection;
-        DbProviderFactory _factory;
+        readonly string _invariantProviderName;
+        readonly DbConnection _connection;
+        readonly DbProviderFactory _factory;
         Dictionary<string, string> _sql;
     }
 }

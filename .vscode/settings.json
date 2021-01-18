@@ -22,6 +22,5 @@
         "strahl",
         "xbuild",
         "zaefferer"
-    ],
-    "eslint.enable": true
+    ]
 }

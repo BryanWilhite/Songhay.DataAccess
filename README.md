@@ -6,7 +6,10 @@ This repository represents the work horse that I have driven for over 15 years (
 
 ## breaking changes
 
+- validation is not baked into Entity Framework Core [[StackOverflow](https://stackoverflow.com/a/43427057/22944)]
+- the `DbContext.Configuration` pattern has been replaced by overriding `DbContext.OnConfiguring` with `DbContextOptionsBuilder` [[docs](https://docs.microsoft.com/en-us/dotnet/api/microsoft.entityframeworkcore.dbcontextoptionsbuilder?view=efcore-5.0)]
 - support for `ConnectionStringSettings` dropped
+- `EntityConnectionStringBuilder` and `ObjectStateManager` is not migrated to .NET 5.0
 - `RegistryKeyExtensions` dropped
 - Oracle-related `TextTemplating` dropped
 

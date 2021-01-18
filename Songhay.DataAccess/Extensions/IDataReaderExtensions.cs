@@ -135,10 +135,10 @@ namespace Songhay.DataAccess.Extensions
         }
 
         /// <summary>
-        /// Converts the <see cref="IDataReader"/> into <see cref="IEnumerable{object[]}"/>.
+        /// Converts the <see cref="IDataReader"/> into <see cref="IEnumerable{T}"/>.
         /// </summary>
         /// <param name="reader">The reader.</param>
-        /// <exception cref="System.ArgumentNullException">The expected reader is not here.</exception>
+        /// <exception cref="ArgumentNullException">The expected reader is not here.</exception>
         /// <remarks>
         /// for more info, see “Consuming a DataReader with LINQ”
         /// [http://www.thinqlinq.com/default/consuming-a-datareader-with-linq]

@@ -12,7 +12,7 @@ namespace Songhay.DataAccess.Extensions
     public static partial class DataSetExtensions
     {
         /// <summary>
-        /// Converts the <see cref="IEnumerable{string}"/> into a data table mappings.
+        /// Converts the <see cref="IEnumerable{T}"/> into a data table mappings.
         /// </summary>
         /// <param name="setTableNames">The set table names.</param>
         /// <returns></returns>
@@ -24,7 +24,7 @@ namespace Songhay.DataAccess.Extensions
         }
 
         /// <summary>
-        /// Converts the <see cref="IEnumerable{KeyValuePair{string, string}}"/> into a data table mappings.
+        /// Converts the <see cref="IEnumerable{T}"/> into a data table mappings.
         /// </summary>
         /// <param name="pairs">The pairs.</param>
         /// <returns></returns>
