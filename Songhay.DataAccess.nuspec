@@ -2,58 +2,37 @@
 <package >
   <metadata>
     <id>Songhay.DataAccess</id>
-    <version>2.1.3</version>
-    <title>Songhay Data Access</title>
-    <authors>bryan.wilhite@gmail.com</authors>
-    <owners>rasx@songhaysystem.com</owners>
-    <projectUrl>https://github.com/BryanWilhite/Songhay.DataAccess</projectUrl>
-    <iconUrl>http://songhaysystem.com/Content/images/songhay_icon.png</iconUrl>
-    <licenseUrl>https://raw.github.com/BryanWilhite/Songhay.DataAccess/master/LICENSE.md</licenseUrl>
-    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <version>5.0.0</version>
     <description>Reusable definitions for System.Data.Common (ADO.NET)</description>
-    <releaseNotes>updated for SonghayCore dependency</releaseNotes>
-    <copyright>Copyright 2001-2017 Bryan D. Wilhite</copyright>
-    <tags>Data Access Songhay LINQ SQL Server SQLite Compact</tags>
-    <frameworkAssemblies>
-      <frameworkAssembly assemblyName="System.configuration" />
-      <frameworkAssembly assemblyName="System.Data" />
-      <frameworkAssembly assemblyName="System.Data.DataSetExtensions" />
-      <frameworkAssembly assemblyName="System.Xml" />
-      <frameworkAssembly assemblyName="System.Xml.Linq" />
-    </frameworkAssemblies>
+    <authors>Bryan D. Wilhite</authors>
+    <title>Songhay Data Access</title>
+    <owners>Bryan D. Wilhite</owners>
+    <projectUrl>https://github.com/BryanWilhite/Songhay.DataAccess</projectUrl>
+    <icon>images\songhay_icon.png</icon>
+    <license type="file">LICENSE.md</license>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <summary>Reusable definitions for System.Data.Common (ADO.NET)</summary>
+    <releaseNotes>https://github.com/BryanWilhite/Songhay.DataAccess/projects/1</releaseNotes>
+    <copyright>(c) 2021 Bryan D. Wilhite</copyright>
+    <tags>ADO ADO.NET System.Data.Common IDbConnection IDataReader EF Entity Framework</tags>
+    <repository type="git" url="https://github.com/BryanWilhite/Songhay.DataAccess"></repository>
     <dependencies>
-      <group targetFramework=".NETFramework4.5.2">
-        <dependency id="SonghayCore" version="2.6.2" />
-        <dependency id="System.ComponentModel.Annotations" version="4.4.0" />
-      </group>
-      <group targetFramework=".NETFramework3.5">
-        <dependency id="SonghayCore" version="2.6.2" />
+      <group targetFramework=".NET5.0">
+        <dependency id="SonghayCore" version="5.0.0" />
+        <dependency id="Microsoft.EntityFrameworkCore" version="5.0.2" />
       </group>
       <group targetFramework=".NETStandard2.0">
-        <dependency id="SonghayCore" version="2.6.2" />
-        <dependency id="System.ComponentModel.Annotations" version="4.4.0" />
+        <dependency id="SonghayCore" version="5.0.0" />
       </group>
     </dependencies>
   </metadata>
   <files>
-    <file src="Songhay.DataAccess-net35\bin\Release\Songhay.DataAccess*.dll" target="lib\net35" />
-    <file src="Songhay.DataAccess-net35\bin\Release\Songhay.DataAccess*.config" target="lib\net35" />
-    <file src="Songhay.DataAccess-net35\bin\Release\Songhay.DataAccess*.xml" target="lib\net35" />
-
-    <file src="Songhay.DataAccess-net452\bin\Release\Songhay.DataAccess*.dll" target="lib\net452" />
-    <file src="Songhay.DataAccess-net452\bin\Release\Songhay.DataAccess*.config" target="lib\net452" />
-    <file src="Songhay.DataAccess-net452\bin\Release\Songhay.DataAccess*.xml" target="lib\net452" />
-
-    <file src="Songhay.DataAccess.Repository-net452\bin\Release\Songhay.DataAccess.Repository*.dll" target="lib\net452" />
-    <file src="Songhay.DataAccess.Repository-net452\bin\Release\Songhay.DataAccess.Repository*.config" target="lib\net452" />
-    <file src="Songhay.DataAccess.Repository-net452\bin\Release\Songhay.DataAccess.Repository*.xml" target="lib\net452" />
-
-    <file src="Songhay.DataAccess.Repository-net452\**\*.cs" exclude="Songhay.DataAccess.Repository-net452\**\obj\**" target="src" />
-
-    <file src="Songhay.DataAccess\bin\Release\netstandard2.0\Songhay.DataAccess*.dll" target="lib\netstandard2.0" />
-    <file src="Songhay.DataAccess\bin\Release\netstandard2.0\Songhay.DataAccess*.json" target="lib\netstandard2.0" />
-    <file src="Songhay.DataAccess\bin\Release\netstandard2.0\Songhay.DataAccess*.xml" target="lib\netstandard2.0" />
-
-    <file src="Songhay.DataAccess\**\*.cs" exclude="Songhay.DataAccess\**\obj\**" target="src" />
+    <file src="bin\Release\net5.0\Songhay.DataAccess*.dll" target="lib\net5.0" />
+    <file src="bin\Release\net5.0\Songhay.DataAccess*.json" target="lib\net5.0" />
+    <file src="bin\Release\netstandard2.0\Songhay.DataAccess*.dll" target="lib\netstandard2.0" />
+    <file src="bin\Release\netstandard2.0\Songhay.DataAccess*.json" target="lib\netstandard2.0" />
+    <file src="**\*.cs" exclude="**\obj\**" target="src" />
+    <file src="..\LICENSE.md" target="" />
+    <file src="..\songhay_icon.png" target="images\" />
   </files>
 </package>
