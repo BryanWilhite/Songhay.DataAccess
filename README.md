@@ -14,7 +14,7 @@ The dominant theme in version 5.0 is about dropping direct support for .NET Fram
 - `EntityConnectionStringBuilder` and `ObjectStateManager` is not migrated to .NET 5.0
 - `RegistryKeyExtensions` dropped
 - Oracle-related `TextTemplating` dropped
-- SQL Server Compact testing dropped
+- use of [SQL Server Compact](https://en.wikipedia.org/wiki/SQL_Server_Compact) in test the project is dropped
 
 ## the `Common*` utilities
 
