@@ -24,6 +24,16 @@
             "problemMatcher": "$msCompile"
         },
         {
+            "label": "dotnet clean [Solution]",
+            "command": "dotnet",
+            "type": "shell",
+            "args": [
+                "clean",
+                "${workspaceFolder}/Songhay.DataAccess.sln"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
             "label": "dotnet test [Songhay.DataAccess.Tests, filtered by selected text]",
             "command": "dotnet",
             "type": "shell",

@@ -416,7 +416,7 @@
         </member>
         <member name="M:Songhay.DataAccess.Extensions.DataSetExtensions.ToDataTableMappings(System.Collections.Generic.IEnumerable{System.String})">
             <summary>
-            Converts the <see cref="!:IEnumerable&lt;string&gt;"/> into a data table mappings.
+            Converts the <see cref="T:System.Collections.Generic.IEnumerable`1"/> into a data table mappings.
             </summary>
             <param name="setTableNames">The set table names.</param>
             <returns></returns>
@@ -424,7 +424,7 @@
         </member>
         <member name="M:Songhay.DataAccess.Extensions.DataSetExtensions.ToDataTableMappings(System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String,System.String}})">
             <summary>
-            Converts the <see cref="!:IEnumerable&lt;KeyValuePair&lt;string, string&gt;&gt;"/> into a data table mappings.
+            Converts the <see cref="T:System.Collections.Generic.IEnumerable`1"/> into a data table mappings.
             </summary>
             <param name="pairs">The pairs.</param>
             <returns></returns>
@@ -556,7 +556,7 @@
         </member>
         <member name="M:Songhay.DataAccess.Extensions.IDataReaderExtensions.ToRowValues(System.Data.IDataReader)">
             <summary>
-            Converts the <see cref="T:System.Data.IDataReader"/> into <see cref="!:IEnumerable&lt;object[]&gt;"/>.
+            Converts the <see cref="T:System.Data.IDataReader"/> into <see cref="T:System.Collections.Generic.IEnumerable`1"/>.
             </summary>
             <param name="reader">The reader.</param>
             <exception cref="T:System.ArgumentNullException">The expected reader is not here.</exception>
@@ -750,7 +750,7 @@
             <param name="invariantProviderName">Name of the invariant provider.</param>
             <param name="connectionString">The connection string.</param>
             <param name="connectionStringKey">The connection string key.</param>
-            <param name="encryptionMetaJson">The encryption meta json.</param>
+            <param name="encryptionMetaJson">The encryption meta JSON.</param>
             <exception cref="T:System.ArgumentNullException">
             invariantProviderName;The expected provider name is not here.
             or
@@ -786,7 +786,7 @@
         </member>
         <member name="M:Songhay.DataAccess.Models.CommonDbms.GetSql(System.String)">
             <summary>
-            Gets the SQL by the specified key or <see cref="!:CallerMemberName"/>.
+            Gets the SQL by the specified key or <see cref="T:System.Runtime.CompilerServices.CallerMemberNameAttribute"/>.
             </summary>
             <param name="key">The key.</param>
         </member>
