@@ -1,29 +1,35 @@
-﻿using Songhay.DataAccess.Tests.Domain.Repository;
-using Songhay.Extensions;
+﻿using Microsoft.EntityFrameworkCore;
+using Songhay.DataAccess.Tests.Domain.Repository;
 using System;
 using System.Data;
+using Xunit;
 
 namespace Songhay.DataAccess.Tests
 {
     public partial class SQLiteTests
     {
-        // [TestCategory("Integration")]
-        // [TestMethod]
-        // public void ShouldConnectToChinookWithEF()
-        // {
-        //     var projectsFolder = this.TestContext.ShouldGetAssemblyDirectoryParent(this.GetType(), expectedLevels: 2);
-        //     AppDomain.CurrentDomain.SetData("DataDirectory", projectsFolder);
+        [Theory]
+        [InlineData("Data Source=|DataDirectory|Chinook.sqlite")]
+        //[InlineData("Name=Chinook")] TODO: System.InvalidOperationException : A named connection string was used, but the name 'Chinook' was not found in the application's configuration. Note that named connection strings are only supported when using 'IConfiguration' and a service provider, such as in a typical ASP.NET Core application. See https://go.microsoft.com/fwlink/?linkid=850912 for more information.
+        public void ConnectionState_EF_Test(string connectionString)
+        {
+            var projectsFolder = ProgramAssemblyUtility.GetPathFromAssembly(this.GetType().Assembly, "../../../");
+            Assert.EndsWith(".Tests", projectsFolder);
 
-        //     var builder = new DbContextOptionsBuilder<ChinookDbContext>()
-        //         .UseSqlite("Name=Chinook");
+            AppDomain.CurrentDomain.SetData("DataDirectory", projectsFolder);
 
-        //     using (var context = new ChinookDbContext(builder.Options))
-        //     {
-        //         var connection = context.Database.GetDbConnection();
-        //         connection.Open();
-        //         Assert.AreEqual(ConnectionState.Open, connection.State);
-        //     }
+            var builder = new DbContextOptionsBuilder<ChinookDbContext>()
+                .EnableDetailedErrors()
+                .EnableSensitiveDataLogging()
+                .UseSqlite(connectionString);
 
-        // }
+            using (var context = new ChinookDbContext(builder.Options))
+            {
+                var connection = context.Database.GetDbConnection();
+                connection.Open();
+                Assert.Equal(ConnectionState.Open, connection.State);
+            }
+
+        }
     }
 }

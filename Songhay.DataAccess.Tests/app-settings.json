@@ -1,3 +1,0 @@
-{
-    "ConnectionStrings": { "Chinook": "Data Source=|DataDirectory|\\Chinook.sqlite" }
-}
