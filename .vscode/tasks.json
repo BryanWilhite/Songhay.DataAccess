@@ -109,7 +109,7 @@
                 "detailed"
             ],
             "options": {
-                "cwd": "${workspaceRoot}"
+                "cwd": "${workspaceRoot}/Songhay.DataAccess"
             },
             "problemMatcher": "$msCompile"
         }
