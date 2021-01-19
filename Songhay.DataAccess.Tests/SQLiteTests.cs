@@ -8,7 +8,7 @@ using Xunit;
 namespace Songhay.DataAccess.Tests
 {
 
-    public partial class SQLiteTest
+    public partial class SQLiteTests
     {
         [Theory]
         [InlineData(@"Data Source=""../../../Chinook.sqlite""")]

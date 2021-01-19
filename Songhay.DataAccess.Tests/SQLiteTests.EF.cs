@@ -5,7 +5,7 @@ using System.Data;
 
 namespace Songhay.DataAccess.Tests
 {
-    public partial class SQLiteTest
+    public partial class SQLiteTests
     {
         // [TestCategory("Integration")]
         // [TestMethod]

@@ -12,6 +12,7 @@ This repository represents the work horse that I have driven for over 15 years (
 - `EntityConnectionStringBuilder` and `ObjectStateManager` is not migrated to .NET 5.0
 - `RegistryKeyExtensions` dropped
 - Oracle-related `TextTemplating` dropped
+- SQL Server Compact testing dropped
 
 ## the `Common*` utilities
 
