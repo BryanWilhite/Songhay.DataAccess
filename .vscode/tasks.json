@@ -34,6 +34,19 @@
             "problemMatcher": "$msCompile"
         },
         {
+            "label": "dotnet test [Solution]",
+            "command": "dotnet",
+            "type": "shell",
+            "args": [
+                "test",
+                "${workspaceFolder}/Songhay.DataAccess.sln",
+                "--logger:trx",
+                "--results-directory:${workspaceFolder}/TestResults",
+                "--verbosity:normal"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
             "label": "dotnet test [Songhay.DataAccess.Tests, filtered by selected text]",
             "command": "dotnet",
             "type": "shell",
