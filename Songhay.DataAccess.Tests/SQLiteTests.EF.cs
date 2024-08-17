@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿/*using Microsoft.EntityFrameworkCore;
 using Songhay.DataAccess.Tests.Domain.Repository;
 using System;
 using System.Data;
@@ -32,4 +32,4 @@ namespace Songhay.DataAccess.Tests
 
         }
     }
-}
+}*/

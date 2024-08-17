@@ -1,27 +1,23 @@
-﻿#if NET5_0
+﻿using Microsoft.EntityFrameworkCore;
 
-using Microsoft.EntityFrameworkCore;
+namespace Songhay.DataAccess.Extensions;
 
-namespace Songhay.DataAccess.Repository.Extensions
+/// <summary>
+/// Extensions of <see cref="DbContext"/>
+/// </summary>
+public static partial class DbContextExtensions
 {
     /// <summary>
-    /// Extensions of <see cref="DbContext"/>
+    /// Detaches the specified entity.
     /// </summary>
-    public static partial class DbContextExtensions
+    /// <typeparam name="TEntity">The type of the entity.</typeparam>
+    /// <param name="context">the <see cref="DbContext"/></param>
+    /// <param name="entity">The entity.</param>
+    public static void Detach<TEntity>(this DbContext? context, TEntity? entity) where TEntity : class
     {
-        /// <summary>
-        /// Detaches the specified entity.
-        /// </summary>
-        /// <typeparam name="TEntity">The type of the entity.</typeparam>
-        /// <param name="context">the <see cref="DbContext"/></param>
-        /// <param name="entity">The entity.</param>
-        public static void Detach<TEntity>(this DbContext context, TEntity entity) where TEntity : class
-        {
-            if (context == null) return;
+        if (context == null) return;
+        if(entity == null) return;
 
-            context.Entry(entity).State = EntityState.Detached;
-        }
+        context.Entry(entity).State = EntityState.Detached;
     }
 }
-
-#endif

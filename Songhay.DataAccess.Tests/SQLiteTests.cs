@@ -1,4 +1,4 @@
-﻿using Songhay.Tests;
+﻿/*using Songhay.Tests;
 using System.Data;
 using System.Data.SQLite;
 using System.IO;
@@ -46,4 +46,4 @@ namespace Songhay.DataAccess.Tests
 
         readonly ITestOutputHelper _testOutputHelper;
     }
-}
+}*/

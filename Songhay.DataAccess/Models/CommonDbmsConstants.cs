@@ -1,18 +1,17 @@
-﻿namespace Songhay.DataAccess.Models
+﻿namespace Songhay.DataAccess.Models;
+
+/// <summary>
+/// Magic strings of Data Access
+/// </summary>
+public static class CommonDbmsConstants
 {
     /// <summary>
-    /// Magic strings of Data Access
+    /// The ODBC provider
     /// </summary>
-    public static class CommonDbmsConstants
-    {
-        /// <summary>
-        /// The ODBC provider
-        /// </summary>
-        public const string OdbcProvider = "System.Data.Odbc";
+    public const string OdbcProvider = "System.Data.Odbc";
 
-        /// <summary>
-        /// The oracle provider
-        /// </summary>
-        public const string OracleProvider = "Oracle.ManagedDataAccess.Client";
-    }
+    /// <summary>
+    /// The oracle provider
+    /// </summary>
+    public const string OracleProvider = "Oracle.ManagedDataAccess.Client";
 }
