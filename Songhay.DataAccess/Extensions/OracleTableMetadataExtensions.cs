@@ -54,7 +54,7 @@ public static class OracleTableMetadataExtensions
     /// <remarks>
     /// Reference: “Oracle to .NET type mapping” [https://www.devart.com/dotconnect/oracle/docs/DataTypeMapping.html]
     /// </remarks>
-    public static string ToDotNetTypeName(this OracleTableMetadata metadata)
+    public static string? ToDotNetTypeName(this OracleTableMetadata metadata)
     {
         if (metadata == null) return null;
         if (string.IsNullOrEmpty(metadata.DataType)) return "object";

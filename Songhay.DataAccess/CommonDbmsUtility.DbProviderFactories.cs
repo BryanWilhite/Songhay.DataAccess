@@ -14,11 +14,12 @@ public static partial class CommonDbmsUtility
     /// <param name="invariantProviderName">
     /// The invariant name of the data provider.
     /// </param>
-    public static DbDataAdapter GetAdapter(string? invariantProviderName)
+    public static DbDataAdapter? GetAdapter(string? invariantProviderName)
     {
         if (string.IsNullOrEmpty(invariantProviderName)) throw new ArgumentException("The Invariant Provider Name was not specified.");
 
         DbProviderFactory factory = DbProviderFactories.GetFactory(invariantProviderName);
+
         return factory.CreateDataAdapter();
     }
 
@@ -40,7 +41,8 @@ public static partial class CommonDbmsUtility
         if (string.IsNullOrEmpty(invariantProviderName)) throw new ArgumentException("The Invariant Provider Name was not specified.");
 
         DbProviderFactory factory = GetProviderFactory(invariantProviderName);
-        var adapter = GetAdapter(factory, connectionConfiguration, query);
+        DbDataAdapter adapter = GetAdapter(factory, connectionConfiguration, query);
+
         return adapter;
     }
 

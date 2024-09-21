@@ -58,7 +58,7 @@ public static partial class CommonReaderUtility
         using IDbCommand selectCommand = connection.CreateCommand();
 
         IDataParameter[] parameters = CommonParameterUtility.GetParameters(selectCommand, parameterCollection);
-        selectCommand.CommandType = (query.ToLower().Contains("select")) ? CommandType.Text : CommandType.StoredProcedure;
+        selectCommand.CommandType = query.ToLower().Contains("select") ? CommandType.Text : CommandType.StoredProcedure;
         selectCommand.CommandText = query;
         selectCommand.CommandTimeout = timeout;
 

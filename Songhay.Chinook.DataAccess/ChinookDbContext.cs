@@ -6,7 +6,10 @@ namespace Songhay.Chinook.DataAccess;
 
 public class ChinookDbContext : DbContext
 {
-    public ChinookDbContext(DbContextOptions<ChinookDbContext> options) : base(options) { }
+    public ChinookDbContext(DbContextOptions<ChinookDbContext> options) : base(options)
+    {
+        Artists = Set<Artist>();
+    }
 
     public DbSet<Artist> Artists { get; set; }
 

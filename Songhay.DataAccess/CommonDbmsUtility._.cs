@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Data;
 using System.Data.Common;
+using Songhay.Extensions;
 
 namespace Songhay.DataAccess;
 
@@ -44,10 +45,7 @@ public static partial class CommonDbmsUtility
     /// <param name="connection">The object implementing <see cref="IDbConnection"/>.</param>
     /// <param name="sqlStatement">The SQL statement.</param>
     /// <returns>Returns the number of records affected.</returns>
-    public static int DoCommand(IDbConnection? connection, string? sqlStatement)
-    {
-        return DoCommand(connection, null, sqlStatement, null);
-    }
+    public static int DoCommand(IDbConnection? connection, string? sqlStatement) => DoCommand(connection, null, sqlStatement, null);
 
     /// <summary>
     /// Executes a SQL sqlStatement for the current instance of <see cref="IDbConnection"/>.
@@ -56,10 +54,7 @@ public static partial class CommonDbmsUtility
     /// <param name="ambientTransaction">An object implementing the explicit, server <see cref="IDbTransaction"/>.</param>
     /// <param name="sqlStatement">The SQL statement.</param>
     /// <returns>Returns the number of records affected.</returns>
-    public static int DoCommand(IDbConnection? connection, IDbTransaction? ambientTransaction, string? sqlStatement)
-    {
-        return DoCommand(connection, ambientTransaction, sqlStatement, null);
-    }
+    public static int DoCommand(IDbConnection? connection, IDbTransaction? ambientTransaction, string? sqlStatement) => DoCommand(connection, ambientTransaction, sqlStatement, null);
 
     /// <summary>
     /// Executes a SQL sqlStatement for the current instance of <see cref="IDbConnection"/>.
@@ -68,10 +63,7 @@ public static partial class CommonDbmsUtility
     /// <param name="sqlStatement">The SQL statement.</param>
     /// <param name="parameterCollection">The parameters.</param>
     /// <returns>Returns the number of records affected.</returns>
-    public static int DoCommand(IDbConnection? connection, string? sqlStatement, IEnumerable? parameterCollection)
-    {
-        return DoCommand(connection, null, sqlStatement, parameterCollection);
-    }
+    public static int DoCommand(IDbConnection? connection, string? sqlStatement, IEnumerable? parameterCollection) => DoCommand(connection, null, sqlStatement, parameterCollection);
 
     /// <summary>
     /// Executes a SQL sqlStatement for the current instance of <see cref="IDbConnection"/>.
@@ -127,18 +119,18 @@ public static partial class CommonDbmsUtility
         if (string.IsNullOrEmpty(connectionConfiguration)) throw new ArgumentException("The DBMS Connection string was not specified.");
         if (string.IsNullOrEmpty(query)) throw new ArgumentException("The DBMS query was not specified.");
 
-        DbDataAdapter? adapter = factory.CreateDataAdapter();
+        DbDataAdapter? adapter = factory.CreateDataAdapter().ToReferenceTypeValueOrThrow();
 
         if (string.IsNullOrEmpty(connectionConfiguration) && string.IsNullOrEmpty(query)) return adapter;
 
-        DbConnection? connection = factory.CreateConnection();
+        DbConnection? connection = factory.CreateConnection().ToReferenceTypeValueOrThrow();
         connection.ConnectionString = connectionConfiguration;
 
-        DbCommand? selectCommand = factory.CreateCommand();
+        DbCommand? selectCommand = factory.CreateCommand().ToReferenceTypeValueOrThrow();
         selectCommand.CommandText = query;
         selectCommand.Connection = connection;
 
-        DbCommandBuilder? builder = factory.CreateCommandBuilder();
+        DbCommandBuilder? builder = factory.CreateCommandBuilder().ToReferenceTypeValueOrThrow();
         builder.DataAdapter = adapter;
         adapter.SelectCommand = selectCommand;
 
@@ -150,18 +142,26 @@ public static partial class CommonDbmsUtility
     }
 
     /// <summary>
-    /// Gets the command.
+    /// Gets the <see cref="DbCommand"/> of <see cref="CommandType.Text"/>
+    /// with the specified command text.
     /// </summary>
     /// <param name="factory">The factory.</param>
-    /// <param name="commandType">Type of the command.</param>
     /// <param name="commandText">The command text.</param>
-    /// <returns></returns>
+    public static DbCommand GetCommand(DbProviderFactory? factory, string? commandText) => GetCommand(factory, null, commandText);
+
+    /// <summary>
+    /// Gets the <see cref="DbCommand"/>
+    /// with the specified command text.
+    /// </summary>
+    /// <param name="factory">The factory.</param>
+    /// <param name="commandType">Type of the command (defaults to <see cref="CommandType.Text"/>).</param>
+    /// <param name="commandText">The command text.</param>
     public static DbCommand GetCommand(DbProviderFactory? factory, CommandType? commandType, string? commandText)
     {
         if (factory == null) throw new ArgumentNullException(nameof(factory), "The expected provider factory is not here.");
 
-        DbCommand? command = factory.CreateCommand();
-        command.CommandType = commandType.Value;
+        DbCommand? command = factory.CreateCommand().ToReferenceTypeValueOrThrow();
+        command.CommandType = commandType ?? CommandType.Text;
         command.CommandText = commandText;
 
         return command;
@@ -179,8 +179,9 @@ public static partial class CommonDbmsUtility
         if (factory == null) throw new ArgumentNullException(nameof(factory), "The expected provider factory is not here.");
         if (string.IsNullOrEmpty(connectionConfiguration)) throw new ArgumentException("The DBMS Connection string was not specified.");
 
-        DbConnection? connection = factory.CreateConnection();
+        DbConnection? connection = factory.CreateConnection().ToReferenceTypeValueOrThrow();
         connection.ConnectionString = connectionConfiguration;
+
         return connection;
     }
 
@@ -201,9 +202,12 @@ public static partial class CommonDbmsUtility
     {
         if (string.IsNullOrEmpty(connectionConfiguration)) throw new ArgumentNullException(nameof(connectionConfiguration), "The expected connection string is not here.");
 
-        var builder = new DbConnectionStringBuilder();
-        builder.ConnectionString = connectionConfiguration;
-        if (builder.ContainsKey(key)) builder.Remove(key);
+        var builder = new DbConnectionStringBuilder
+        {
+            ConnectionString = connectionConfiguration
+        };
+
+        if (!string.IsNullOrWhiteSpace(key) && builder.ContainsKey(key)) builder.Remove(key);
 
         return builder.ConnectionString;
     }

@@ -159,8 +159,9 @@ public static partial class IDataReaderExtensions
 
         while (reader.Read())
         {
-            var row = new object[reader.FieldCount];
+            object[] row = new object[reader.FieldCount];
             reader.GetValues(row);
+
             yield return row;
         }
     }
@@ -185,8 +186,9 @@ public static partial class IDataReaderExtensions
     public static object? ToValue(this IDataReader? reader, string? key)
     {
         if (reader == null) return null;
+        if (string.IsNullOrEmpty(key)) return null;
 
-        int i = default(int);
+        int i = default;
         try
         {
             i = reader.GetOrdinal(key);

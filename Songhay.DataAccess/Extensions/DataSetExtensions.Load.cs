@@ -1,5 +1,6 @@
 ﻿using System.Data;
 using System.Data.Common;
+using Songhay.Extensions;
 
 namespace Songhay.DataAccess.Extensions;
 
@@ -60,7 +61,9 @@ public static partial class DataSetExtensions
         if (mappings == null || !mappings.Any()) throw new ArgumentNullException(nameof(mappings), "The expected table mappings are not here.");
         if (string.IsNullOrEmpty(invariantProviderName)) throw new ArgumentNullException(nameof(invariantProviderName), "The expected invariant provider name.");
 
-        using var adapter = CommonDbmsUtility.GetAdapter(invariantProviderName);
+        using DbDataAdapter? adapter = CommonDbmsUtility
+            .GetAdapter(invariantProviderName)
+            .ToReferenceTypeValueOrThrow();
 
         adapter.TableMappings.AddRange(mappings.ToArray());
         adapter.SelectCommand = command;

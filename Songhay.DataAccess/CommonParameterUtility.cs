@@ -23,11 +23,12 @@ public static class CommonParameterUtility
 
         IDataParameter param = dbmsCommand.CreateParameter();
         if (!string.IsNullOrEmpty(parameterName)) param.ParameterName = parameterName;
+
         return param;
     }
 
     /// <summary>
-    /// Gets a parameter.
+    /// Gets a <see cref="IDataParameter"/>.
     /// </summary>
     /// <param name="dbmsCommand">The object implementing <see cref="IDbCommand"/>.</param>
     /// <param name="parameterName">The name of the Parameter.</param>
@@ -38,13 +39,15 @@ public static class CommonParameterUtility
         if (dbmsCommand == null) throw new ArgumentNullException(nameof(dbmsCommand), "The expected Data Command is not here.");
 
         IDataParameter param = dbmsCommand.CreateParameter();
+
         if (!string.IsNullOrEmpty(parameterName)) param.ParameterName = parameterName;
         param.Value = parameterValue;
+
         return param;
     }
 
     /// <summary>
-    /// Gets a parameter.
+    /// Gets a <see cref="IDataParameter"/>.
     /// </summary>
     /// <param name="dbmsCommand">The object implementing <see cref="IDbCommand"/>.</param>
     /// <param name="parameterName">The name of the Parameter.</param>
@@ -53,10 +56,11 @@ public static class CommonParameterUtility
     /// <returns>Returns an object implementing <see cref="IDataParameter"/>.</returns>
     public static IDataParameter GetParameter(IDbCommand? dbmsCommand, string parameterName, object parameterValue, DbType parameterType)
     {
-        var param = GetParameter(dbmsCommand, parameterName, parameterValue);
-        if (param == null) throw new NullReferenceException("The expected parameter is not here.");
+        var param = GetParameter(dbmsCommand, parameterName, parameterValue) ??
+            throw new NullReferenceException("The expected parameter is not here.");
 
         param.DbType = parameterType;
+
         return param;
     }
 
@@ -137,7 +141,7 @@ Supported collections:
     /// <param name="returnDbNullForZero">When true, return <see cref="DBNull"/> for numeric values.</param>
     public static object? GetParameterValue<TValue>(object? parameterValue, bool returnDbNullForZero)
     {
-        object o = parameterValue;
+        object? o = parameterValue;
         Type t = typeof(TValue);
 
         if (parameterValue == null)
@@ -153,7 +157,7 @@ Supported collections:
         }
         else if (t.IsValueType)
         {
-            if (default(TValue).Equals(parameterValue) && returnDbNullForZero) o = ProgramTypeUtility.SqlDatabaseNull();
+            if ((default(TValue) ?? new object()).Equals(parameterValue) && returnDbNullForZero) o = ProgramTypeUtility.SqlDatabaseNull();
         }
 
         return o;

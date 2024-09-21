@@ -19,6 +19,7 @@ public sealed class CommonDbms : IDisposable
     /// <param name="connectionStringKey">The connection string key.</param>
     public CommonDbms(IConfiguration configuration, string invariantProviderName, string? connectionStringKey)
     {
+        _sql = new Dictionary<string, string>();
 
         InvariantProviderName = invariantProviderName;
         ProviderFactory = CommonDbmsUtility.GetProviderFactory(InvariantProviderName);
@@ -62,9 +63,11 @@ public sealed class CommonDbms : IDisposable
     /// Gets the SQL by the specified key or <see cref="CallerMemberNameAttribute"/>.
     /// </summary>
     /// <param name="key">The key.</param>
-    private string GetSql([CallerMemberName] string? key = null)
+    private string? GetSql([CallerMemberName] string? key = null)
     {
-        var sql = _sql[key];
+        if(string.IsNullOrWhiteSpace(key)) return null;
+
+        string sql = _sql[key];
 
         return (InvariantProviderName == CommonDbmsConstants.OdbcProvider) ?
             sql.WithOdbcStyleParameters()
@@ -93,5 +96,6 @@ public sealed class CommonDbms : IDisposable
     }
 
     readonly DbConnection _connection;
+
     Dictionary<string, string> _sql;
 }
