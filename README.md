@@ -1,20 +1,6 @@
 # Songhay.DataAccess
 
-These reusable definitions for `System.Data.Common` ([ADO.NET](https://en.wikipedia.org/wiki/ADO.NET)) remind us that the excellent [Entity Framework](https://github.com/aspnet/EntityFramework6) (EF) and [EF Core](https://github.com/aspnet/EntityFrameworkCore) began as an application of the types in this namespace. This package is based on [a project file](https://github.com/BryanWilhite/Songhay.DataAccess/blob/master/Songhay.DataAccess/Songhay.DataAccess.csproj) that supports [multi-targeting](http://gigi.nullneuron.net/gigilabs/multi-targeting-net-standard-class-libraries/), declaring support for `net5.0` and `netstandard2.0`.
-
-This repository represents the work horse that I have driven for over 15 years (depending on my other work horse, `SonghayCore` [[GitHub](https://github.com/BryanWilhite/SonghayCore), [NuGet](https://www.nuget.org/packages/SonghayCore/)]). It is quite a pleasure to finally share this work here on relatively newfangled GitHub.
-
-## version 5.0 breaking changes
-
-The dominant theme in version 5.0 is about dropping direct support for .NET Framework. Microsoft strongly suggests that we support the .NET Framework legacy through targeting .NET Standard 2.0 because .NET Framework 4.71 supports .NET Standard 2.0. Moreover, the course of Entity Framework Core [[GitHub](https://github.com/dotnet/efcore)] dominate breaking changes:
-
-- validation is not baked into Entity Framework Core [[StackOverflow](https://stackoverflow.com/a/43427057/22944)]
-- the `DbContext.Configuration` pattern has been replaced by overriding `DbContext.OnConfiguring` with `DbContextOptionsBuilder` [[docs](https://docs.microsoft.com/en-us/dotnet/api/microsoft.entityframeworkcore.dbcontextoptionsbuilder?view=efcore-5.0)]
-- support for `ConnectionStringSettings` dropped
-- `EntityConnectionStringBuilder` and `ObjectStateManager` is not migrated to .NET 5.0
-- `RegistryKeyExtensions` dropped
-- Oracle-related `TextTemplating` dropped
-- use of [SQL Server Compact](https://en.wikipedia.org/wiki/SQL_Server_Compact) in test the project is dropped
+These reusable definitions for `System.Data.Common` ([ADO.NET](https://en.wikipedia.org/wiki/ADO.NET)) remind us that the excellent [Entity Framework](https://github.com/aspnet/EntityFramework6) (EF) and [EF Core](https://github.com/aspnet/EntityFrameworkCore) began as an application of the types in this namespace.
 
 ## the `Common*` utilities
 
