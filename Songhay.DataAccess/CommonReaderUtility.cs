@@ -45,20 +45,19 @@ public static partial class CommonReaderUtility
     /// based on the object implementing <see cref="System.Data.IDbConnection"/>.
     /// </summary>
     /// <param name="connection">The object implementing <see cref="System.Data.IDbConnection"/>.</param>
-    /// <param name="query">The SELECT SQL statement.</param>
+    /// <param name="query">The SELECT SQL statement or stored procedure execution.</param>
     /// <param name="parameterCollection">A list of parameters.</param>
     /// <param name="timeout">Command timeout in seconds.</param>
     /// <param name="ambientTransaction">The ambient <see cref="IDbTransaction"/> implementation.</param>
     public static IDataReader GetReader(IDbConnection? connection, string? query, IEnumerable? parameterCollection, int timeout, IDbTransaction? ambientTransaction)
     {
-        if (connection == null) throw new ArgumentNullException("connection", "The implementing Connection object is null.");
+        if (connection == null) throw new ArgumentNullException(nameof(connection), "The implementing Connection object is null.");
         if (string.IsNullOrEmpty(query)) throw new ArgumentException("The DBMS query was not specified.");
 
-        IDataReader? r = null;
         using IDbCommand selectCommand = connection.CreateCommand();
 
         IDataParameter[] parameters = CommonParameterUtility.GetParameters(selectCommand, parameterCollection);
-        selectCommand.CommandType = query.ToLower().Contains("select") ? CommandType.Text : CommandType.StoredProcedure;
+        selectCommand.CommandType = query.ToLower().Contains("select ") ? CommandType.Text : CommandType.StoredProcedure;
         selectCommand.CommandText = query;
         selectCommand.CommandTimeout = timeout;
 
@@ -68,7 +67,8 @@ public static partial class CommonReaderUtility
         }
 
         if (ambientTransaction != null) selectCommand.Transaction = ambientTransaction;
-        r = selectCommand.ExecuteReader(CommandBehavior.Default);
+
+        IDataReader r = selectCommand.ExecuteReader(CommandBehavior.Default);
 
         return r;
     }

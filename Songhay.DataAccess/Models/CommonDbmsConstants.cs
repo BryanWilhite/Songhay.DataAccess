@@ -11,7 +11,12 @@ public static class CommonDbmsConstants
     public const string OdbcProvider = "System.Data.Odbc";
 
     /// <summary>
-    /// The oracle provider
+    /// The Oracle provider
     /// </summary>
     public const string OracleProvider = "Oracle.ManagedDataAccess.Client";
+
+    /// <summary>
+    /// The Microsoft SQLite provider
+    /// </summary>
+    public const string MicrosoftSqliteProvider = "Microsoft.Data.Sqlite";
 }

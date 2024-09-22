@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Data;
 using System.Data.Common;
+using Microsoft.Data.Sqlite;
+using Songhay.DataAccess.Models;
 using Songhay.Extensions;
 
 namespace Songhay.DataAccess;
@@ -78,8 +80,6 @@ public static partial class CommonDbmsUtility
         if (connection == null) throw new ArgumentNullException(nameof(connection), "The implementing Connection object is null.");
         if (string.IsNullOrEmpty(sqlStatement)) throw new ArgumentException("The DBMS SQL Statement was not specified.");
 
-        int i = 0;
-
         using IDbCommand cmd = connection.CreateCommand();
 
         if (ambientTransaction != null) cmd.Transaction = ambientTransaction;
@@ -95,7 +95,7 @@ public static partial class CommonDbmsUtility
             }
         }
 
-        i = cmd.ExecuteNonQuery();
+        var i = cmd.ExecuteNonQuery();
 
         return i;
     }
@@ -119,18 +119,18 @@ public static partial class CommonDbmsUtility
         if (string.IsNullOrEmpty(connectionConfiguration)) throw new ArgumentException("The DBMS Connection string was not specified.");
         if (string.IsNullOrEmpty(query)) throw new ArgumentException("The DBMS query was not specified.");
 
-        DbDataAdapter? adapter = factory.CreateDataAdapter().ToReferenceTypeValueOrThrow();
+        DbDataAdapter adapter = factory.CreateDataAdapter().ToReferenceTypeValueOrThrow();
 
         if (string.IsNullOrEmpty(connectionConfiguration) && string.IsNullOrEmpty(query)) return adapter;
 
-        DbConnection? connection = factory.CreateConnection().ToReferenceTypeValueOrThrow();
+        DbConnection connection = factory.CreateConnection().ToReferenceTypeValueOrThrow();
         connection.ConnectionString = connectionConfiguration;
 
-        DbCommand? selectCommand = factory.CreateCommand().ToReferenceTypeValueOrThrow();
+        DbCommand selectCommand = factory.CreateCommand().ToReferenceTypeValueOrThrow();
         selectCommand.CommandText = query;
         selectCommand.Connection = connection;
 
-        DbCommandBuilder? builder = factory.CreateCommandBuilder().ToReferenceTypeValueOrThrow();
+        DbCommandBuilder builder = factory.CreateCommandBuilder().ToReferenceTypeValueOrThrow();
         builder.DataAdapter = adapter;
         adapter.SelectCommand = selectCommand;
 
@@ -160,7 +160,7 @@ public static partial class CommonDbmsUtility
     {
         if (factory == null) throw new ArgumentNullException(nameof(factory), "The expected provider factory is not here.");
 
-        DbCommand? command = factory.CreateCommand().ToReferenceTypeValueOrThrow();
+        DbCommand command = factory.CreateCommand().ToReferenceTypeValueOrThrow();
         command.CommandType = commandType ?? CommandType.Text;
         command.CommandText = commandText;
 
@@ -179,32 +179,37 @@ public static partial class CommonDbmsUtility
         if (factory == null) throw new ArgumentNullException(nameof(factory), "The expected provider factory is not here.");
         if (string.IsNullOrEmpty(connectionConfiguration)) throw new ArgumentException("The DBMS Connection string was not specified.");
 
-        DbConnection? connection = factory.CreateConnection().ToReferenceTypeValueOrThrow();
+        DbConnection connection = factory.CreateConnection().ToReferenceTypeValueOrThrow();
         connection.ConnectionString = connectionConfiguration;
 
         return connection;
     }
 
     /// <summary>
+    /// Registers <see cref="SqliteFactory"/> with the current app domain.
+    /// </summary>
+    public static void RegisterMicrosoftSqlite() => DbProviderFactories.RegisterFactory(CommonDbmsConstants.MicrosoftSqliteProvider, SqliteFactory.Instance);
+
+    /// <summary>
     /// Removes the key value pair from connection string.
     /// </summary>
-    /// <param name="connectionConfiguration">The connection configuration.</param>
+    /// <param name="connectionString">The connection configuration.</param>
     /// <param name="key">The key.</param>
     /// <returns></returns>
-    /// <exception cref="System.ArgumentNullException">connectionConfiguration;The expected connection string is not here.</exception>
+    /// <exception cref="System.ArgumentNullException">connectionString;The expected connection string is not here.</exception>
     /// <remarks>
     /// This routine can convert, say, an OLEDB connection string for use with another provider.
-    /// So <c>"Provider=ORAOLEDB.ORACLE;Data Source=MY_SOURCE;User ID=myId;Password=my!#Passw0rd"</c>
-    /// can be converted to <c>Data Source=MY_SOURCE;User ID=myId;Password=my!#Passw0rd"</c>
-    /// with <c>CommonDbmsUtility.RemoveKeyValuePairFromConnectionString(connectionConfiguration, "Provider")</c>.
+    /// So <c>"provider=ORAOLEDB.ORACLE;data source=MY_SOURCE;user id=myId;password=my!#Passw0rd"</c>
+    /// can be converted to <c>data source=MY_SOURCE;user id=myId;password=my!#Passw0rd"</c>
+    /// with <c>CommonDbmsUtility.RemoveKeyValuePairFromConnectionString(connectionString, "Provider")</c>.
     /// </remarks>
-    public static string RemoveKeyValuePairFromConnectionString(string? connectionConfiguration, string? key)
+    public static string RemoveKeyValuePairFromConnectionString(string? connectionString, string? key)
     {
-        if (string.IsNullOrEmpty(connectionConfiguration)) throw new ArgumentNullException(nameof(connectionConfiguration), "The expected connection string is not here.");
+        if (string.IsNullOrEmpty(connectionString)) throw new ArgumentNullException(nameof(connectionString), "The expected connection string is not here.");
 
         var builder = new DbConnectionStringBuilder
         {
-            ConnectionString = connectionConfiguration
+            ConnectionString = connectionString,
         };
 
         if (!string.IsNullOrWhiteSpace(key) && builder.ContainsKey(key)) builder.Remove(key);
