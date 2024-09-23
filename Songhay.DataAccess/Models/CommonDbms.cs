@@ -1,3 +1,4 @@
+using System.Data;
 using Songhay.DataAccess.Extensions;
 using System.Data.Common;
 using System.Runtime.CompilerServices;
@@ -79,7 +80,7 @@ public sealed class CommonDbms : IDisposable
     /// Called when the <see cref="DbConnection"/> is open.
     /// </summary>
     /// <param name="connection">The connection.</param>
-    private void OnConnectionOpen(DbConnection connection)
+    private void OnConnectionOpen(IDbConnection connection)
     {
     }
 
@@ -95,7 +96,7 @@ public sealed class CommonDbms : IDisposable
         _sql = sqlSetter.Invoke();
     }
 
-    readonly DbConnection _connection;
+    readonly IDbConnection _connection;
 
     Dictionary<string, string> _sql;
 }

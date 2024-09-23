@@ -23,7 +23,7 @@ public class CommonDbmsUtilityTests
 
         string connectionString = $"data source={dbPath}";
 
-        using DbConnection connection = CommonDbmsUtility.GetConnection(SqliteFactory.Instance, connectionString);
+        using IDbConnection connection = CommonDbmsUtility.GetConnection(SqliteFactory.Instance, connectionString);
         connection.Open();
         var actual = CommonDbmsUtility.DoCommand(connection, sql);
         Assert.Equal(expected, actual);
@@ -42,7 +42,7 @@ public class CommonDbmsUtilityTests
 
         string connectionString = $"data source={dbPath}";
 
-        using DbConnection connection = CommonDbmsUtility.GetConnection(provider, connectionString);
+        using IDbConnection connection = CommonDbmsUtility.GetConnection(provider, connectionString);
         connection.Open();
         var actual = CommonDbmsUtility.DoCommand(connection, sql);
         Assert.Equal(expected, actual);
@@ -83,7 +83,7 @@ public class CommonDbmsUtilityTests
 
         string connectionString = $"data source={dbPath}";
 
-        using DbConnection connection = CommonDbmsUtility.GetConnection(SqliteFactory.Instance, connectionString);
+        using IDbConnection connection = CommonDbmsUtility.GetConnection(SqliteFactory.Instance, connectionString);
         Assert.NotNull(connection);
         connection.Open();
 

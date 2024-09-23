@@ -61,7 +61,7 @@ public static partial class DataSetExtensions
         if (mappings == null || !mappings.Any()) throw new ArgumentNullException(nameof(mappings), "The expected table mappings are not here.");
         if (string.IsNullOrEmpty(invariantProviderName)) throw new ArgumentNullException(nameof(invariantProviderName), "The expected invariant provider name.");
 
-        using DbDataAdapter? adapter = CommonDbmsUtility
+        using DbDataAdapter adapter = (DbDataAdapter)CommonDbmsUtility
             .GetAdapter(invariantProviderName)
             .ToReferenceTypeValueOrThrow();
 

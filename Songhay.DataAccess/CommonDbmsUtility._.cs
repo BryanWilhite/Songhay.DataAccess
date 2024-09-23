@@ -113,25 +113,25 @@ public static partial class CommonDbmsUtility
     /// or
     /// The DBMS query was not specified.
     /// </exception>
-    public static DbDataAdapter GetAdapter(DbProviderFactory? factory, string? connectionConfiguration, string? query)
+    public static IDbDataAdapter GetAdapter(DbProviderFactory? factory, string? connectionConfiguration, string? query)
     {
-        if (factory == null) throw new ArgumentNullException("factory", "The expected provider factory is not here.");
+        if (factory == null) throw new ArgumentNullException(nameof(factory), "The expected provider factory is not here.");
         if (string.IsNullOrEmpty(connectionConfiguration)) throw new ArgumentException("The DBMS Connection string was not specified.");
         if (string.IsNullOrEmpty(query)) throw new ArgumentException("The DBMS query was not specified.");
 
-        DbDataAdapter adapter = factory.CreateDataAdapter().ToReferenceTypeValueOrThrow();
+        IDbDataAdapter adapter = factory.CreateDataAdapter().ToReferenceTypeValueOrThrow();
 
         if (string.IsNullOrEmpty(connectionConfiguration) && string.IsNullOrEmpty(query)) return adapter;
 
-        DbConnection connection = factory.CreateConnection().ToReferenceTypeValueOrThrow();
+        IDbConnection connection = factory.CreateConnection().ToReferenceTypeValueOrThrow();
         connection.ConnectionString = connectionConfiguration;
 
-        DbCommand selectCommand = factory.CreateCommand().ToReferenceTypeValueOrThrow();
+        IDbCommand selectCommand = factory.CreateCommand().ToReferenceTypeValueOrThrow();
         selectCommand.CommandText = query;
         selectCommand.Connection = connection;
 
         DbCommandBuilder builder = factory.CreateCommandBuilder().ToReferenceTypeValueOrThrow();
-        builder.DataAdapter = adapter;
+        builder.DataAdapter = adapter as DbDataAdapter;
         adapter.SelectCommand = selectCommand;
 
         adapter.DeleteCommand = builder.GetDeleteCommand();
@@ -142,25 +142,43 @@ public static partial class CommonDbmsUtility
     }
 
     /// <summary>
-    /// Gets the <see cref="DbCommand"/> of <see cref="CommandType.Text"/>
+    /// Gets the <see cref="IDbCommand"/> of <see cref="CommandType.Text"/>
     /// with the specified command text.
     /// </summary>
     /// <param name="factory">The factory.</param>
     /// <param name="commandText">The command text.</param>
-    public static DbCommand GetCommand(DbProviderFactory? factory, string? commandText) => GetCommand(factory, null, commandText);
+    public static IDbCommand GetCommand(DbProviderFactory? factory, string? commandText) => GetCommand(factory, null, commandText);
 
     /// <summary>
-    /// Gets the <see cref="DbCommand"/>
+    /// Gets the <see cref="IDbCommand"/>
     /// with the specified command text.
     /// </summary>
     /// <param name="factory">The factory.</param>
     /// <param name="commandType">Type of the command (defaults to <see cref="CommandType.Text"/>).</param>
     /// <param name="commandText">The command text.</param>
-    public static DbCommand GetCommand(DbProviderFactory? factory, CommandType? commandType, string? commandText)
+    public static IDbCommand GetCommand(DbProviderFactory? factory, CommandType? commandType, string? commandText)
     {
         if (factory == null) throw new ArgumentNullException(nameof(factory), "The expected provider factory is not here.");
 
-        DbCommand command = factory.CreateCommand().ToReferenceTypeValueOrThrow();
+        IDbCommand command = factory.CreateCommand().ToReferenceTypeValueOrThrow();
+        command.CommandType = commandType ?? CommandType.Text;
+        command.CommandText = commandText;
+
+        return command;
+    }
+
+    /// <summary>
+    /// Gets the <see cref="IDbCommand"/>
+    /// with the specified command text.
+    /// </summary>
+    /// <param name="connection">The object implementing <see cref="System.Data.IDbConnection"/>.</param>
+    /// <param name="commandType">Type of the command (defaults to <see cref="CommandType.Text"/>).</param>
+    /// <param name="commandText">The command text.</param>
+    public static IDbCommand GetCommand(IDbConnection? connection, CommandType? commandType, string? commandText)
+    {
+        if (connection == null) throw new ArgumentNullException(nameof(connection), "The implementing Connection object is null.");
+
+        IDbCommand command = connection.CreateCommand().ToReferenceTypeValueOrThrow();
         command.CommandType = commandType ?? CommandType.Text;
         command.CommandText = commandText;
 
@@ -174,12 +192,12 @@ public static partial class CommonDbmsUtility
     /// <param name="connectionConfiguration">The connection configuration.</param>
     /// <returns></returns>
     /// <exception cref="System.ArgumentNullException">factory;The expected provider factory is not here.</exception>
-    public static DbConnection GetConnection(DbProviderFactory? factory, string? connectionConfiguration)
+    public static IDbConnection GetConnection(DbProviderFactory? factory, string? connectionConfiguration)
     {
         if (factory == null) throw new ArgumentNullException(nameof(factory), "The expected provider factory is not here.");
         if (string.IsNullOrEmpty(connectionConfiguration)) throw new ArgumentException("The DBMS Connection string was not specified.");
 
-        DbConnection connection = factory.CreateConnection().ToReferenceTypeValueOrThrow();
+        IDbConnection connection = factory.CreateConnection().ToReferenceTypeValueOrThrow();
         connection.ConnectionString = connectionConfiguration;
 
         return connection;
