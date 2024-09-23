@@ -37,7 +37,8 @@ static public class CommonScalarUtility
 
         if (parameterCollection != null)
         {
-            IDataParameter[] paramArray = CommonParameterUtility.GetParameters(cmd, parameterCollection);
+            IReadOnlyCollection<IDataParameter> paramArray = CommonParameterUtility.GetParameters(cmd, parameterCollection);
+
             foreach (IDataParameter p in paramArray)
             {
                 cmd.Parameters.Add(p);
@@ -111,7 +112,7 @@ static public class CommonScalarUtility
 
         if (parameterCollection != null)
         {
-            IDataParameter[] parameters = CommonParameterUtility.GetParameters(cmd, parameterCollection);
+            IReadOnlyCollection<IDataParameter> parameters = CommonParameterUtility.GetParameters(cmd, parameterCollection);
             foreach (IDataParameter p in parameters)
             {
                 cmd.Parameters.Add(p);

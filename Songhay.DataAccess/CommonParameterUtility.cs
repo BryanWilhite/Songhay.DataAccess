@@ -104,25 +104,22 @@ public static class CommonParameterUtility
     ///     IEnumerable&lt;DataParameterMetadata&gt;
     ///     Dictionary&lt;string, object&gt;
     /// </remarks>
-    public static IDataParameter[] GetParameters(IDbCommand? dbmsCommand, IEnumerable? parameterCollection)
-    {
-        if (parameterCollection == null) throw new ArgumentNullException(nameof(parameterCollection), "The expected set of parameters is not here.");
-
-        if (parameterCollection is IEnumerable<IDataParameter>) return parameterCollection.OfType<IDataParameter>().ToArray();
-
-        if (parameterCollection is IEnumerable<DataParameterMetadata> m) return m.Select(i => GetParameterFromParameterMetadata(dbmsCommand, i)).ToArray();
-
-        if (parameterCollection is Dictionary<string, object> d) return d.Select(i => GetParameter(dbmsCommand, i.Key, i.Value ?? ProgramTypeUtility.SqlDatabaseNull())).ToArray();
-
-        throw new NotSupportedException(@"
+    public static IReadOnlyCollection<IDataParameter> GetParameters(IDbCommand? dbmsCommand, IEnumerable? parameterCollection) =>
+        parameterCollection switch
+        {
+            null => Array.Empty<IDataParameter>(),
+            IEnumerable<IDataParameter> => parameterCollection.OfType<IDataParameter>().ToArray(),
+            IEnumerable<DataParameterMetadata> meta => meta.Select(data => GetParameterFromParameterMetadata(dbmsCommand, data)).ToArray(),
+            Dictionary<string, object> dict => dict.Select(pair => GetParameter(dbmsCommand, pair.Key, pair.Value ?? ProgramTypeUtility.SqlDatabaseNull())).ToArray(),
+            _ => throw new NotSupportedException(@"
 The parameter collection is not supported.
 
 Supported collections:
     IEnumerable<IDataParameter> [pass-through]
     IEnumerable<DataParameterMetadata>
     Dictionary<string, object>
-");
-    }
+")
+        };
 
     /// <summary>
     /// Returns <see cref="System.DBNull"/>

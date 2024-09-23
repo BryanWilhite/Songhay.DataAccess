@@ -54,9 +54,9 @@ public static partial class CommonReaderUtility
         if (connection == null) throw new ArgumentNullException(nameof(connection), "The implementing Connection object is null.");
         if (string.IsNullOrEmpty(query)) throw new ArgumentException("The DBMS query was not specified.");
 
-        using IDbCommand selectCommand = connection.CreateCommand();
+        IDbCommand selectCommand = connection.CreateCommand();
 
-        IDataParameter[] parameters = CommonParameterUtility.GetParameters(selectCommand, parameterCollection);
+        IReadOnlyCollection<IDataParameter> parameters = CommonParameterUtility.GetParameters(selectCommand, parameterCollection);
         selectCommand.CommandType = query.ToLower().Contains("select ") ? CommandType.Text : CommandType.StoredProcedure;
         selectCommand.CommandText = query;
         selectCommand.CommandTimeout = timeout;

@@ -95,11 +95,7 @@ public static partial class IDataReaderExtensions
     {
         var o = reader.ToValue(key);
 
-        if (o == null) return null;
-        if (o == DBNull.Value) return null;
-        if (string.IsNullOrWhiteSpace($"{o}")) return null;
-
-        return Convert.ToDateTime(o);
+        return o == DBNull.Value || o == null ? null : Convert.ToDateTime(o);
     }
 
     /// <summary>
@@ -112,10 +108,7 @@ public static partial class IDataReaderExtensions
     {
         var o = reader.ToValue(key);
 
-        if (o == DBNull.Value) return null;
-        if (string.IsNullOrWhiteSpace($"{o}")) return null;
-
-        return Convert.ToDecimal(o);
+        return o == DBNull.Value || o == null ? null : Convert.ToDecimal(o);
     }
 
     /// <summary>
@@ -127,8 +120,8 @@ public static partial class IDataReaderExtensions
     public static int? ToNullableInt(this IDataReader? reader, string? key)
     {
         var o = reader.ToValue(key);
-        if (o == DBNull.Value) return null;
-        return Convert.ToInt32(o);
+
+        return o == DBNull.Value || o == null ? null : Convert.ToInt32(o);
     }
 
     /// <summary>
@@ -140,8 +133,8 @@ public static partial class IDataReaderExtensions
     public static long? ToNullableLong(this IDataReader? reader, string? key)
     {
         var o = reader.ToValue(key);
-        if (o == DBNull.Value) return null;
-        return Convert.ToInt64(o);
+
+        return o == DBNull.Value || o == null ? null : Convert.ToInt64(o);
     }
 
     /// <summary>
@@ -189,16 +182,19 @@ public static partial class IDataReaderExtensions
         if (string.IsNullOrEmpty(key)) return null;
 
         int i = default;
+
         try
         {
             i = reader.GetOrdinal(key);
         }
         catch (IndexOutOfRangeException ex) { Throw(ex, key); }
 
-        return reader.GetValue(i);
+        object o = reader.GetValue(i);
+
+        return string.IsNullOrWhiteSpace($"{o}") ? null : reader.GetValue(i);
     }
 
-    static void Throw(IndexOutOfRangeException ex, string? key) => throw new IndexOutOfRangeException($"The expected column name, “{key},” is not here.", ex);
+    static void Throw(IndexOutOfRangeException ex, string? key) => throw new IndexOutOfRangeException($"The expected column name, `{key}`, is not here.", ex);
 
-    static void ThrowNullReferenceException(string? key) => throw new NullReferenceException($"The expected data for column name, “{key},” is not here.");
+    static void ThrowNullReferenceException(string? key) => throw new NullReferenceException($"The expected data for column name, `{key}`, is not here.");
 }
