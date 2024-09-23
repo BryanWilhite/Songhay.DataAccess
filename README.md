@@ -1,6 +1,10 @@
 # Songhay.DataAccess
 
-These reusable definitions for `System.Data.Common` ([ADO.NET](https://en.wikipedia.org/wiki/ADO.NET)) remind us that the excellent [Entity Framework](https://github.com/aspnet/EntityFramework6) (EF) and [EF Core](https://github.com/aspnet/EntityFrameworkCore) began as an application of the types in this namespace.
+These reusable definitions for `System.Data.Common` ([ADO.NET](https://en.wikipedia.org/wiki/ADO.NET)) remind us that the excellent [Entity Framework](https://github.com/aspnet/EntityFramework6) (EF) and [EF Core](https://github.com/aspnet/EntityFrameworkCore) began as an application of the types in this namespace. Microsoft preserves the 2008 article, “[Writing Generic Data Access Code in ASP.NET 2.0 and ADO.NET 2.0](https://learn.microsoft.com/en-us/previous-versions/dotnet/articles/ms971499(v=msdn.10)),” which provides some historical and contextual background to the work done here. The following from this 2008 article asserts the main motivation for this “common” database approach:
+
+>Writing generic data access code is especially important in data-driven Web applications because data comes from many different sources, including Microsoft SQL Server, Oracle, XML documents, flat files, and Web services, just to name a few.
+
+What was not mentioned above is [SQLite](https://www.sqlite.org/) which is the primary focus of this Studio. It follows that the `Microsoft.Data.Sqlite` NuGet [package](https://www.nuget.org/packages/Microsoft.Data.Sqlite) is installed and supported here. This package was chosen over the [original SQLite package](https://www.nuget.org/packages/System.Data.SQLite), `System.Data.SQLite`, for reasons described in “[Comparison to System.Data.SQLite](https://learn.microsoft.com/en-us/dotnet/standard/data/sqlite/compare).”
 
 ## the `Common*` utilities
 
