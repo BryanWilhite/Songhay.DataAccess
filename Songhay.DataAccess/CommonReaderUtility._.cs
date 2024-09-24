@@ -12,44 +12,48 @@ namespace Songhay.DataAccess;
 public static partial class CommonReaderUtility
 {
     /// <summary>
-    /// Returns an instance of <see cref="IDataReader"/>
-    /// based on the instance of <see cref="DbConnection"/>.
+    /// Returns an instance the conventional <see cref="IDbCommand"/>
+    /// for generating an <see cref="IDataReader"/>
+    /// based on the specified <see cref="IDbConnection"/>.
     /// </summary>
     /// <param name="connection">The <see cref="DbConnection"/>.</param>
     /// <param name="query">The SELECT SQL statement.</param>
-    public static IDataReader GetReader(IDbConnection? connection, string? query) => GetReader(connection, query, null);
+    public static IDbCommand GetReaderCommand(IDbConnection? connection, string? query) => GetReaderCommand(connection, query, null);
 
     /// <summary>
-    /// Returns an instance of <see cref="System.Data.IDataReader"/>
-    /// based on the object implementing <see cref="System.Data.IDbConnection"/>.
+    /// Returns an instance the conventional <see cref="IDbCommand"/>
+    /// for generating an <see cref="IDataReader"/>
+    /// based on the specified <see cref="IDbConnection"/>.
     /// </summary>
     /// <param name="connection">The object implementing <see cref="System.Data.IDbConnection"/>.</param>
     /// <param name="query">The SELECT SQL statement.</param>
     /// <param name="parameterCollection">A list of parameters.</param>
-    public static IDataReader GetReader(IDbConnection? connection, string? query, IEnumerable? parameterCollection) =>
-        GetReader(connection, query, parameterCollection, 30);
+    public static IDbCommand GetReaderCommand(IDbConnection? connection, string? query, IEnumerable? parameterCollection) =>
+        GetReaderCommand(connection, query, parameterCollection, 30);
 
     /// <summary>
-    /// Returns an instance of <see cref="System.Data.IDataReader"/>
-    /// based on the object implementing <see cref="System.Data.IDbConnection"/>.
+    /// Returns an instance the conventional <see cref="IDbCommand"/>
+    /// for generating an <see cref="IDataReader"/>
+    /// based on the specified <see cref="IDbConnection"/>.
     /// </summary>
     /// <param name="connection">The object implementing <see cref="System.Data.IDbConnection"/>.</param>
     /// <param name="query">The SELECT SQL statement.</param>
     /// <param name="parameterCollection">A list of parameters.</param>
     /// <param name="timeout">Command timeout in seconds.</param>
-    public static IDataReader GetReader(IDbConnection? connection, string? query, IEnumerable? parameterCollection, int timeout) =>
-        GetReader(connection, query, parameterCollection, timeout, null);
+    public static IDbCommand GetReaderCommand(IDbConnection? connection, string? query, IEnumerable? parameterCollection, int timeout) =>
+        GetReaderCommand(connection, query, parameterCollection, timeout, null);
 
     /// <summary>
-    /// Returns an instance of <see cref="System.Data.IDataReader"/>
-    /// based on the object implementing <see cref="System.Data.IDbConnection"/>.
+    /// Returns an instance the conventional <see cref="IDbCommand"/>
+    /// for generating an <see cref="IDataReader"/>
+    /// based on the specified <see cref="IDbConnection"/>.
     /// </summary>
     /// <param name="connection">The object implementing <see cref="System.Data.IDbConnection"/>.</param>
     /// <param name="query">The SELECT SQL statement or stored procedure execution.</param>
     /// <param name="parameterCollection">A list of parameters.</param>
     /// <param name="timeout">Command timeout in seconds.</param>
     /// <param name="ambientTransaction">The ambient <see cref="IDbTransaction"/> implementation.</param>
-    public static IDataReader GetReader(IDbConnection? connection, string? query, IEnumerable? parameterCollection, int timeout, IDbTransaction? ambientTransaction)
+    public static IDbCommand GetReaderCommand(IDbConnection? connection, string? query, IEnumerable? parameterCollection, int timeout, IDbTransaction? ambientTransaction)
     {
         if (connection == null) throw new ArgumentNullException(nameof(connection), "The implementing Connection object is null.");
         if (string.IsNullOrEmpty(query)) throw new ArgumentException("The DBMS query was not specified.");
@@ -68,8 +72,6 @@ public static partial class CommonReaderUtility
 
         if (ambientTransaction != null) selectCommand.Transaction = ambientTransaction;
 
-        IDataReader r = selectCommand.ExecuteReader(CommandBehavior.Default);
-
-        return r;
+        return selectCommand;
     }
 }

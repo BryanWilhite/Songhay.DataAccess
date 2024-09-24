@@ -30,7 +30,8 @@ public class IDataReaderExtensionsTests
         Assert.NotNull(connection);
         connection.Open();
 
-        using IDataReader reader = CommonReaderUtility.GetReader(connection, sql);
+        using IDbCommand command = CommonReaderUtility.GetReaderCommand(connection, sql);
+        using IDataReader reader = command.ExecuteReader();
 
         JsonObject? actual = reader.ToJsonObject();
         Assert.NotNull(actual);
@@ -51,7 +52,8 @@ public class IDataReaderExtensionsTests
         Assert.NotNull(connection);
         connection.Open();
 
-        using IDataReader reader = CommonReaderUtility.GetReader(connection, sql);
+        using IDbCommand command = CommonReaderUtility.GetReaderCommand(connection, sql);
+        using IDataReader reader = command.ExecuteReader();
 
         XDocument actual = reader.ToXDocument();
         Assert.NotNull(actual);
