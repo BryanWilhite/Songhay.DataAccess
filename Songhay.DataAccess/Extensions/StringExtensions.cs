@@ -49,6 +49,18 @@ public static class StringExtensions
     }
 
     /// <summary>
+    /// Converts the boxed <see cref="string"/> into CSV cell format.
+    /// </summary>
+    /// <param name="data">The data.</param>
+    public static string ToCsvCell(this object? data) => $"{data}".ToCsvCell();
+
+    /// <summary>
+    /// Converts the <see cref="string"/> into CSV cell format.
+    /// </summary>
+    /// <param name="data">The data.</param>
+    public static string ToCsvCell(this string? data) => string.Concat("\"", $"{data}".Replace("\"", "\"\""), "\"");
+
+    /// <summary>
     /// Converts the <see cref="string"/> into a nullable boolean.
     /// </summary>
     /// <param name="data">The data.</param>

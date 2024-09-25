@@ -1,6 +1,5 @@
 using System.Data;
 using System.Text;
-using System.Text.Json.Nodes;
 using Microsoft.Extensions.Logging;
 using Songhay.Extensions;
 
@@ -29,30 +28,31 @@ public static partial class IDataReaderExtensions
             return;
         }
 
-        if (!string.IsNullOrWhiteSpace(path))
+        if (string.IsNullOrWhiteSpace(path))
         {
             logger?.LogError("Error: the expected path is not here.");
 
             return;
         }
 
-        using FileStream stream = File.OpenWrite(path!);
+        using FileStream stream = File.OpenWrite(path);
 
         if (includeHeader)
         {
             logger?.LogError("Getting headers...");
 
-            byte[] headersData = Encoding.UTF8.GetBytes(string.Concat(reader.ToRowNames().Aggregate((a, name) => $"{a},\"{name}\""), Environment.NewLine));
+            byte[] headersData = Encoding.UTF8.GetBytes(string.Concat(reader.ToRowNames().Select(n => n.ToCsvCell()).Aggregate((a, name) => $"{a},{name}"), Environment.NewLine));
             stream.Write(headersData, 0, headersData.Length);
         }
 
-        logger?.LogInformation("Writing to CSV file...");
+        logger?.LogInformation("Writing to CSV file, `{Path}`...", path);
+
         while (reader.Read())
         {
             object[] row = new object[reader.FieldCount];
             reader.GetValues(row);
 
-            byte[] data = Encoding.UTF8.GetBytes(string.Concat(row.Aggregate((a, datum) => $"{a},\"{datum}\""), Environment.NewLine));
+            byte[] data = Encoding.UTF8.GetBytes(string.Concat(row.Select(n => n.ToCsvCell()).Aggregate((a, datum) => $"{a},{datum}"), Environment.NewLine));
             stream.Write(data, 0, data.Length);
         }
     }
