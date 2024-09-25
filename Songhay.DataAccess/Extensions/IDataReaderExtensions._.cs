@@ -84,6 +84,14 @@ public static partial class IDataReaderExtensions
     public static float? ToFloatOrDefault(this IDataReader? reader, string? key, ILogger? logger) => (reader as IDataRecord).ToFloatOrDefault(key, logger);
 
     /// <summary>
+    /// Tries to return the value of <see cref="IDataRecord.GetGuid"/> or null.
+    /// </summary>
+    /// <param name="reader">the <see cref="IDataReader"/></param>
+    /// <param name="key">the key (or field name of the underlying <see cref="IDataRecord"/>)</param>
+    /// <param name="logger">the conventional <see cref="ILogger"/></param>
+    public static Guid? ToGuidOrDefault(this IDataReader? reader, string? key, ILogger? logger) => (reader as IDataRecord).ToGuidOrDefault(key, logger);
+
+    /// <summary>
     /// Tries to return the value of <see cref="IDataRecord.GetInt16"/> or null.
     /// </summary>
     /// <param name="reader">the <see cref="IDataReader"/></param>

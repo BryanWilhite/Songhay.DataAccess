@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace Songhay.DataAccess.Extensions;
 
@@ -7,6 +8,31 @@ namespace Songhay.DataAccess.Extensions;
 /// </summary>
 public static partial class DbContextExtensions
 {
+    /// <summary>
+    /// Deletes an EF entity by the specified column and key.
+    /// </summary>
+    /// <typeparam name="TEntityType">The type of the entity.</typeparam>
+    /// <typeparam name="TKey">The type of the key.</typeparam>
+    /// <param name="context">the <see cref="DbContext"/></param>
+    /// <param name="keyColumn">The key column.</param>
+    /// <param name="key">The key.</param>
+    /// <returns>The number of rows affected.</returns>
+    public static int DeleteByKey<TEntityType, TKey>(this DbContext? context, string? keyColumn, TKey? key)
+    {
+        if (context == null) return default;
+        if (string.IsNullOrEmpty(keyColumn)) return default;
+
+        IEntityType? entityType = context.Model.FindEntityType(typeof(TEntityType));
+        if (entityType == null) return default;
+
+        string? tableName = entityType.GetTableName();
+        if (string.IsNullOrEmpty(tableName)) return default;
+
+        string sql = $"DELETE FROM {tableName} WHERE {keyColumn} = @key";
+
+        return context.Database.ExecuteSqlRaw(sql, new { key });
+    }
+
     /// <summary>
     /// Detaches the specified entity.
     /// </summary>

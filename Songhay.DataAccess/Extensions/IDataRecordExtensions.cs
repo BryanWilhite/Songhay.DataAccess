@@ -324,6 +324,41 @@ public static class IDataRecordExtensions
     }
 
     /// <summary>
+    /// Tries to return the value of <see cref="IDataRecord.GetGuid"/> or null.
+    /// </summary>
+    /// <param name="record">the <see cref="IDataRecord"/></param>
+    /// <param name="key">the key (or field name of the underlying <see cref="IDataRecord"/>)</param>
+    /// <param name="logger">the conventional <see cref="ILogger"/></param>
+    public static Guid? ToGuidOrDefault(this IDataRecord? record, string? key, ILogger? logger)
+    {
+        logger?.LogInformation("Looking for {Type} with key `{Key}`...", typeof(bool), key);
+
+        int? ordinal = GetReaderOrdinal(record, key, logger);
+
+        if(ordinal == null) return null;
+
+        Type fieldType = record!.GetFieldType(ordinal.Value);
+
+        if (typeof(float) != fieldType)
+        {
+            logger?.LogError("The expected field type is not here! Found {Type} instead. Returning null...", fieldType);
+
+            return null;
+        }
+
+        try
+        {
+            return record.GetGuid(ordinal.Value);
+        }
+        catch (Exception e)
+        {
+            logger?.LogError(e, "{Method} failed! Returning null...", nameof(IDataRecord.GetGuid));
+
+            return null;
+        }
+    }
+
+    /// <summary>
     /// Tries to return the value of <see cref="IDataRecord.GetInt16"/> or null.
     /// </summary>
     /// <param name="record">the <see cref="IDataRecord"/></param>
