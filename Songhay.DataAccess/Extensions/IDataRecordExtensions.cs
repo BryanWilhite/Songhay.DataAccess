@@ -78,7 +78,7 @@ public static class IDataRecordExtensions
 
         try
         {
-            return record.GetBoolean(ordinal.Value);
+            return record.IsDBNull(ordinal.Value) ? null : record.GetBoolean(ordinal.Value);
         }
         catch (Exception e)
         {
@@ -121,7 +121,7 @@ public static class IDataRecordExtensions
     /// <param name="logger">the conventional <see cref="ILogger"/></param>
     public static byte? ToByteOrDefault(this IDataRecord? record, string? key, ILogger? logger)
     {
-        logger?.LogInformation("Looking for {Type} with key `{Key}`...", typeof(bool), key);
+        logger?.LogInformation("Looking for {Type} with key `{Key}`...", typeof(byte), key);
 
         int? ordinal = GetReaderOrdinal(record, key, logger);
 
@@ -138,7 +138,7 @@ public static class IDataRecordExtensions
 
         try
         {
-            return record.GetByte(ordinal.Value);
+            return record.IsDBNull(ordinal.Value) ? null : record.GetByte(ordinal.Value);
         }
         catch (Exception e)
         {
@@ -156,7 +156,7 @@ public static class IDataRecordExtensions
     /// <param name="logger">the conventional <see cref="ILogger"/></param>
     public static char? ToCharOrDefault(this IDataRecord? record, string? key, ILogger? logger)
     {
-        logger?.LogInformation("Looking for {Type} with key `{Key}`...", typeof(bool), key);
+        logger?.LogInformation("Looking for {Type} with key `{Key}`...", typeof(char), key);
 
         int? ordinal = GetReaderOrdinal(record, key, logger);
 
@@ -173,7 +173,7 @@ public static class IDataRecordExtensions
 
         try
         {
-            return record.GetChar(ordinal.Value);
+            return record.IsDBNull(ordinal.Value) ? null : record.GetChar(ordinal.Value);
         }
         catch (Exception e)
         {
@@ -191,7 +191,7 @@ public static class IDataRecordExtensions
     /// <param name="logger">the conventional <see cref="ILogger"/></param>
     public static DateTime? ToDateTimeOrDefault(this IDataRecord? record, string? key, ILogger? logger)
     {
-        logger?.LogInformation("Looking for {Type} with key `{Key}`...", typeof(bool), key);
+        logger?.LogInformation("Looking for {Type} with key `{Key}`...", typeof(DateTime), key);
 
         int? ordinal = GetReaderOrdinal(record, key, logger);
 
@@ -208,7 +208,7 @@ public static class IDataRecordExtensions
 
         try
         {
-            return record.GetDateTime(ordinal.Value);
+            return record.IsDBNull(ordinal.Value) ? null : record.GetDateTime(ordinal.Value);
         }
         catch (Exception e)
         {
@@ -226,7 +226,7 @@ public static class IDataRecordExtensions
     /// <param name="logger">the conventional <see cref="ILogger"/></param>
     public static decimal? ToDecimalOrDefault(this IDataRecord? record, string? key, ILogger? logger)
     {
-        logger?.LogInformation("Looking for {Type} with key `{Key}`...", typeof(bool), key);
+        logger?.LogInformation("Looking for {Type} with key `{Key}`...", typeof(decimal), key);
 
         int? ordinal = GetReaderOrdinal(record, key, logger);
 
@@ -243,7 +243,7 @@ public static class IDataRecordExtensions
 
         try
         {
-            return record.GetDecimal(ordinal.Value);
+            return record.IsDBNull(ordinal.Value) ? null : record.GetDecimal(ordinal.Value);
         }
         catch (Exception e)
         {
@@ -261,7 +261,7 @@ public static class IDataRecordExtensions
     /// <param name="logger">the conventional <see cref="ILogger"/></param>
     public static double? ToDoubleOrDefault(this IDataRecord? record, string? key, ILogger? logger)
     {
-        logger?.LogInformation("Looking for {Type} with key `{Key}`...", typeof(bool), key);
+        logger?.LogInformation("Looking for {Type} with key `{Key}`...", typeof(double), key);
 
         int? ordinal = GetReaderOrdinal(record, key, logger);
 
@@ -278,7 +278,7 @@ public static class IDataRecordExtensions
 
         try
         {
-            return record.GetDouble(ordinal.Value);
+            return record.IsDBNull(ordinal.Value) ? null : record.GetDouble(ordinal.Value);
         }
         catch (Exception e)
         {
@@ -296,7 +296,7 @@ public static class IDataRecordExtensions
     /// <param name="logger">the conventional <see cref="ILogger"/></param>
     public static float? ToFloatOrDefault(this IDataRecord? record, string? key, ILogger? logger)
     {
-        logger?.LogInformation("Looking for {Type} with key `{Key}`...", typeof(bool), key);
+        logger?.LogInformation("Looking for {Type} with key `{Key}`...", typeof(float), key);
 
         int? ordinal = GetReaderOrdinal(record, key, logger);
 
@@ -313,7 +313,7 @@ public static class IDataRecordExtensions
 
         try
         {
-            return record.GetFloat(ordinal.Value);
+            return record.IsDBNull(ordinal.Value) ? null : record.GetFloat(ordinal.Value);
         }
         catch (Exception e)
         {
@@ -331,7 +331,7 @@ public static class IDataRecordExtensions
     /// <param name="logger">the conventional <see cref="ILogger"/></param>
     public static Guid? ToGuidOrDefault(this IDataRecord? record, string? key, ILogger? logger)
     {
-        logger?.LogInformation("Looking for {Type} with key `{Key}`...", typeof(bool), key);
+        logger?.LogInformation("Looking for {Type} with key `{Key}`...", typeof(Guid), key);
 
         int? ordinal = GetReaderOrdinal(record, key, logger);
 
@@ -348,7 +348,7 @@ public static class IDataRecordExtensions
 
         try
         {
-            return record.GetGuid(ordinal.Value);
+            return record.IsDBNull(ordinal.Value) ? null : record.GetGuid(ordinal.Value);
         }
         catch (Exception e)
         {
@@ -366,7 +366,7 @@ public static class IDataRecordExtensions
     /// <param name="logger">the conventional <see cref="ILogger"/></param>
     public static short? ToInt16OrDefault(this IDataRecord? record, string? key, ILogger? logger)
     {
-        logger?.LogInformation("Looking for {Type} with key `{Key}`...", typeof(bool), key);
+        logger?.LogInformation("Looking for {Type} with key `{Key}`...", typeof(short), key);
 
         int? ordinal = GetReaderOrdinal(record, key, logger);
 
@@ -383,7 +383,7 @@ public static class IDataRecordExtensions
 
         try
         {
-            return record.GetInt16(ordinal.Value);
+            return record.IsDBNull(ordinal.Value) ? null :  record.GetInt16(ordinal.Value);
         }
         catch (Exception e)
         {
@@ -401,7 +401,7 @@ public static class IDataRecordExtensions
     /// <param name="logger">the conventional <see cref="ILogger"/></param>
     public static int? ToInt32OrDefault(this IDataRecord? record, string? key, ILogger? logger)
     {
-        logger?.LogInformation("Looking for {Type} with key `{Key}`...", typeof(bool), key);
+        logger?.LogInformation("Looking for {Type} with key `{Key}`...", typeof(int), key);
 
         int? ordinal = GetReaderOrdinal(record, key, logger);
 
@@ -418,7 +418,7 @@ public static class IDataRecordExtensions
 
         try
         {
-            return record.GetInt32(ordinal.Value);
+            return record.IsDBNull(ordinal.Value) ? null : record.GetInt32(ordinal.Value);
         }
         catch (Exception e)
         {
@@ -436,7 +436,7 @@ public static class IDataRecordExtensions
     /// <param name="logger">the conventional <see cref="ILogger"/></param>
     public static long? ToInt64OrDefault(this IDataRecord? record, string? key, ILogger? logger)
     {
-        logger?.LogInformation("Looking for {Type} with key `{Key}`...", typeof(bool), key);
+        logger?.LogInformation("Looking for {Type} with key `{Key}`...", typeof(long), key);
 
         int? ordinal = GetReaderOrdinal(record, key, logger);
 
@@ -453,7 +453,7 @@ public static class IDataRecordExtensions
 
         try
         {
-            return record.GetInt64(ordinal.Value);
+            return record.IsDBNull(ordinal.Value) ? null : record.GetInt64(ordinal.Value);
         }
         catch (Exception e)
         {
@@ -486,7 +486,7 @@ public static class IDataRecordExtensions
     /// <param name="logger">the conventional <see cref="ILogger"/></param>
     public static string? ToStringOrDefault(this IDataRecord? record, string? key, ILogger? logger)
     {
-        logger?.LogInformation("Looking for {Type} with key `{Key}`...", typeof(bool), key);
+        logger?.LogInformation("Looking for {Type} with key `{Key}`...", typeof(string), key);
 
         int? ordinal = GetReaderOrdinal(record, key, logger);
 
@@ -503,7 +503,7 @@ public static class IDataRecordExtensions
 
         try
         {
-            return record.GetString(ordinal.Value);
+            return record.IsDBNull(ordinal.Value) ? null : record.GetString(ordinal.Value);
         }
         catch (Exception e)
         {
