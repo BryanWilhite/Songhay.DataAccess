@@ -110,7 +110,7 @@ public static partial class IDataReaderExtensions
     /// <summary>
     /// Converts the <see cref="IDataReader"/> into <see cref="IEnumerable{T}"/>.
     /// </summary>
-    /// <param name="reader">The reader.</param>
+    /// <param name="reader">the <see cref="IDataReader"/></param>
     /// <exception cref="ArgumentNullException">The expected reader is not here.</exception>
     /// <remarks>
     /// This member uses <see cref="IDataRecord.GetValues"/> under the hood;

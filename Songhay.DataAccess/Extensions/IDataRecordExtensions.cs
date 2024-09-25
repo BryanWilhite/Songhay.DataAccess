@@ -429,6 +429,21 @@ public static class IDataRecordExtensions
     }
 
     /// <summary>
+    /// Converts the <see cref="IDataRecord"/> to the field names of the <see cref="IDataRecord"/>.
+    /// </summary>
+    /// <param name="record">the <see cref="IDataRecord"/></param>
+    /// <exception cref="ArgumentNullException"></exception>
+    public static IEnumerable<string> ToRowNames(this IDataReader? record)
+    {
+        if (record == null) throw new ArgumentNullException(nameof(record), "The expected data reader is not here.");
+
+        for (int i = 0; i < record.FieldCount; i++)
+        {
+            yield return record.GetName(i);
+        }
+    }
+
+    /// <summary>
     /// Tries to return the value of <see cref="IDataRecord.GetString"/> or null.
     /// </summary>
     /// <param name="record">the <see cref="IDataRecord"/></param>
