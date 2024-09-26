@@ -89,6 +89,7 @@ public static partial class CommonDbmsUtility
         if (parameterCollection != null)
         {
             IReadOnlyCollection<IDataParameter> paramArray = CommonParameterUtility.GetParameters(cmd, parameterCollection);
+
             foreach (IDataParameter p in paramArray)
             {
                 cmd.Parameters.Add(p);

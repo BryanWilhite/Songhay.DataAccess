@@ -13,12 +13,12 @@ public static partial class DataSetExtensions
     /// </summary>
     /// <param name="setTableNames">The set table names.</param>
     /// <exception cref="System.ArgumentNullException">setTableNames;The expected DataSet names are not here.</exception>
-    public static IReadOnlyCollection<DataTableMapping> ToDataTableMappings(this IReadOnlyCollection<string>? setTableNames)
+    public static IReadOnlyCollection<DataTableMapping> ToDataTableMappings(this IEnumerable<string>? setTableNames)
     {
-        if ((setTableNames == null) || !setTableNames.Any()) throw new ArgumentNullException(nameof(setTableNames), "The expected DataSet names are not here.");
+        if (setTableNames == null) return Array.Empty<DataTableMapping>();
 
         return setTableNames
-            .Select((x, i) => new DataTableMapping($"Table{i}", x))
+            .Select((name, i) => new DataTableMapping($"Table{i}", name))
             .ToArray();
     }
 
@@ -31,12 +31,12 @@ public static partial class DataSetExtensions
     /// or
     /// pairs;The expected pairs are not here.
     /// </exception>
-    public static IReadOnlyCollection<DataTableMapping> ToDataTableMappings(this IReadOnlyCollection<KeyValuePair<string, string>>? pairs)
+    public static IReadOnlyCollection<DataTableMapping> ToDataTableMappings(this IEnumerable<KeyValuePair<string, string>>? pairs)
     {
-        if (pairs == null || !pairs.Any()) throw new ArgumentNullException(nameof(pairs), "The expected pairs are not here.");
+        if (pairs == null) return Array.Empty<DataTableMapping>();
 
         return pairs
-            .Select(i => new DataTableMapping(i.Key, i.Value))
+            .Select(pair => new DataTableMapping(pair.Key, pair.Value))
             .ToArray();
     }
 }
