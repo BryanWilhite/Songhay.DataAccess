@@ -63,9 +63,38 @@ public static partial class CommonDbmsUtility
     /// </summary>
     /// <param name="connection">The object implementing <see cref="IDbConnection"/>.</param>
     /// <param name="sqlStatement">The SQL statement.</param>
+    /// <param name="parameters">The parameters.</param>
+    /// <returns>Returns the number of records affected.</returns>
+    public static int DoCommand(IDbConnection? connection, string? sqlStatement, params (string Name, object? Value)[] parameters)
+    {
+        IEnumerable<(string Name, object? Value)> parameterCollection = parameters;
+
+        return DoCommand(connection, ambientTransaction: null, sqlStatement, parameterCollection);
+    }
+
+    /// <summary>
+    /// Executes a SQL sqlStatement for the current instance of <see cref="IDbConnection"/>.
+    /// </summary>
+    /// <param name="connection">The object implementing <see cref="IDbConnection"/>.</param>
+    /// <param name="sqlStatement">The SQL statement.</param>
     /// <param name="parameterCollection">The parameters.</param>
     /// <returns>Returns the number of records affected.</returns>
     public static int DoCommand(IDbConnection? connection, string? sqlStatement, IEnumerable? parameterCollection) => DoCommand(connection, null, sqlStatement, parameterCollection);
+
+    /// <summary>
+    /// Executes a SQL sqlStatement for the current instance of <see cref="IDbConnection"/>.
+    /// </summary>
+    /// <param name="connection">The object implementing <see cref="IDbConnection"/>.</param>
+    /// <param name="ambientTransaction">An instance of the explicit, server <see cref="IDbTransaction"/>.</param>
+    /// <param name="sqlStatement">The SQL statement.</param>
+    /// <param name="parameters">The parameters.</param>
+    /// <returns>Returns the number of records affected.</returns>
+    public static int DoCommand(IDbConnection? connection, IDbTransaction? ambientTransaction, string? sqlStatement, params (string Name, object? Value)[]? parameters)
+    {
+        IEnumerable<(string Name, object? Value)>? parameterCollection = parameters;
+
+        return DoCommand(connection, ambientTransaction, sqlStatement, parameterCollection);
+    }
 
     /// <summary>
     /// Executes a SQL sqlStatement for the current instance of <see cref="IDbConnection"/>.

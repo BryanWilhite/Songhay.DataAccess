@@ -44,6 +44,29 @@ public class IDataReaderExtensionsTests
     }
 
     [Theory]
+    [InlineData("../../../../db/northwind.db", "SELECT * FROM Employees WHERE EmployeeID = @EmployeeId", "../../../csv", "employee-by-id", "EmployeeId", 5)]
+    public void StreamToCsvFile_with_Params_Test(string dbPath, string sql, string csvPath, string outputName, string paramName, object? paramValue)
+    {
+        ILogger logger = _loggerProvider.CreateLogger(nameof(StreamToCsvFile_with_Params_Test));
+
+        dbPath = ProgramAssemblyUtility.GetPathFromAssembly(GetType().Assembly, dbPath);
+        Assert.True(File.Exists(dbPath));
+
+        string connectionString = $"data source={dbPath}";
+
+        csvPath = ProgramAssemblyUtility.GetPathFromAssembly(GetType().Assembly, $"{csvPath}/{nameof(StreamToCsvFile_with_Params_Test)}/{outputName}-output.csv");
+
+        using IDbConnection connection = CommonDbmsUtility.GetConnection(SqliteFactory.Instance, connectionString);
+        Assert.NotNull(connection);
+        connection.Open();
+
+        using IDbCommand command = CommonReaderUtility.GetReaderCommand(connection, sql, (paramName, paramValue));
+        using IDataReader reader = command.ExecuteReader();
+
+        reader.StreamToCsvFile(csvPath, includeHeader: true, logger);
+    }
+
+    [Theory]
     [InlineData("../../../../db/northwind.db", "SELECT * FROM Orders WHERE OrderID = 10248", "Freight", false)]
     public void ToDoubleOrDefault_Test(string dbPath, string sql, string key, bool shouldReturnNull)
     {

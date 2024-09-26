@@ -112,6 +112,7 @@ public static class CommonParameterUtility
             null => Array.Empty<IDataParameter>(),
             IEnumerable<IDataParameter> => parameterCollection.OfType<IDataParameter>().ToArray(),
             IEnumerable<DataParameterMetadata> meta => meta.Select(data => GetParameterFromParameterMetadata(dbmsCommand, data)).ToArray(),
+            IEnumerable<(string Name, object? Value)> dict => dict.Select(pair => GetParameter(dbmsCommand, pair.Name, pair.Value ?? ProgramTypeUtility.SqlDatabaseNull())).ToArray(),
             Dictionary<string, object?> dict => dict.Select(pair => GetParameter(dbmsCommand, pair.Key, pair.Value ?? ProgramTypeUtility.SqlDatabaseNull())).ToArray(),
             _ => throw new NotSupportedException(@"
 The parameter collection is not supported.
