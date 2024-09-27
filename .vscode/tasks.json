@@ -26,19 +26,6 @@
             "problemMatcher": "$msCompile"
         },
         {
-            "label": "watch",
-            "command": "dotnet",
-            "type": "process",
-            "args": [
-                "watch",
-                "run",
-                "${workspaceFolder}/Songhay.DataAccess.Tests/Songhay.DataAccess.Tests.csproj",
-                "/property:GenerateFullPaths=true",
-                "/consoleloggerparameters:NoSummary"
-            ],
-            "problemMatcher": "$msCompile"
-        },
-        {
             "label": "dotnet build [Solution]",
             "command": "dotnet",
             "type": "shell",
@@ -98,19 +85,21 @@
             "problemMatcher": "$msCompile"
         },
         {
-            "command": "nuget",
-            "label": "NuGet pack",
-            "isBackground": false,
+            "label": "dotnet pack [Songhay.DataAccess, Debug]",
+            "command": "dotnet",
             "type": "shell",
             "args": [
                 "pack",
-                "Songhay.DataAccess.nuspec",
-                "-Verbosity",
-                "detailed"
+                "${workspaceFolder}/Songhay.DataAccess/Songhay.DataAccess.csproj",
+                "--configuration",
+                "Debug",
+                "-p:NuspecFile=${workspaceFolder}/Songhay.DataAccess/Songhay.DataAccess.nuspec",
+                "-p:NuspecBasePath=${workspaceFolder}/Songhay.DataAccess",
+                "--output",
+                "${workspaceFolder}/Songhay.DataAccess",
+                "--verbosity",
+                "normal"
             ],
-            "options": {
-                "cwd": "${workspaceRoot}/Songhay.DataAccess"
-            },
             "problemMatcher": "$msCompile"
         }
     ]

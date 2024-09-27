@@ -1,38 +1,36 @@
 ﻿<?xml version="1.0"?>
 <package >
-  <metadata>
-    <id>Songhay.DataAccess</id>
-    <version>5.0.0</version>
-    <description>Reusable definitions for System.Data.Common (ADO.NET)</description>
-    <authors>Bryan D. Wilhite</authors>
-    <title>Songhay Data Access</title>
-    <owners>Bryan D. Wilhite</owners>
-    <projectUrl>https://github.com/BryanWilhite/Songhay.DataAccess</projectUrl>
-    <icon>images\songhay_icon.png</icon>
-    <license type="file">LICENSE.md</license>
-    <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <summary>Reusable definitions for System.Data.Common (ADO.NET)</summary>
-    <releaseNotes>https://github.com/BryanWilhite/Songhay.DataAccess/projects/1</releaseNotes>
-    <copyright>(c) 2021 Bryan D. Wilhite</copyright>
-    <tags>ADO ADO.NET System.Data.Common IDbConnection IDataReader EF Entity Framework</tags>
-    <repository type="git" url="https://github.com/BryanWilhite/Songhay.DataAccess"></repository>
-    <dependencies>
-      <group targetFramework=".NET5.0">
-        <dependency id="SonghayCore" version="5.0.0" />
-        <dependency id="Microsoft.EntityFrameworkCore" version="5.0.2" />
-      </group>
-      <group targetFramework=".NETStandard2.0">
-        <dependency id="SonghayCore" version="5.0.0" />
-      </group>
-    </dependencies>
-  </metadata>
-  <files>
-    <file src="bin\Release\net5.0\Songhay.DataAccess*.dll" target="lib\net5.0" />
-    <file src="bin\Release\net5.0\Songhay.DataAccess*.json" target="lib\net5.0" />
-    <file src="bin\Release\netstandard2.0\Songhay.DataAccess*.dll" target="lib\netstandard2.0" />
-    <file src="bin\Release\netstandard2.0\Songhay.DataAccess*.json" target="lib\netstandard2.0" />
-    <file src="**\*.cs" exclude="**\obj\**" target="src" />
-    <file src="..\LICENSE.md" target="" />
-    <file src="..\songhay_icon.png" target="images\" />
-  </files>
+    <metadata>
+        <id>Songhay.DataAccess</id>
+        <version>6.0.0</version>
+        <description>Reusable definitions for System.Data.Common (ADO.NET)</description>
+        <authors>Bryan D. Wilhite</authors>
+        <title>Songhay Data Access</title>
+        <owners>Bryan D. Wilhite</owners>
+        <projectUrl>https://github.com/BryanWilhite/Songhay.DataAccess</projectUrl>
+        <icon>images\songhay_icon.png</icon>
+        <license type="file">LICENSE.md</license>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <summary>Reusable definitions for System.Data.Common (ADO.NET)</summary>
+        <readme>README.md</readme>
+        <releaseNotes>https://github.com/BryanWilhite/Songhay.DataAccess/pull/13</releaseNotes>
+        <copyright>(c) 2024 Bryan D. Wilhite</copyright>
+        <tags>ADO ADO.NET System.Data.Common IDbConnection IDataReader EF Entity Framework</tags>
+        <repository type="git" url="https://github.com/BryanWilhite/Songhay.DataAccess"></repository>
+        <dependencies>
+            <group targetFramework=".NET6.0">
+                <dependency id="Microsoft.Data.Sqlite" version="6.0.33" />
+                <dependency id="Microsoft.EntityFrameworkCore.Sqlite" version="6.0.32" />
+                <dependency id="SonghayCore" version="6.1.4" />
+            </group>
+        </dependencies>
+    </metadata>
+    <files>
+        <file src="bin\Debug\net6.0\Songhay*.dll" target="lib\net6.0"/>
+        <file src="bin\Debug\net6.0\Songhay*.json" target="lib\net6.0"/>
+        <file src="**\*.cs" exclude="**\obj\**" target="src"/>
+        <file src="..\LICENSE.md" target=""/>
+        <file src="..\README.md" target=""/>
+        <file src="..\songhay_icon.png" target="images\"/>
+    </files>
 </package>
