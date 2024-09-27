@@ -1,30 +1,24 @@
 # Songhay.DataAccess
 
-These reusable definitions for `System.Data.Common` ([ADO.NET](https://en.wikipedia.org/wiki/ADO.NET)) remind us that the excellent [Entity Framework](https://github.com/aspnet/EntityFramework6) (EF) and [EF Core](https://github.com/aspnet/EntityFrameworkCore) began as an application of the types in this namespace. This package is based on [a project file](https://github.com/BryanWilhite/Songhay.DataAccess/blob/master/Songhay.DataAccess/Songhay.DataAccess.csproj) that supports [multi-targeting](http://gigi.nullneuron.net/gigilabs/multi-targeting-net-standard-class-libraries/), declaring support for `net5.0` and `netstandard2.0`.
+These reusable definitions for `System.Data.Common` ([ADO.NET](https://en.wikipedia.org/wiki/ADO.NET)) remind us that the excellent [Entity Framework](https://github.com/aspnet/EntityFramework6) (EF) and [EF Core](https://github.com/aspnet/EntityFrameworkCore) began as an application of the types in this namespace. Microsoft preserves the 2008 article, “[Writing Generic Data Access Code in ASP.NET 2.0 and ADO.NET 2.0](https://learn.microsoft.com/en-us/previous-versions/dotnet/articles/ms971499(v=msdn.10)),” which provides some historical and contextual background to the work done here. The following from this 2008 article asserts the main motivation for this “common” database approach:
 
-This repository represents the work horse that I have driven for over 15 years (depending on my other work horse, `SonghayCore` [[GitHub](https://github.com/BryanWilhite/SonghayCore), [NuGet](https://www.nuget.org/packages/SonghayCore/)]). It is quite a pleasure to finally share this work here on relatively newfangled GitHub.
+>Writing generic data access code is especially important in data-driven Web applications because data comes from many different sources, including Microsoft SQL Server, Oracle, XML documents, flat files, and Web services, just to name a few.
 
-## version 5.0 breaking changes
+What was not mentioned above is [SQLite](https://www.sqlite.org/) which emerges through the mists of time as the primary focus of this Studio. It follows that the `Microsoft.Data.Sqlite` NuGet [package](https://www.nuget.org/packages/Microsoft.Data.Sqlite) is installed and supported here. This package was chosen over the [original SQLite package](https://www.nuget.org/packages/System.Data.SQLite), `System.Data.SQLite`, for reasons described in “[Comparison to System.Data.SQLite](https://learn.microsoft.com/en-us/dotnet/standard/data/sqlite/compare).”
 
-The dominant theme in version 5.0 is about dropping direct support for .NET Framework. Microsoft strongly suggests that we support the .NET Framework legacy through targeting .NET Standard 2.0 because .NET Framework 4.71 supports .NET Standard 2.0. Moreover, the course of Entity Framework Core [[GitHub](https://github.com/dotnet/efcore)] dominate breaking changes:
+## the `Microsoft.Data.Sqlite.SqliteFactory`
 
-- validation is not baked into Entity Framework Core [[StackOverflow](https://stackoverflow.com/a/43427057/22944)]
-- the `DbContext.Configuration` pattern has been replaced by overriding `DbContext.OnConfiguring` with `DbContextOptionsBuilder` [[docs](https://docs.microsoft.com/en-us/dotnet/api/microsoft.entityframeworkcore.dbcontextoptionsbuilder?view=efcore-5.0)]
-- support for `ConnectionStringSettings` dropped
-- `EntityConnectionStringBuilder` and `ObjectStateManager` is not migrated to .NET 5.0
-- `RegistryKeyExtensions` dropped
-- Oracle-related `TextTemplating` dropped
-- use of [SQL Server Compact](https://en.wikipedia.org/wiki/SQL_Server_Compact) in test the project is dropped
+The `Microsoft.Data.Sqlite.SqliteFactory` [📖 [docs](https://learn.microsoft.com/en-us/dotnet/api/microsoft.data.sqlite.sqlitefactory?view=msdata-sqlite-7.0.0)] is considered here the premiere `DbProviderFactory` [📖 [docs](https://learn.microsoft.com/en-us/dotnet/api/system.data.common.dbproviderfactory)] of this Studio. The `CommonDbmsUtility.RegisterMicrosoftSqlite()` method registers the SQLite provider with the current app domain. We can see this provider in action throughout the automated tests in the `Songhay.DataAccess.Tests` [project](./Songhay.DataAccess.Tests) that accompany this library. These tests depend on the `Songhay.Northwind.DataAccess` [project](./Songhay.Northwind.DataAccess), featuring a SQLite database [file](./db/northwind.db), `northwind.db`.
 
 ## the `Common*` utilities
 
 This Solution features the `Common*` utilities of reusable routines around:
 
-- `System.Data.IDbConnection` [[docs](https://docs.microsoft.com/en-us/dotnet/api/system.data.IDbConnection?view=netcore-2.0)]
-- `System.Data.Common.DbParameter` [[docs](https://docs.microsoft.com/en-us/dotnet/api/system.data.common.dbparameter?view=netcore-2.0)]
-- `System.Data.IDataReader` [[docs](https://docs.microsoft.com/en-us/dotnet/api/system.data.IDataReader?view=netcore-2.0)]
+- `System.Data.IDbConnection` [📖 [docs](https://docs.microsoft.com/en-us/dotnet/api/system.data.IDbConnection?view=netcore-2.0)]
+- `System.Data.Common.DbParameter` [📖 [docs](https://docs.microsoft.com/en-us/dotnet/api/system.data.common.dbparameter?view=netcore-2.0)]
+- `System.Data.IDataReader` [📖 [docs](https://docs.microsoft.com/en-us/dotnet/api/system.data.IDataReader?view=netcore-2.0)]
 
-The interfaces `IDbConnection` and `IDataReader` are implemented in .NET as `System.Data.Common.DbConnection` [[docs](https://docs.microsoft.com/en-us/dotnet/api/system.data.common.dbconnection?view=netcore-2.0)] and `System.Data.Common.DbDataReader` [[docs](https://docs.microsoft.com/en-us/dotnet/api/system.data.common.dbdatareader?view=netcore-2.0)], respectively.
+The interfaces `IDbConnection` and `IDataReader` are implemented in .NET as `System.Data.Common.DbConnection` [[docs](https://docs.microsoft.com/en-us/dotnet/api/system.data.common.dbconnection?view=netcore-2.0)] and `System.Data.Common.DbDataReader` [📖 [docs](https://docs.microsoft.com/en-us/dotnet/api/system.data.common.dbdatareader?view=netcore-2.0)], respectively.
 
 With respect to the list above, these `Common*` utilities are:
 
@@ -38,7 +32,8 @@ The [extension method classes](https://github.com/BryanWilhite/Songhay.DataAcces
 
 ## related links
 
-- ADO.NET [[docs](https://docs.microsoft.com/en-us/dotnet/framework/data/adonet/)]
-- Entity Framework Overview [[docs](https://docs.microsoft.com/en-us/dotnet/framework/data/adonet/ef/overview)]
+- ADO.NET [📖 [docs](https://docs.microsoft.com/en-us/dotnet/framework/data/adonet/)]
+- [DbProviderFactories](https://learn.microsoft.com/en-us/dotnet/framework/data/adonet/dbproviderfactories)
+- “[Obtaining a DbProviderFactory](https://learn.microsoft.com/en-us/dotnet/framework/data/adonet/obtaining-a-dbproviderfactory)”
 
 @[BryanWilhite](https://twitter.com/bryanwilhite)

@@ -1,53 +1,15 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <AssemblyVersion>5.0.0</AssemblyVersion>
-        <RootNamespace>Songhay.DataAccess</RootNamespace>
-
-        <Title>Songhay Core</Title>
-        <Description>Reusable definitions for System.Data.Common (ADO.NET)</Description>
-        <Authors>Bryan D. Wilhite</Authors>
-        <Copyright>(c) 2021 Bryan D. Wilhite</Copyright>
-        <Company>Songhay System</Company>
-        <RepositoryType>git</RepositoryType>
-        <RepositoryUrl>https://github.com/BryanWilhite/Songhay.DataAccess</RepositoryUrl>
-
-        <IncludeSource>false</IncludeSource>
-        <IncludeSymbols>false</IncludeSymbols>
-        <IsPackable>true</IsPackable>
-        <PackageIcon>..\songhay_icon.png</PackageIcon>
-        <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
-        <PackageProjectUrl>https://github.com/BryanWilhite/Songhay.DataAccess/projects</PackageProjectUrl>
-        <PackageReleaseNotes>https://github.com/BryanWilhite/Songhay.DataAccess/projects/1</PackageReleaseNotes>
-        <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-        <PackageTags>ADO;ADO.NET;System.Data.Common;IDbConnection;IDataReader;EF;Entity Framework;</PackageTags>
-        <PackageVersion>$(AssemblyVersion)</PackageVersion>
-        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-        <Version>$(AssemblyVersion)</Version>
+      <TargetFramework>net6.0</TargetFramework>
+      <ImplicitUsings>enable</ImplicitUsings>
+      <Nullable>enable</Nullable>
     </PropertyGroup>
-
-    <PropertyGroup>
-        <TargetFrameworks>netstandard2.0;net5.0;</TargetFrameworks>
-    </PropertyGroup>
-
-    <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
-        <DefineConstants>TRACE;NETSTANDARD2_0</DefineConstants>
-    </PropertyGroup>
-
-    <PropertyGroup Condition=" '$(TargetFramework)' == 'net5.0' ">
-        <DefineConstants>TRACE;NET5_0</DefineConstants>
-    </PropertyGroup>
-
-    <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net5.0|AnyCPU'">
-        <DocumentationFile>.\Songhay.DataAccess.xml</DocumentationFile>
-    </PropertyGroup>
-
-    <ItemGroup Condition=" '$(TargetFramework)' == 'net5.0' ">
-        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.2" />
-    </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="SonghayCore" Version="5.0.0" />
+        <PackageReference Include="Microsoft.Data.Sqlite" Version="6.0.33" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.32" />
+        <PackageReference Include="SonghayCore" Version="6.1.4" />
     </ItemGroup>
 
 </Project>

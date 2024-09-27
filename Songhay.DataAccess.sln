@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Songhay.DataAccess", "Songh
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Songhay.DataAccess.Tests", "Songhay.DataAccess.Tests\Songhay.DataAccess.Tests.csproj", "{9346C6D6-6B09-4384-AD69-08F277D612A5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Songhay.Northwind.DataAccess", "Songhay.Northwind.DataAccess\Songhay.Northwind.DataAccess.csproj", "{C1F07D0B-9010-4C29-9DC4-629905F2DFD7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,9 +17,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{AF5ECFE9-3919-42CF-9947-3ABB51276C02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -44,5 +43,20 @@ Global
 		{9346C6D6-6B09-4384-AD69-08F277D612A5}.Release|x64.Build.0 = Release|Any CPU
 		{9346C6D6-6B09-4384-AD69-08F277D612A5}.Release|x86.ActiveCfg = Release|Any CPU
 		{9346C6D6-6B09-4384-AD69-08F277D612A5}.Release|x86.Build.0 = Release|Any CPU
+		{C1F07D0B-9010-4C29-9DC4-629905F2DFD7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1F07D0B-9010-4C29-9DC4-629905F2DFD7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1F07D0B-9010-4C29-9DC4-629905F2DFD7}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{C1F07D0B-9010-4C29-9DC4-629905F2DFD7}.Debug|x64.Build.0 = Debug|Any CPU
+		{C1F07D0B-9010-4C29-9DC4-629905F2DFD7}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C1F07D0B-9010-4C29-9DC4-629905F2DFD7}.Debug|x86.Build.0 = Debug|Any CPU
+		{C1F07D0B-9010-4C29-9DC4-629905F2DFD7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1F07D0B-9010-4C29-9DC4-629905F2DFD7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C1F07D0B-9010-4C29-9DC4-629905F2DFD7}.Release|x64.ActiveCfg = Release|Any CPU
+		{C1F07D0B-9010-4C29-9DC4-629905F2DFD7}.Release|x64.Build.0 = Release|Any CPU
+		{C1F07D0B-9010-4C29-9DC4-629905F2DFD7}.Release|x86.ActiveCfg = Release|Any CPU
+		{C1F07D0B-9010-4C29-9DC4-629905F2DFD7}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 EndGlobal

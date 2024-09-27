@@ -1,42 +1,42 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using System.Data;
 using System.Data.Common;
-using System.Linq;
 
-namespace Songhay.DataAccess.Extensions
+namespace Songhay.DataAccess.Extensions;
+
+/// <summary>
+/// Extensions of <see cref="DataSet"/>
+/// </summary>
+public static partial class DataSetExtensions
 {
     /// <summary>
-    /// Extensions of <see cref="DataSet"/>
+    /// Converts the <see cref="IEnumerable{T}"/> into a data table mappings.
     /// </summary>
-    public static partial class DataSetExtensions
+    /// <param name="setTableNames">The set table names.</param>
+    /// <exception cref="System.ArgumentNullException">setTableNames;The expected DataSet names are not here.</exception>
+    public static IReadOnlyCollection<DataTableMapping> ToDataTableMappings(this IEnumerable<string>? setTableNames)
     {
-        /// <summary>
-        /// Converts the <see cref="IEnumerable{T}"/> into a data table mappings.
-        /// </summary>
-        /// <param name="setTableNames">The set table names.</param>
-        /// <returns></returns>
-        /// <exception cref="System.ArgumentNullException">setTableNames;The expected DataSet names are not here.</exception>
-        public static IEnumerable<DataTableMapping> ToDataTableMappings(this IEnumerable<string> setTableNames)
-        {
-            if ((setTableNames == null) || (!setTableNames.Any())) throw new ArgumentNullException("setTableNames", "The expected DataSet names are not here.");
-            return setTableNames.Select((x, i) => new DataTableMapping(string.Format("Table{0}", i), x));
-        }
+        if (setTableNames == null) return Array.Empty<DataTableMapping>();
 
-        /// <summary>
-        /// Converts the <see cref="IEnumerable{T}"/> into a data table mappings.
-        /// </summary>
-        /// <param name="pairs">The pairs.</param>
-        /// <returns></returns>
-        /// <exception cref="System.ArgumentNullException">
-        /// pairs;The expected pairs are not here.
-        /// or
-        /// pairs;The expected pairs are not here.
-        /// </exception>
-        public static IEnumerable<DataTableMapping> ToDataTableMappings(this IEnumerable<KeyValuePair<string, string>> pairs)
-        {
-            if ((pairs == null) || (!pairs.Any())) throw new ArgumentNullException("pairs", "The expected pairs are not here.");
-            return pairs.Select(i => new DataTableMapping(i.Key, i.Value));
-        }
+        return setTableNames
+            .Select((name, i) => new DataTableMapping($"Table{i}", name))
+            .ToArray();
+    }
+
+    /// <summary>
+    /// Converts the <see cref="IEnumerable{T}"/> into a data table mappings.
+    /// </summary>
+    /// <param name="pairs">The pairs.</param>
+    /// <exception cref="System.ArgumentNullException">
+    /// pairs;The expected pairs are not here.
+    /// or
+    /// pairs;The expected pairs are not here.
+    /// </exception>
+    public static IReadOnlyCollection<DataTableMapping> ToDataTableMappings(this IEnumerable<KeyValuePair<string, string>>? pairs)
+    {
+        if (pairs == null) return Array.Empty<DataTableMapping>();
+
+        return pairs
+            .Select(pair => new DataTableMapping(pair.Key, pair.Value))
+            .ToArray();
     }
 }
