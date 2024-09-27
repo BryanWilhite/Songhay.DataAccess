@@ -1,5 +1,4 @@
-﻿using Songhay.Xml;
-using System.Collections;
+﻿using System.Collections;
 using System.Data;
 
 namespace Songhay.DataAccess;
@@ -18,6 +17,20 @@ static public class CommonScalarUtility
     /// <param name="connection">The object implementing <see cref="System.Data.IDbConnection"/>.</param>
     /// <param name="query">The SELECT SQL statement.</param>
     public static object? GetObject(IDbConnection? connection, string? query) => GetObject(connection, query, null);
+
+    /// <summary>
+    /// Return a <see cref="System.Object"/>
+    /// based on the DBMS query.
+    /// </summary>
+    /// <param name="connection">The object implementing <see cref="System.Data.IDbConnection"/>.</param>
+    /// <param name="query">The SELECT SQL statement.</param>
+    /// <param name="parameters">The parameters.</param>
+    public static object? GetObject(IDbConnection? connection, string? query, params (string Name, object? Value)[]? parameters)
+    {
+        IEnumerable<(string Name, object? Value)>? parameterCollection = parameters;
+
+        return GetObject(connection, query, parameterCollection);
+    }
 
     /// <summary>
     /// Return a <see cref="System.Object"/>
@@ -51,83 +64,5 @@ static public class CommonScalarUtility
         o = cmd.ExecuteScalar();
 
         return o;
-    }
-
-    /// <summary>
-    /// Return a <see cref="System.String"/>
-    /// based on the DBMS query.
-    /// </summary>
-    /// <param name="connection">The object implementing <see cref="System.Data.IDbConnection"/>.</param>
-    /// <param name="query">The SQL statement.</param>
-    /// <remarks>
-    /// Use this member for queries like this:
-    /// 
-    ///     DECLARE @xml XML
-    ///     SET @xml = (SELECT * FROM MyTable FOR XML AUTO, ELEMENTS, ROOT('RootElement'))
-    ///     SELECT @xml
-    /// 
-    /// </remarks>
-    public static string? GetString(IDbConnection? connection, string? query) => GetString(connection, query, null, true);
-
-    /// <summary>
-    /// Return a <see cref="System.String"/>
-    /// based on the DBMS query.
-    /// </summary>
-    /// <param name="connection">The object implementing <see cref="System.Data.IDbConnection"/>.</param>
-    /// <param name="query">The SQL statement.</param>
-    /// <param name="returnXmlForEmptySet">When <c>true</c> <see cref="Songhay.Xml.XmlUtility.GetInternalMessage(string,string[])"/> is used for empty sets.</param>
-    public static string? GetString(IDbConnection? connection, string? query, bool returnXmlForEmptySet) => GetString(connection, query, null, returnXmlForEmptySet);
-
-    /// <summary>
-    /// Return a <see cref="System.String"/>
-    /// based on the DBMS query.
-    /// </summary>
-    /// <param name="connection">The object implementing <see cref="System.Data.IDbConnection"/>.</param>
-    /// <param name="query">The SQL statement.</param>
-    /// <param name="parameterCollection">The parameters.</param>
-    public static string? GetString(IDbConnection? connection, string? query, IEnumerable? parameterCollection) =>
-        GetString(connection, query, parameterCollection, true);
-
-    /// <summary>
-    /// Return a <see cref="System.String"/>
-    /// based on the DBMS query.
-    /// </summary>
-    /// <param name="connection">The object implementing <see cref="System.Data.IDbConnection"/>.</param>
-    /// <param name="query">The SQL statement.</param>
-    /// <param name="parameterCollection">The parameters.</param>
-    /// <param name="returnXmlForEmptySet">When <c>true</c> <see cref="Songhay.Xml.XmlUtility.GetInternalMessage(string,string[])"/> is used for empty sets.</param>
-    public static string? GetString(IDbConnection? connection, string? query, IEnumerable? parameterCollection, bool returnXmlForEmptySet)
-    {
-        if (connection == null) throw new ArgumentNullException(nameof(connection), "The Common Connection object is null.");
-        if (string.IsNullOrEmpty(query)) throw new ArgumentException("The DBMS query was not specified.");
-
-        string? s = null;
-
-        if (connection.State != ConnectionState.Open) throw new DataException("The Connection to the DBMS is not open.");
-
-        using IDbCommand cmd = connection.CreateCommand();
-
-        cmd.CommandType = CommandType.Text;
-        cmd.CommandText = query;
-
-        if (parameterCollection != null)
-        {
-            IReadOnlyCollection<IDataParameter> parameters = CommonParameterUtility.GetParameters(cmd, parameterCollection);
-            foreach (IDataParameter p in parameters)
-            {
-                cmd.Parameters.Add(p);
-            }
-        }
-
-        object? o = cmd.ExecuteScalar();
-        if (o is string) s = o.ToString();
-
-        if (string.IsNullOrEmpty(s) && returnXmlForEmptySet)
-        {
-            string[] sa = { "The query executed against the DBMS connection returned an empty set." };
-            s = XmlUtility.GetInternalMessage("The query Returned No Data", sa);
-        }
-
-        return s;
     }
 }
