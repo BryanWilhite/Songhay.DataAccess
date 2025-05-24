@@ -1,8 +1,9 @@
 using System.Data;
-using Songhay.DataAccess.Extensions;
 using System.Data.Common;
 using System.Runtime.CompilerServices;
 using Microsoft.Extensions.Configuration;
+using Songhay.Extensions;
+using Songhay.DataAccess.Extensions;
 
 namespace Songhay.DataAccess.Models;
 
@@ -18,14 +19,18 @@ public sealed class CommonDbms : IDisposable
     /// <param name="configuration">the <see cref="IConfiguration"/></param>
     /// <param name="invariantProviderName">Name of the invariant provider.</param>
     /// <param name="connectionStringKey">The connection string key.</param>
-    public CommonDbms(IConfiguration configuration, string invariantProviderName, string? connectionStringKey)
+    public CommonDbms(IConfiguration configuration, string invariantProviderName, string? connectionStringKey, Action<IDbConnection>? connectionOpenHandler = null)
     {
-        _sql = new Dictionary<string, string>();
+        connectionStringKey.ThrowWhenNullOrWhiteSpace();
+
+        _sqlSet = [];
 
         InvariantProviderName = invariantProviderName;
         ProviderFactory = CommonDbmsUtility.GetProviderFactory(InvariantProviderName);
 
-        string connectionString = configuration.GetConnectionString(connectionStringKey);
+        string? connectionString = configuration.GetConnectionString(connectionStringKey);
+
+        _connectionOpenHandler = connectionOpenHandler;
 
         _connection = CommonDbmsUtility.GetConnection(ProviderFactory, connectionString);
         _connection.Open();
@@ -66,9 +71,9 @@ public sealed class CommonDbms : IDisposable
     /// <param name="key">The key.</param>
     private string? GetSql([CallerMemberName] string? key = null)
     {
-        if(string.IsNullOrWhiteSpace(key)) return null;
+        if (string.IsNullOrWhiteSpace(key)) return null;
 
-        string sql = _sql[key];
+        string sql = _sqlSet[key];
 
         return (InvariantProviderName == CommonDbmsConstants.OdbcProvider) ?
             sql.WithOdbcStyleParameters()
@@ -80,9 +85,7 @@ public sealed class CommonDbms : IDisposable
     /// Called when the <see cref="DbConnection"/> is open.
     /// </summary>
     /// <param name="connection">The connection.</param>
-    private void OnConnectionOpen(IDbConnection connection)
-    {
-    }
+    private void OnConnectionOpen(IDbConnection connection) => _connectionOpenHandler?.Invoke(connection);
 
     /// <summary>
     /// Sets the SQL.
@@ -91,12 +94,12 @@ public sealed class CommonDbms : IDisposable
     /// <exception cref="System.ArgumentNullException">sqlSetter;The expected SQL-statement setter is not here.</exception>
     private void SetSql(Func<Dictionary<string, string>> sqlSetter)
     {
-        if (sqlSetter == null) throw new ArgumentNullException(nameof(sqlSetter), "The expected SQL-statement setter is not here.");
+        ArgumentNullException.ThrowIfNull(sqlSetter);
 
-        _sql = sqlSetter.Invoke();
+        _sqlSet = sqlSetter.Invoke();
     }
 
-    readonly IDbConnection _connection;
-
-    Dictionary<string, string> _sql;
+    private readonly IDbConnection _connection;
+    private readonly Action<IDbConnection>? _connectionOpenHandler;
+    private Dictionary<string, string> _sqlSet;
 }

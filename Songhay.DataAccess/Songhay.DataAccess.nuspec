@@ -2,7 +2,7 @@
 <package >
     <metadata>
         <id>Songhay.DataAccess</id>
-        <version>6.0.0</version>
+        <version>8.0.0</version>
         <description>Reusable definitions for System.Data.Common (ADO.NET)</description>
         <authors>Bryan D. Wilhite</authors>
         <title>Songhay Data Access</title>
@@ -18,16 +18,16 @@
         <tags>ADO ADO.NET System.Data.Common IDbConnection IDataReader EF Entity Framework</tags>
         <repository type="git" url="https://github.com/BryanWilhite/Songhay.DataAccess"></repository>
         <dependencies>
-            <group targetFramework=".NET6.0">
-                <dependency id="Microsoft.Data.Sqlite" version="6.0.33" />
-                <dependency id="Microsoft.EntityFrameworkCore.Sqlite" version="6.0.32" />
-                <dependency id="SonghayCore" version="6.1.4" />
+            <group targetFramework=".NET8.0">
+                <dependency id="Microsoft.Data.Sqlite" version="8.0.16" />
+                <dependency id="Microsoft.EntityFrameworkCore.Sqlite" version="8.0.16" />
+                <dependency id="SonghayCore" version="8.0.1" />
             </group>
         </dependencies>
     </metadata>
     <files>
-        <file src="bin\Debug\net6.0\Songhay*.dll" target="lib\net6.0"/>
-        <file src="bin\Debug\net6.0\Songhay*.json" target="lib\net6.0"/>
+        <file src="bin\Debug\net8.0\Songhay*.dll" target="lib\net8.0"/>
+        <file src="bin\Debug\net8.0\Songhay*.json" target="lib\net8.0"/>
         <file src="**\*.cs" exclude="**\obj\**" target="src"/>
         <file src="..\LICENSE.md" target=""/>
         <file src="..\README.md" target=""/>
