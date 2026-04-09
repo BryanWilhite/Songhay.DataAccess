@@ -28,11 +28,11 @@ public static partial class IDataReaderExtensions
 
         JsonObject jORoot = new ();
 
-        JsonArray jA = new ();
+        JsonArray jA = [];
 
         while (reader.Read())
         {
-            var jO = new JsonObject();
+            JsonObject jO = new();
             for (int i = 0; i < reader.FieldCount; i++)
             {
                 JsonNode? node = reader.GetValue(i).ToJsonNode();

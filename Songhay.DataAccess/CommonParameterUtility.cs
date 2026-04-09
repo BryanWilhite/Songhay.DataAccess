@@ -1,6 +1,6 @@
-using Songhay.Models;
 using System.Collections;
 using System.Data;
+using Songhay.Models;
 
 namespace Songhay.DataAccess;
 
@@ -109,19 +109,21 @@ public static class CommonParameterUtility
     public static IReadOnlyCollection<IDataParameter> GetParameters(IDbCommand? dbmsCommand, IEnumerable? parameterCollection) =>
         parameterCollection switch
         {
-            null => Array.Empty<IDataParameter>(),
+            null => [],
             IEnumerable<IDataParameter> => parameterCollection.OfType<IDataParameter>().ToArray(),
             IEnumerable<DataParameterMetadata> meta => meta.Select(data => GetParameterFromParameterMetadata(dbmsCommand, data)).ToArray(),
             IEnumerable<(string Name, object? Value)> dict => dict.Select(pair => GetParameter(dbmsCommand, pair.Name, pair.Value ?? ProgramTypeUtility.SqlDatabaseNull())).ToArray(),
             Dictionary<string, object?> dict => dict.Select(pair => GetParameter(dbmsCommand, pair.Key, pair.Value ?? ProgramTypeUtility.SqlDatabaseNull())).ToArray(),
-            _ => throw new NotSupportedException(@"
-The parameter collection is not supported.
+            _ => throw new NotSupportedException("""
 
-Supported collections:
-    IEnumerable<IDataParameter> [pass-through]
-    IEnumerable<DataParameterMetadata>
-    Dictionary<string, object>
-")
+                                                 The parameter collection is not supported.
+
+                                                 Supported collections:
+                                                     IEnumerable<IDataParameter> [pass-through]
+                                                     IEnumerable<DataParameterMetadata>
+                                                     Dictionary<string, object>
+
+                                                 """)
         };
 
     /// <summary>

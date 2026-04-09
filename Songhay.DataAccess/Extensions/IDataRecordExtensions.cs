@@ -17,25 +17,25 @@ public static class IDataRecordExtensions
     /// <param name="record">the <see cref="IDataRecord"/></param>
     /// <param name="key">the key (or field name of the underlying <see cref="IDataRecord"/>)</param>
     /// <param name="logger">the conventional <see cref="ILogger"/></param>
-    public static int? GetReaderOrdinal(this IDataRecord? record, string? key, ILogger? logger)
+    public static int? GetReaderOrdinal(this IDataRecord? record, string? key, ILogger logger)
     {
         int? ordinal = null;
 
         if (record == null)
         {
-            logger?.LogErrorForMissingData<IDataRecord>();
+            logger.LogErrorForMissingData<IDataRecord>();
 
             return ordinal;
         }
 
         if (string.IsNullOrEmpty(key))
         {
-            logger?.LogErrorForMissingData("No key specified.");
+            logger.LogErrorForMissingData("No key specified.");
 
             return ordinal;
         }
 
-        logger?.LogInformation("Looking for ordinal for key `{Key}`", key);
+        logger.LogInformation("Looking for ordinal for key `{Key}`", key);
 
         try
         {
@@ -43,12 +43,12 @@ public static class IDataRecordExtensions
         }
         catch (Exception ex)
         {
-            logger?.LogError(ex, "The reader did not match the expected key.");
+            logger.LogError(ex, "The reader did not match the expected key.");
 
             return ordinal;
         }
 
-        logger?.LogInformation("Found ordinal, {Ordinal}, for key `{Key}`", ordinal, key);
+        logger.LogInformation("Found ordinal, {Ordinal}, for key `{Key}`", ordinal, key);
 
         return ordinal;
     }
@@ -59,19 +59,26 @@ public static class IDataRecordExtensions
     /// <param name="record">the <see cref="IDataRecord"/></param>
     /// <param name="key">the key (or field name of the underlying <see cref="IDataRecord"/>)</param>
     /// <param name="logger">the conventional <see cref="ILogger"/></param>
-    public static bool? ToBooleanOrDefault(this IDataRecord? record, string? key, ILogger? logger)
+    public static bool? ToBooleanOrDefault(this IDataRecord? record, string? key, ILogger logger)
     {
-        logger?.LogInformation("Looking for {Type} with key `{Key}`...", typeof(bool), key);
+        if (record == null)
+        {
+            logger.LogErrorForMissingData<IDataRecord>();
 
-        int? ordinal = GetReaderOrdinal(record, key, logger);
+            return null;
+        }
+
+        logger.LogInformation("Looking for {Type} with key `{Key}`...", typeof(bool), key);
+
+        int? ordinal = record.GetReaderOrdinal(key, logger);
 
         if(ordinal == null) return null;
 
-        Type fieldType = record!.GetFieldType(ordinal.Value);
+        Type fieldType = record.GetFieldType(ordinal.Value);
 
         if (typeof(bool) != fieldType)
         {
-            logger?.LogError("The expected field type is not here! Found {Type} instead. Returning null...", fieldType);
+            logger.LogError("The expected field type is not here! Found {Type} instead. Returning null...", fieldType);
 
             return null;
         }
@@ -82,7 +89,7 @@ public static class IDataRecordExtensions
         }
         catch (Exception e)
         {
-            logger?.LogError(e, "{Method} failed! Returning null...", nameof(IDataRecord.GetBoolean));
+            logger.LogError(e, "{Method} failed! Returning null...", nameof(IDataRecord.GetBoolean));
 
             return null;
         }
@@ -95,15 +102,22 @@ public static class IDataRecordExtensions
     /// <param name="record">the <see cref="IDataReader"/></param>
     /// <param name="key">the key (or field name of the <see cref="IDataRecord"/>)</param>
     /// <param name="logger">the conventional <see cref="ILogger"/></param>
-    public static object? ToBoxedValue(this IDataRecord? record, string? key, ILogger? logger)
+    public static object? ToBoxedValue(this IDataRecord? record, string? key, ILogger logger)
     {
+        if (record == null)
+        {
+            logger.LogErrorForMissingData<IDataRecord>();
+
+            return null;
+        }
+
         int? ordinal = record.GetReaderOrdinal(key, logger);
 
         if (ordinal == null) return null;
 
-        if (record!.IsDBNull(ordinal.GetValueOrDefault()))
+        if (record.IsDBNull(ordinal.GetValueOrDefault()))
         {
-            logger?.LogWarning("Warning: key `{Key}` is null! Returning...", key);
+            logger.LogWarning("Warning: key `{Key}` is null! Returning...", key);
 
             return null;
         }
@@ -119,19 +133,26 @@ public static class IDataRecordExtensions
     /// <param name="record">the <see cref="IDataRecord"/></param>
     /// <param name="key">the key (or field name of the underlying <see cref="IDataRecord"/>)</param>
     /// <param name="logger">the conventional <see cref="ILogger"/></param>
-    public static byte? ToByteOrDefault(this IDataRecord? record, string? key, ILogger? logger)
+    public static byte? ToByteOrDefault(this IDataRecord? record, string? key, ILogger logger)
     {
-        logger?.LogInformation("Looking for {Type} with key `{Key}`...", typeof(byte), key);
+        if (record == null)
+        {
+            logger.LogErrorForMissingData<IDataRecord>();
 
-        int? ordinal = GetReaderOrdinal(record, key, logger);
+            return null;
+        }
+
+        logger.LogInformation("Looking for {Type} with key `{Key}`...", typeof(byte), key);
+
+        int? ordinal = record.GetReaderOrdinal(key, logger);
 
         if(ordinal == null) return null;
 
-        Type fieldType = record!.GetFieldType(ordinal.Value);
+        Type fieldType = record.GetFieldType(ordinal.Value);
 
         if (typeof(byte) != fieldType)
         {
-            logger?.LogError("The expected field type is not here! Found {Type} instead. Returning null...", fieldType);
+            logger.LogError("The expected field type is not here! Found {Type} instead. Returning null...", fieldType);
 
             return null;
         }
@@ -142,7 +163,7 @@ public static class IDataRecordExtensions
         }
         catch (Exception e)
         {
-            logger?.LogError(e, "{Method} failed! Returning null...", nameof(IDataRecord.GetByte));
+            logger.LogError(e, "{Method} failed! Returning null...", nameof(IDataRecord.GetByte));
 
             return null;
         }
@@ -154,19 +175,26 @@ public static class IDataRecordExtensions
     /// <param name="record">the <see cref="IDataRecord"/></param>
     /// <param name="key">the key (or field name of the underlying <see cref="IDataRecord"/>)</param>
     /// <param name="logger">the conventional <see cref="ILogger"/></param>
-    public static char? ToCharOrDefault(this IDataRecord? record, string? key, ILogger? logger)
+    public static char? ToCharOrDefault(this IDataRecord? record, string? key, ILogger logger)
     {
-        logger?.LogInformation("Looking for {Type} with key `{Key}`...", typeof(char), key);
+        if (record == null)
+        {
+            logger.LogErrorForMissingData<IDataRecord>();
 
-        int? ordinal = GetReaderOrdinal(record, key, logger);
+            return null;
+        }
+
+        logger.LogInformation("Looking for {Type} with key `{Key}`...", typeof(char), key);
+
+        int? ordinal = record.GetReaderOrdinal(key, logger);
 
         if(ordinal == null) return null;
 
-        Type fieldType = record!.GetFieldType(ordinal.Value);
+        Type fieldType = record.GetFieldType(ordinal.Value);
 
         if (typeof(char) != fieldType)
         {
-            logger?.LogError("The expected field type is not here! Found {Type} instead. Returning null...", fieldType);
+            logger.LogError("The expected field type is not here! Found {Type} instead. Returning null...", fieldType);
 
             return null;
         }
@@ -177,7 +205,7 @@ public static class IDataRecordExtensions
         }
         catch (Exception e)
         {
-            logger?.LogError(e, "{Method} failed! Returning null...", nameof(IDataRecord.GetChar));
+            logger.LogError(e, "{Method} failed! Returning null...", nameof(IDataRecord.GetChar));
 
             return null;
         }
@@ -189,19 +217,26 @@ public static class IDataRecordExtensions
     /// <param name="record">the <see cref="IDataRecord"/></param>
     /// <param name="key">the key (or field name of the underlying <see cref="IDataRecord"/>)</param>
     /// <param name="logger">the conventional <see cref="ILogger"/></param>
-    public static DateTime? ToDateTimeOrDefault(this IDataRecord? record, string? key, ILogger? logger)
+    public static DateTime? ToDateTimeOrDefault(this IDataRecord? record, string? key, ILogger logger)
     {
-        logger?.LogInformation("Looking for {Type} with key `{Key}`...", typeof(DateTime), key);
+        if (record == null)
+        {
+            logger.LogErrorForMissingData<IDataRecord>();
 
-        int? ordinal = GetReaderOrdinal(record, key, logger);
+            return null;
+        }
+
+        logger.LogInformation("Looking for {Type} with key `{Key}`...", typeof(DateTime), key);
+
+        int? ordinal = record.GetReaderOrdinal(key, logger);
 
         if(ordinal == null) return null;
 
-        Type fieldType = record!.GetFieldType(ordinal.Value);
+        Type fieldType = record.GetFieldType(ordinal.Value);
 
         if (typeof(DateTime) != fieldType)
         {
-            logger?.LogError("The expected field type is not here! Found {Type} instead. Returning null...", fieldType);
+            logger.LogError("The expected field type is not here! Found {Type} instead. Returning null...", fieldType);
 
             return null;
         }
@@ -212,7 +247,7 @@ public static class IDataRecordExtensions
         }
         catch (Exception e)
         {
-            logger?.LogError(e, "{Method} failed! Returning null...", nameof(IDataRecord.GetDateTime));
+            logger.LogError(e, "{Method} failed! Returning null...", nameof(IDataRecord.GetDateTime));
 
             return null;
         }
@@ -224,19 +259,26 @@ public static class IDataRecordExtensions
     /// <param name="record">the <see cref="IDataRecord"/></param>
     /// <param name="key">the key (or field name of the underlying <see cref="IDataRecord"/>)</param>
     /// <param name="logger">the conventional <see cref="ILogger"/></param>
-    public static decimal? ToDecimalOrDefault(this IDataRecord? record, string? key, ILogger? logger)
+    public static decimal? ToDecimalOrDefault(this IDataRecord? record, string? key, ILogger logger)
     {
-        logger?.LogInformation("Looking for {Type} with key `{Key}`...", typeof(decimal), key);
+        if (record == null)
+        {
+            logger.LogErrorForMissingData<IDataRecord>();
 
-        int? ordinal = GetReaderOrdinal(record, key, logger);
+            return null;
+        }
+
+        logger.LogInformation("Looking for {Type} with key `{Key}`...", typeof(decimal), key);
+
+        int? ordinal = record.GetReaderOrdinal(key, logger);
 
         if(ordinal == null) return null;
 
-        Type fieldType = record!.GetFieldType(ordinal.Value);
+        Type fieldType = record.GetFieldType(ordinal.Value);
 
         if (typeof(decimal) != fieldType)
         {
-            logger?.LogError("The expected field type is not here! Found {Type} instead. Returning null...", fieldType);
+            logger.LogError("The expected field type is not here! Found {Type} instead. Returning null...", fieldType);
 
             return null;
         }
@@ -247,7 +289,7 @@ public static class IDataRecordExtensions
         }
         catch (Exception e)
         {
-            logger?.LogError(e, "{Method} failed! Returning null...", nameof(IDataRecord.GetDecimal));
+            logger.LogError(e, "{Method} failed! Returning null...", nameof(IDataRecord.GetDecimal));
 
             return null;
         }
@@ -259,19 +301,26 @@ public static class IDataRecordExtensions
     /// <param name="record">the <see cref="IDataRecord"/></param>
     /// <param name="key">the key (or field name of the underlying <see cref="IDataRecord"/>)</param>
     /// <param name="logger">the conventional <see cref="ILogger"/></param>
-    public static double? ToDoubleOrDefault(this IDataRecord? record, string? key, ILogger? logger)
+    public static double? ToDoubleOrDefault(this IDataRecord? record, string? key, ILogger logger)
     {
-        logger?.LogInformation("Looking for {Type} with key `{Key}`...", typeof(double), key);
+        if (record == null)
+        {
+            logger.LogErrorForMissingData<IDataRecord>();
 
-        int? ordinal = GetReaderOrdinal(record, key, logger);
+            return null;
+        }
+
+        logger.LogInformation("Looking for {Type} with key `{Key}`...", typeof(double), key);
+
+        int? ordinal = record.GetReaderOrdinal(key, logger);
 
         if(ordinal == null) return null;
 
-        Type fieldType = record!.GetFieldType(ordinal.Value);
+        Type fieldType = record.GetFieldType(ordinal.Value);
 
         if (typeof(double) != fieldType)
         {
-            logger?.LogError("The expected field type is not here! Found {Type} instead. Returning null...", fieldType);
+            logger.LogError("The expected field type is not here! Found {Type} instead. Returning null...", fieldType);
 
             return null;
         }
@@ -282,7 +331,7 @@ public static class IDataRecordExtensions
         }
         catch (Exception e)
         {
-            logger?.LogError(e, "{Method} failed! Returning null...", nameof(IDataRecord.GetDouble));
+            logger.LogError(e, "{Method} failed! Returning null...", nameof(IDataRecord.GetDouble));
 
             return null;
         }
@@ -294,19 +343,26 @@ public static class IDataRecordExtensions
     /// <param name="record">the <see cref="IDataRecord"/></param>
     /// <param name="key">the key (or field name of the underlying <see cref="IDataRecord"/>)</param>
     /// <param name="logger">the conventional <see cref="ILogger"/></param>
-    public static float? ToFloatOrDefault(this IDataRecord? record, string? key, ILogger? logger)
+    public static float? ToFloatOrDefault(this IDataRecord? record, string? key, ILogger logger)
     {
-        logger?.LogInformation("Looking for {Type} with key `{Key}`...", typeof(float), key);
+        if (record == null)
+        {
+            logger.LogErrorForMissingData<IDataRecord>();
 
-        int? ordinal = GetReaderOrdinal(record, key, logger);
+            return null;
+        }
+
+        logger.LogInformation("Looking for {Type} with key `{Key}`...", typeof(float), key);
+
+        int? ordinal = record.GetReaderOrdinal(key, logger);
 
         if(ordinal == null) return null;
 
-        Type fieldType = record!.GetFieldType(ordinal.Value);
+        Type fieldType = record.GetFieldType(ordinal.Value);
 
         if (typeof(float) != fieldType)
         {
-            logger?.LogError("The expected field type is not here! Found {Type} instead. Returning null...", fieldType);
+            logger.LogError("The expected field type is not here! Found {Type} instead. Returning null...", fieldType);
 
             return null;
         }
@@ -317,7 +373,7 @@ public static class IDataRecordExtensions
         }
         catch (Exception e)
         {
-            logger?.LogError(e, "{Method} failed! Returning null...", nameof(IDataRecord.GetFloat));
+            logger.LogError(e, "{Method} failed! Returning null...", nameof(IDataRecord.GetFloat));
 
             return null;
         }
@@ -329,19 +385,26 @@ public static class IDataRecordExtensions
     /// <param name="record">the <see cref="IDataRecord"/></param>
     /// <param name="key">the key (or field name of the underlying <see cref="IDataRecord"/>)</param>
     /// <param name="logger">the conventional <see cref="ILogger"/></param>
-    public static Guid? ToGuidOrDefault(this IDataRecord? record, string? key, ILogger? logger)
+    public static Guid? ToGuidOrDefault(this IDataRecord? record, string? key, ILogger logger)
     {
-        logger?.LogInformation("Looking for {Type} with key `{Key}`...", typeof(Guid), key);
+        if (record == null)
+        {
+            logger.LogErrorForMissingData<IDataRecord>();
 
-        int? ordinal = GetReaderOrdinal(record, key, logger);
+            return null;
+        }
+
+        logger.LogInformation("Looking for {Type} with key `{Key}`...", typeof(Guid), key);
+
+        int? ordinal = record.GetReaderOrdinal(key, logger);
 
         if(ordinal == null) return null;
 
-        Type fieldType = record!.GetFieldType(ordinal.Value);
+        Type fieldType = record.GetFieldType(ordinal.Value);
 
         if (typeof(float) != fieldType)
         {
-            logger?.LogError("The expected field type is not here! Found {Type} instead. Returning null...", fieldType);
+            logger.LogError("The expected field type is not here! Found {Type} instead. Returning null...", fieldType);
 
             return null;
         }
@@ -352,7 +415,7 @@ public static class IDataRecordExtensions
         }
         catch (Exception e)
         {
-            logger?.LogError(e, "{Method} failed! Returning null...", nameof(IDataRecord.GetGuid));
+            logger.LogError(e, "{Method} failed! Returning null...", nameof(IDataRecord.GetGuid));
 
             return null;
         }
@@ -364,19 +427,26 @@ public static class IDataRecordExtensions
     /// <param name="record">the <see cref="IDataRecord"/></param>
     /// <param name="key">the key (or field name of the underlying <see cref="IDataRecord"/>)</param>
     /// <param name="logger">the conventional <see cref="ILogger"/></param>
-    public static short? ToInt16OrDefault(this IDataRecord? record, string? key, ILogger? logger)
+    public static short? ToInt16OrDefault(this IDataRecord? record, string? key, ILogger logger)
     {
-        logger?.LogInformation("Looking for {Type} with key `{Key}`...", typeof(short), key);
+        if (record == null)
+        {
+            logger.LogErrorForMissingData<IDataRecord>();
 
-        int? ordinal = GetReaderOrdinal(record, key, logger);
+            return null;
+        }
+
+        logger.LogInformation("Looking for {Type} with key `{Key}`...", typeof(short), key);
+
+        int? ordinal = record.GetReaderOrdinal(key, logger);
 
         if(ordinal == null) return null;
 
-        Type fieldType = record!.GetFieldType(ordinal.Value);
+        Type fieldType = record.GetFieldType(ordinal.Value);
 
         if (typeof(short) != fieldType)
         {
-            logger?.LogError("The expected field type is not here! Found {Type} instead. Returning null...", fieldType);
+            logger.LogError("The expected field type is not here! Found {Type} instead. Returning null...", fieldType);
 
             return null;
         }
@@ -387,7 +457,7 @@ public static class IDataRecordExtensions
         }
         catch (Exception e)
         {
-            logger?.LogError(e, "{Method} failed! Returning null...", nameof(IDataRecord.GetInt16));
+            logger.LogError(e, "{Method} failed! Returning null...", nameof(IDataRecord.GetInt16));
 
             return null;
         }
@@ -399,19 +469,26 @@ public static class IDataRecordExtensions
     /// <param name="record">the <see cref="IDataRecord"/></param>
     /// <param name="key">the key (or field name of the underlying <see cref="IDataRecord"/>)</param>
     /// <param name="logger">the conventional <see cref="ILogger"/></param>
-    public static int? ToInt32OrDefault(this IDataRecord? record, string? key, ILogger? logger)
+    public static int? ToInt32OrDefault(this IDataRecord? record, string? key, ILogger logger)
     {
-        logger?.LogInformation("Looking for {Type} with key `{Key}`...", typeof(int), key);
+        if (record == null)
+        {
+            logger.LogErrorForMissingData<IDataRecord>();
 
-        int? ordinal = GetReaderOrdinal(record, key, logger);
+            return null;
+        }
+
+        logger.LogInformation("Looking for {Type} with key `{Key}`...", typeof(int), key);
+
+        int? ordinal = record.GetReaderOrdinal(key, logger);
 
         if(ordinal == null) return null;
 
-        Type fieldType = record!.GetFieldType(ordinal.Value);
+        Type fieldType = record.GetFieldType(ordinal.Value);
 
         if (typeof(int) != fieldType)
         {
-            logger?.LogError("The expected field type is not here! Found {Type} instead. Returning null...", fieldType);
+            logger.LogError("The expected field type is not here! Found {Type} instead. Returning null...", fieldType);
 
             return null;
         }
@@ -422,7 +499,7 @@ public static class IDataRecordExtensions
         }
         catch (Exception e)
         {
-            logger?.LogError(e, "{Method} failed! Returning null...", nameof(IDataRecord.GetInt32));
+            logger.LogError(e, "{Method} failed! Returning null...", nameof(IDataRecord.GetInt32));
 
             return null;
         }
@@ -434,19 +511,26 @@ public static class IDataRecordExtensions
     /// <param name="record">the <see cref="IDataRecord"/></param>
     /// <param name="key">the key (or field name of the underlying <see cref="IDataRecord"/>)</param>
     /// <param name="logger">the conventional <see cref="ILogger"/></param>
-    public static long? ToInt64OrDefault(this IDataRecord? record, string? key, ILogger? logger)
+    public static long? ToInt64OrDefault(this IDataRecord? record, string? key, ILogger logger)
     {
-        logger?.LogInformation("Looking for {Type} with key `{Key}`...", typeof(long), key);
+        if (record == null)
+        {
+            logger.LogErrorForMissingData<IDataRecord>();
 
-        int? ordinal = GetReaderOrdinal(record, key, logger);
+            return null;
+        }
+
+        logger.LogInformation("Looking for {Type} with key `{Key}`...", typeof(long), key);
+
+        int? ordinal = record.GetReaderOrdinal(key, logger);
 
         if(ordinal == null) return null;
 
-        Type fieldType = record!.GetFieldType(ordinal.Value);
+        Type fieldType = record.GetFieldType(ordinal.Value);
 
         if (typeof(long) != fieldType)
         {
-            logger?.LogError("The expected field type is not here! Found {Type} instead. Returning null...", fieldType);
+            logger.LogError("The expected field type is not here! Found {Type} instead. Returning null...", fieldType);
 
             return null;
         }
@@ -457,7 +541,7 @@ public static class IDataRecordExtensions
         }
         catch (Exception e)
         {
-            logger?.LogError(e, "{Method} failed! Returning null...", nameof(IDataRecord.GetInt64));
+            logger.LogError(e, "{Method} failed! Returning null...", nameof(IDataRecord.GetInt64));
 
             return null;
         }
@@ -484,19 +568,26 @@ public static class IDataRecordExtensions
     /// <param name="record">the <see cref="IDataRecord"/></param>
     /// <param name="key">the key (or field name of the underlying <see cref="IDataRecord"/>)</param>
     /// <param name="logger">the conventional <see cref="ILogger"/></param>
-    public static string? ToStringOrDefault(this IDataRecord? record, string? key, ILogger? logger)
+    public static string? ToStringOrDefault(this IDataRecord? record, string? key, ILogger logger)
     {
-        logger?.LogInformation("Looking for {Type} with key `{Key}`...", typeof(string), key);
+        if (record == null)
+        {
+            logger.LogErrorForMissingData<IDataRecord>();
 
-        int? ordinal = GetReaderOrdinal(record, key, logger);
+            return null;
+        }
+
+        logger.LogInformation("Looking for {Type} with key `{Key}`...", typeof(string), key);
+
+        int? ordinal = record.GetReaderOrdinal(key, logger);
 
         if(ordinal == null) return null;
 
-        Type fieldType = record!.GetFieldType(ordinal.Value);
+        Type fieldType = record.GetFieldType(ordinal.Value);
 
         if (typeof(string) != fieldType)
         {
-            logger?.LogError("The expected field type is not here! Found {Type} instead. Returning null...", fieldType);
+            logger.LogError("The expected field type is not here! Found {Type} instead. Returning null...", fieldType);
 
             return null;
         }
@@ -507,7 +598,7 @@ public static class IDataRecordExtensions
         }
         catch (Exception e)
         {
-            logger?.LogError(e, "{Method} failed! Returning null...", nameof(IDataRecord.GetString));
+            logger.LogError(e, "{Method} failed! Returning null...", nameof(IDataRecord.GetString));
 
             return null;
         }

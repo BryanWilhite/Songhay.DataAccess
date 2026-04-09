@@ -6,7 +6,7 @@ namespace Songhay.DataAccess.Extensions;
 /// <summary>
 /// Extensions of <see cref="DbContext"/>
 /// </summary>
-public static partial class DbContextExtensions
+public static class DbContextExtensions
 {
     /// <summary>
     /// Deletes an EF entity by the specified column and key.
@@ -19,18 +19,31 @@ public static partial class DbContextExtensions
     /// <returns>The number of rows affected.</returns>
     public static int DeleteByKey<TEntityType, TKey>(this DbContext? context, string? keyColumn, TKey? key)
     {
-        if (context == null) return default;
-        if (string.IsNullOrEmpty(keyColumn)) return default;
+        string? sql = GetDeleteByKeySql<TEntityType, TKey>(context, keyColumn, key);
 
-        IEntityType? entityType = context.Model.FindEntityType(typeof(TEntityType));
-        if (entityType == null) return default;
+        if (string.IsNullOrWhiteSpace(sql)) return 0;
 
-        string? tableName = entityType.GetTableName();
-        if (string.IsNullOrEmpty(tableName)) return default;
+        return context?.Database.ExecuteSqlRaw(sql, new { key }) ?? 0;
+    }
 
-        string sql = $"DELETE FROM {tableName} WHERE {keyColumn} = @key";
+    /// <summary>
+    /// Deletes an EF entity by the specified column and key, asynchronously.
+    /// </summary>
+    /// <typeparam name="TEntityType">The type of the entity.</typeparam>
+    /// <typeparam name="TKey">The type of the key.</typeparam>
+    /// <param name="context">the <see cref="DbContext"/></param>
+    /// <param name="keyColumn">The key column.</param>
+    /// <param name="key">The key.</param>
+    /// <returns>The number of rows affected.</returns>
+    public static async Task<int> DeleteByKeyAsync<TEntityType, TKey>(this DbContext? context, string? keyColumn, TKey? key)
+    {
+        if (context == null) return 0;
 
-        return context.Database.ExecuteSqlRaw(sql, new { key });
+        string? sql = GetDeleteByKeySql<TEntityType, TKey>(context, keyColumn, key);
+
+        if (string.IsNullOrWhiteSpace(sql)) return 0;
+
+        return await context.Database.ExecuteSqlRawAsync(sql, new { key });
     }
 
     /// <summary>
@@ -45,5 +58,21 @@ public static partial class DbContextExtensions
         if(entity == null) return;
 
         context.Entry(entity).State = EntityState.Detached;
+    }
+
+    internal static string? GetDeleteByKeySql<TEntityType, TKey>(DbContext? context, string? keyColumn, TKey? key)
+    {
+        if (context == null) return null;
+        if (string.IsNullOrEmpty(keyColumn) || keyColumn.Contains(';')) return null;
+
+        IEntityType? entityType = context.Model.FindEntityType(typeof(TEntityType));
+        if (entityType == null) return null;
+
+        string? tableName = entityType.GetTableName();
+        if (string.IsNullOrEmpty(tableName)) return null;
+
+        string sql = $"DELETE FROM {tableName} WHERE {keyColumn} = @key";
+
+        return sql;
     }
 }

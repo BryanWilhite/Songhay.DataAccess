@@ -33,7 +33,7 @@ public static partial class DataSetExtensions
     /// </exception>
     public static IReadOnlyCollection<DataTableMapping> ToDataTableMappings(this IEnumerable<KeyValuePair<string, string>>? pairs)
     {
-        if (pairs == null) return Array.Empty<DataTableMapping>();
+        if (pairs == null) return [];
 
         return pairs
             .Select(pair => new DataTableMapping(pair.Key, pair.Value))

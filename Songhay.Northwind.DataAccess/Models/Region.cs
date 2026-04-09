@@ -1,18 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿namespace Songhay.Northwind.DataAccess.Models;
 
-namespace Songhay.Northwind.DataAccess.Models
+public partial class Region
 {
-    public partial class Region
-    {
-        public Region()
-        {
-            Territories = new HashSet<Territory>();
-        }
+    public long RegionId { get; set; }
+    public string RegionDescription { get; set; } = null!;
 
-        public long RegionId { get; set; }
-        public string RegionDescription { get; set; } = null!;
-
-        public virtual ICollection<Territory> Territories { get; set; }
-    }
+    public virtual ICollection<Territory> Territories { get; set; } = new HashSet<Territory>();
 }

@@ -19,18 +19,18 @@ public static partial class IDataReaderExtensions
     /// <param name="path">the path the CSV file</param>
     /// <param name="includeHeader">when <c>true</c> include CSV headers</param>
     /// <param name="logger">the conventional <see cref="ILogger"/></param>
-    public static void StreamToCsvFile(this IDataReader? reader, string? path, bool includeHeader, ILogger? logger)
+    public static void StreamToCsvFile(this IDataReader? reader, string? path, bool includeHeader, ILogger logger)
     {
         if (reader == null)
         {
-            logger?.LogErrorForMissingData<IDataReader>();
+            logger.LogErrorForMissingData<IDataReader>();
 
             return;
         }
 
         if (string.IsNullOrWhiteSpace(path))
         {
-            logger?.LogError("Error: the expected path is not here.");
+            logger.LogError("Error: the expected path is not here.");
 
             return;
         }
@@ -39,13 +39,13 @@ public static partial class IDataReaderExtensions
 
         if (includeHeader)
         {
-            logger?.LogError("Getting headers...");
+            logger.LogError("Getting headers...");
 
             byte[] headersData = Encoding.UTF8.GetBytes(string.Concat(reader.ToRowNames().Select(n => n.ToCsvCell()).Aggregate((a, name) => $"{a},{name}"), Environment.NewLine));
             stream.Write(headersData, 0, headersData.Length);
         }
 
-        logger?.LogInformation("Writing to CSV file, `{Path}`...", path);
+        logger.LogInformation("Writing to CSV file, `{Path}`...", path);
 
         while (reader.Read())
         {

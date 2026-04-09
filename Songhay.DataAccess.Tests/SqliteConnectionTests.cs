@@ -5,13 +5,8 @@ using Xunit.Abstractions;
 
 namespace Songhay.DataAccess.Tests;
 
-public class SqliteConnectionTests
+public class SqliteConnectionTests(ITestOutputHelper helper)
 {
-    public SqliteConnectionTests(ITestOutputHelper helper)
-    {
-        _helper = helper;
-    }
-
     [Theory]
     [InlineData("../../../../db/northwind.db")]
     public void ShouldOpenSqliteConnection(string dbPath)
@@ -26,6 +21,4 @@ public class SqliteConnectionTests
 
         Assert.Equal(ConnectionState.Open, connection.State);
     }
-
-    readonly ITestOutputHelper _helper;
 }

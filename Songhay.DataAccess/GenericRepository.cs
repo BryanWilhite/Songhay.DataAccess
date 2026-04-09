@@ -6,7 +6,6 @@ using Songhay.DataAccess.Abstractions;
 
 namespace Songhay.DataAccess;
 
-
 public class GenericRepository<T, TKey>(DbContext dbContext, int allLimit = 1000) : IGenericRepository<T, TKey> where T : class where TKey : struct
 {
     public async Task<T?> DeleteAsync(TKey key)

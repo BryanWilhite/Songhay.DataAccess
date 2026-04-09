@@ -89,10 +89,10 @@ public partial class OracleTableMetadata
     {
         var sb = new StringBuilder();
 
-        if (!string.IsNullOrEmpty(TableName)) sb.AppendFormat("TableName: {0}\n", TableName);
-        if (ColumnId != null) sb.AppendFormat("ColumnId: {0}\n", ColumnId);
-        if (!string.IsNullOrEmpty(ColumnName)) sb.AppendFormat("ColumnName: {0}\n", ColumnName);
-        if (IsNullable != null) sb.AppendFormat("IsNullable: {0}\n", IsNullable);
+        if (!string.IsNullOrEmpty(TableName)) sb.Append($"TableName: {TableName}\n");
+        if (ColumnId != null) sb.Append($"ColumnId: {ColumnId}\n");
+        if (!string.IsNullOrEmpty(ColumnName)) sb.Append($"ColumnName: {ColumnName}\n");
+        if (IsNullable != null) sb.Append($"IsNullable: {IsNullable}\n");
 
         return (sb.Length > 0 ? sb.ToString() : base.ToString()) ?? string.Empty;
     }

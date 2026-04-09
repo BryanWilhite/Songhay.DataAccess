@@ -19,6 +19,7 @@ public sealed class CommonDbms : IDisposable
     /// <param name="configuration">the <see cref="IConfiguration"/></param>
     /// <param name="invariantProviderName">Name of the invariant provider.</param>
     /// <param name="connectionStringKey">The connection string key.</param>
+    /// <param name="connectionOpenHandler">the action to take when the database connection opens</param>
     public CommonDbms(IConfiguration configuration, string invariantProviderName, string? connectionStringKey, Action<IDbConnection>? connectionOpenHandler = null)
     {
         connectionStringKey.ThrowWhenNullOrWhiteSpace();
@@ -75,7 +76,7 @@ public sealed class CommonDbms : IDisposable
 
         string sql = _sqlSet[key];
 
-        return (InvariantProviderName == CommonDbmsConstants.OdbcProvider) ?
+        return InvariantProviderName == CommonDbmsConstants.OdbcProvider ?
             sql.WithOdbcStyleParameters()
             :
             sql;

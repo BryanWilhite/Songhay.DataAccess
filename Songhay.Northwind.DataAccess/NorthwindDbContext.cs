@@ -6,7 +6,7 @@ namespace Songhay.Northwind.DataAccess;
 
 public class NorthwindDbContext : DbContext
 {
-    public NorthwindDbContext() : this(new DbContextOptions<NorthwindDbContext> {}) {}
+    public NorthwindDbContext() : this(new DbContextOptions<NorthwindDbContext>()) {}
 
     public NorthwindDbContext(DbContextOptions<NorthwindDbContext> options) : base(options)
     {

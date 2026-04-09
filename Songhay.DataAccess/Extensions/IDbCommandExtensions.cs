@@ -20,6 +20,7 @@ public static class IDbCommandExtensions
 
         if (connection == null) throw new ArgumentNullException(nameof(connection), "The expected connection is not here.");
         command.Connection = connection;
+
         return command;
     }
 
@@ -35,6 +36,7 @@ public static class IDbCommandExtensions
 
         if (transaction == null) throw new ArgumentNullException(nameof(transaction), "The expected transaction is not here.");
         command.Transaction = transaction;
+
         return command;
     }
 }

@@ -16,7 +16,7 @@ public static partial class IDataReaderExtensions
     /// <param name="reader">the <see cref="IDataRecord"/></param>
     /// <param name="key">the key (or field name of the underlying <see cref="IDataRecord"/>)</param>
     /// <param name="logger">the conventional <see cref="ILogger"/></param>
-    public static int? GetReaderOrdinal(this IDataReader? reader, string? key, ILogger? logger) => (reader as IDataRecord).GetReaderOrdinal(key, logger);
+    public static int? GetReaderOrdinal(this IDataReader? reader, string? key, ILogger logger) => (reader as IDataRecord).GetReaderOrdinal(key, logger);
 
     /// <summary>
     /// Tries to return the value of <see cref="IDataRecord.GetBoolean"/> or null.
@@ -24,7 +24,7 @@ public static partial class IDataReaderExtensions
     /// <param name="reader">the <see cref="IDataReader"/></param>
     /// <param name="key">the key (or field name of the underlying <see cref="IDataRecord"/>)</param>
     /// <param name="logger">the conventional <see cref="ILogger"/></param>
-    public static bool? ToBooleanOrDefault(this IDataReader? reader, string? key, ILogger? logger) => (reader as IDataRecord).ToBooleanOrDefault(key, logger);
+    public static bool? ToBooleanOrDefault(this IDataReader? reader, string? key, ILogger logger) => (reader as IDataRecord).ToBooleanOrDefault(key, logger);
 
     /// <summary>
     /// Converts the specified <see cref="IDataReader"/> into a boxed value
@@ -33,7 +33,7 @@ public static partial class IDataReaderExtensions
     /// <param name="reader">the <see cref="IDataReader"/></param>
     /// <param name="key">the key (or field name of the <see cref="IDataRecord"/>)</param>
     /// <param name="logger">the conventional <see cref="ILogger"/></param>
-    public static object? ToBoxedValue(this IDataReader? reader, string? key, ILogger? logger) => (reader as IDataRecord).ToBoxedValue(key, logger);
+    public static object? ToBoxedValue(this IDataReader? reader, string? key, ILogger logger) => (reader as IDataRecord).ToBoxedValue(key, logger);
 
     /// <summary>
     /// Tries to return the value of <see cref="IDataRecord.GetByte"/> or null.
@@ -41,7 +41,7 @@ public static partial class IDataReaderExtensions
     /// <param name="reader">the <see cref="IDataReader"/></param>
     /// <param name="key">the key (or field name of the underlying <see cref="IDataRecord"/>)</param>
     /// <param name="logger">the conventional <see cref="ILogger"/></param>
-    public static byte? ToByteOrDefault(this IDataReader? reader, string? key, ILogger? logger) => (reader as IDataRecord).ToByteOrDefault(key, logger);
+    public static byte? ToByteOrDefault(this IDataReader? reader, string? key, ILogger logger) => (reader as IDataRecord).ToByteOrDefault(key, logger);
 
     /// <summary>
     /// Tries to return the value of <see cref="IDataRecord.GetChar"/> or null.
@@ -49,7 +49,7 @@ public static partial class IDataReaderExtensions
     /// <param name="reader">the <see cref="IDataReader"/></param>
     /// <param name="key">the key (or field name of the underlying <see cref="IDataRecord"/>)</param>
     /// <param name="logger">the conventional <see cref="ILogger"/></param>
-    public static char? ToCharOrDefault(this IDataReader? reader, string? key, ILogger? logger) => (reader as IDataRecord).ToCharOrDefault(key, logger);
+    public static char? ToCharOrDefault(this IDataReader? reader, string? key, ILogger logger) => (reader as IDataRecord).ToCharOrDefault(key, logger);
 
     /// <summary>
     /// Tries to return the value of <see cref="IDataRecord.GetDateTime"/> or null.
@@ -57,7 +57,7 @@ public static partial class IDataReaderExtensions
     /// <param name="reader">the <see cref="IDataReader"/></param>
     /// <param name="key">the key (or field name of the underlying <see cref="IDataRecord"/>)</param>
     /// <param name="logger">the conventional <see cref="ILogger"/></param>
-    public static DateTime? ToDateTimeOrDefault(this IDataReader? reader, string? key, ILogger? logger) => (reader as IDataRecord).ToDateTimeOrDefault(key, logger);
+    public static DateTime? ToDateTimeOrDefault(this IDataReader? reader, string? key, ILogger logger) => (reader as IDataRecord).ToDateTimeOrDefault(key, logger);
 
     /// <summary>
     /// Tries to return the value of <see cref="IDataRecord.GetDecimal"/> or null.
@@ -65,7 +65,7 @@ public static partial class IDataReaderExtensions
     /// <param name="reader">the <see cref="IDataReader"/></param>
     /// <param name="key">the key (or field name of the underlying <see cref="IDataRecord"/>)</param>
     /// <param name="logger">the conventional <see cref="ILogger"/></param>
-    public static decimal? ToDecimalOrDefault(this IDataReader? reader, string? key, ILogger? logger) => (reader as IDataRecord).ToDecimalOrDefault(key, logger);
+    public static decimal? ToDecimalOrDefault(this IDataReader? reader, string? key, ILogger logger) => (reader as IDataRecord).ToDecimalOrDefault(key, logger);
 
     /// <summary>
     /// Tries to return the value of <see cref="IDataRecord.GetDouble"/> or null.
@@ -73,7 +73,7 @@ public static partial class IDataReaderExtensions
     /// <param name="reader">the <see cref="IDataReader"/></param>
     /// <param name="key">the key (or field name of the underlying <see cref="IDataRecord"/>)</param>
     /// <param name="logger">the conventional <see cref="ILogger"/></param>
-    public static double? ToDoubleOrDefault(this IDataReader? reader, string? key, ILogger? logger) => (reader as IDataRecord).ToDoubleOrDefault(key, logger);
+    public static double? ToDoubleOrDefault(this IDataReader? reader, string? key, ILogger logger) => (reader as IDataRecord).ToDoubleOrDefault(key, logger);
 
     /// <summary>
     /// Tries to return the value of <see cref="IDataRecord.GetFloat"/> or null.
@@ -81,7 +81,7 @@ public static partial class IDataReaderExtensions
     /// <param name="reader">the <see cref="IDataReader"/></param>
     /// <param name="key">the key (or field name of the underlying <see cref="IDataRecord"/>)</param>
     /// <param name="logger">the conventional <see cref="ILogger"/></param>
-    public static float? ToFloatOrDefault(this IDataReader? reader, string? key, ILogger? logger) => (reader as IDataRecord).ToFloatOrDefault(key, logger);
+    public static float? ToFloatOrDefault(this IDataReader? reader, string? key, ILogger logger) => (reader as IDataRecord).ToFloatOrDefault(key, logger);
 
     /// <summary>
     /// Tries to return the value of <see cref="IDataRecord.GetGuid"/> or null.
@@ -89,7 +89,7 @@ public static partial class IDataReaderExtensions
     /// <param name="reader">the <see cref="IDataReader"/></param>
     /// <param name="key">the key (or field name of the underlying <see cref="IDataRecord"/>)</param>
     /// <param name="logger">the conventional <see cref="ILogger"/></param>
-    public static Guid? ToGuidOrDefault(this IDataReader? reader, string? key, ILogger? logger) => (reader as IDataRecord).ToGuidOrDefault(key, logger);
+    public static Guid? ToGuidOrDefault(this IDataReader? reader, string? key, ILogger logger) => (reader as IDataRecord).ToGuidOrDefault(key, logger);
 
     /// <summary>
     /// Tries to return the value of <see cref="IDataRecord.GetInt16"/> or null.
@@ -97,7 +97,7 @@ public static partial class IDataReaderExtensions
     /// <param name="reader">the <see cref="IDataReader"/></param>
     /// <param name="key">the key (or field name of the underlying <see cref="IDataRecord"/>)</param>
     /// <param name="logger">the conventional <see cref="ILogger"/></param>
-    public static short? ToInt16OrDefault(this IDataReader? reader, string? key, ILogger? logger) => (reader as IDataRecord).ToInt16OrDefault(key, logger);
+    public static short? ToInt16OrDefault(this IDataReader? reader, string? key, ILogger logger) => (reader as IDataRecord).ToInt16OrDefault(key, logger);
 
     /// <summary>
     /// Tries to return the value of <see cref="IDataRecord.GetInt32"/> or null.
@@ -105,7 +105,7 @@ public static partial class IDataReaderExtensions
     /// <param name="reader">the <see cref="IDataReader"/></param>
     /// <param name="key">the key (or field name of the underlying <see cref="IDataRecord"/>)</param>
     /// <param name="logger">the conventional <see cref="ILogger"/></param>
-    public static int? ToInt32OrDefault(this IDataReader? reader, string? key, ILogger? logger) => (reader as IDataRecord).ToInt32OrDefault(key, logger);
+    public static int? ToInt32OrDefault(this IDataReader? reader, string? key, ILogger logger) => (reader as IDataRecord).ToInt32OrDefault(key, logger);
 
     /// <summary>
     /// Tries to return the value of <see cref="IDataRecord.GetInt64"/> or null.
@@ -113,7 +113,7 @@ public static partial class IDataReaderExtensions
     /// <param name="reader">the <see cref="IDataReader"/></param>
     /// <param name="key">the key (or field name of the underlying <see cref="IDataRecord"/>)</param>
     /// <param name="logger">the conventional <see cref="ILogger"/></param>
-    public static long? ToInt64OrDefault(this IDataReader? reader, string? key, ILogger? logger) => (reader as IDataRecord).ToInt64OrDefault(key, logger);
+    public static long? ToInt64OrDefault(this IDataReader? reader, string? key, ILogger logger) => (reader as IDataRecord).ToInt64OrDefault(key, logger);
 
     /// <summary>
     /// Converts the <see cref="IDataReader"/> into <see cref="IEnumerable{T}"/>.
@@ -144,5 +144,5 @@ public static partial class IDataReaderExtensions
     /// <param name="reader">the <see cref="IDataReader"/></param>
     /// <param name="key">the key (or field name of the underlying <see cref="IDataRecord"/>)</param>
     /// <param name="logger">the conventional <see cref="ILogger"/></param>
-    public static string? ToStringOrDefault(this IDataReader? reader, string? key, ILogger? logger) => (reader as IDataRecord).ToStringOrDefault(key, logger);
+    public static string? ToStringOrDefault(this IDataReader? reader, string? key, ILogger logger) => (reader as IDataRecord).ToStringOrDefault(key, logger);
 }

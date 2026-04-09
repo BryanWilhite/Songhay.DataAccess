@@ -2,7 +2,7 @@
 <package >
     <metadata>
         <id>Songhay.DataAccess</id>
-        <version>8.0.0</version>
+        <version>10.0.0</version>
         <description>Reusable definitions for System.Data.Common (ADO.NET)</description>
         <authors>Bryan D. Wilhite</authors>
         <title>Songhay Data Access</title>
@@ -13,21 +13,21 @@
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <summary>Reusable definitions for System.Data.Common (ADO.NET)</summary>
         <readme>README.md</readme>
-        <releaseNotes>https://github.com/BryanWilhite/Songhay.DataAccess/issues/14</releaseNotes>
-        <copyright>(c) 2024 Bryan D. Wilhite</copyright>
+        <releaseNotes>dependencies updated 📦🔝</releaseNotes>
+        <copyright>(c) 2026 Bryan D. Wilhite</copyright>
         <tags>ADO ADO.NET System.Data.Common IDbConnection IDataReader EF Entity Framework</tags>
         <repository type="git" url="https://github.com/BryanWilhite/Songhay.DataAccess"></repository>
         <dependencies>
-            <group targetFramework=".NET8.0">
-                <dependency id="Microsoft.Data.Sqlite" version="8.0.16" />
-                <dependency id="Microsoft.EntityFrameworkCore.Sqlite" version="8.0.16" />
-                <dependency id="SonghayCore" version="8.0.1" />
+            <group targetFramework=".net10.0">
+                <dependency id="Microsoft.Data.Sqlite" version="10.0.5" />
+                <dependency id="Microsoft.EntityFrameworkCore.Sqlite" version="10.0.5" />
+                <dependency id="SonghayCore" version="10.0.0" />
             </group>
         </dependencies>
     </metadata>
     <files>
-        <file src="bin\Debug\net8.0\Songhay*.dll" target="lib\net8.0"/>
-        <file src="bin\Debug\net8.0\Songhay*.json" target="lib\net8.0"/>
+        <file src="bin\Debug\net10.0\Songhay*.dll" target="lib\net10.0"/>
+        <file src="bin\Debug\net10.0\Songhay*.json" target="lib\net10.0"/>
         <file src="**\*.cs" exclude="**\obj\**" target="src"/>
         <file src="..\LICENSE.md" target=""/>
         <file src="..\README.md" target=""/>

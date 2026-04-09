@@ -1,19 +1,14 @@
 using System.Data;
 using System.Data.Common;
 using Microsoft.Data.Sqlite;
-using Songhay.DataAccess.Models;
 using Xunit;
 using Xunit.Abstractions;
+using Songhay.DataAccess.Models;
 
 namespace Songhay.DataAccess.Tests;
 
-public class CommonDbmsUtilityTests
+public class CommonDbmsUtilityTests(ITestOutputHelper helper)
 {
-    public CommonDbmsUtilityTests(ITestOutputHelper helper)
-    {
-        _helper = helper;
-    }
-
     [Theory]
     [InlineData("../../../../db/northwind.db", "UPDATE Categories SET CategoryName = CategoryName", 8)]
     public void DoCommand_Test(string dbPath, string sql, int expected)
@@ -100,7 +95,7 @@ public class CommonDbmsUtilityTests
 
         foreach (var name in names)
         {
-            _helper.WriteLine(name);
+            helper.WriteLine(name);
         }
     }
 
@@ -114,6 +109,4 @@ public class CommonDbmsUtilityTests
         var actual = CommonDbmsUtility.RemoveKeyValuePairFromConnectionString(connectionString, key);
         Assert.Equal(expected, actual);
     }
-
-    readonly ITestOutputHelper _helper;
 }

@@ -5,21 +5,15 @@ using System.Xml.Linq;
 using Meziantou.Extensions.Logging.Xunit;
 using Microsoft.Data.Sqlite;
 using Microsoft.Extensions.Logging;
-using Songhay.DataAccess.Extensions;
 using Xunit;
 using Xunit.Abstractions;
+using Songhay.DataAccess.Extensions;
 
 namespace Songhay.DataAccess.Tests.Extensions;
 
 // ReSharper disable once InconsistentNaming
-public class IDataReaderExtensionsTests
+public class IDataReaderExtensionsTests(ITestOutputHelper helper)
 {
-    public IDataReaderExtensionsTests(ITestOutputHelper helper)
-    {
-        _helper = helper;
-        _loggerProvider = new XUnitLoggerProvider(helper);
-    }
-
     [Theory]
     [InlineData("../../../../db/northwind.db", "SELECT * FROM Employees", "../../../csv", "employees")]
     public void StreamToCsvFile_Test(string dbPath, string sql, string csvPath, string outputName)
@@ -135,7 +129,7 @@ public class IDataReaderExtensionsTests
         JsonObject? actual = reader.ToJsonObject();
         Assert.NotNull(actual);
 
-        _helper.WriteLine(actual.ToJsonString(new JsonSerializerOptions { WriteIndented = true }));
+        helper.WriteLine(actual.ToJsonString(new JsonSerializerOptions { WriteIndented = true }));
     }
 
     [Theory]
@@ -183,9 +177,8 @@ public class IDataReaderExtensionsTests
         XDocument actual = reader.ToXDocument();
         Assert.NotNull(actual);
 
-        _helper.WriteLine(actual.ToString());
+        helper.WriteLine(actual.ToString());
     }
 
-    readonly ITestOutputHelper _helper;
-    readonly XUnitLoggerProvider _loggerProvider;
+    private readonly XUnitLoggerProvider _loggerProvider = new(helper);
 }

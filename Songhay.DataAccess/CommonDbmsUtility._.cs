@@ -125,7 +125,7 @@ public static partial class CommonDbmsUtility
             }
         }
 
-        var i = cmd.ExecuteNonQuery();
+        int i = cmd.ExecuteNonQuery();
 
         return i;
     }
@@ -255,7 +255,7 @@ public static partial class CommonDbmsUtility
     {
         if (string.IsNullOrEmpty(connectionString)) throw new ArgumentNullException(nameof(connectionString), "The expected connection string is not here.");
 
-        var builder = new DbConnectionStringBuilder
+        DbConnectionStringBuilder builder = new()
         {
             ConnectionString = connectionString,
         };

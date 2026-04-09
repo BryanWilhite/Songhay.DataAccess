@@ -5,7 +5,7 @@ namespace Songhay.DataAccess.Extensions;
 /// <summary>
 /// Extensions of <see cref="System.String"/>
 /// </summary>
-public static class StringExtensions
+public static partial class StringExtensions
 {
     /// <summary>
     /// Escapes the specified value.
@@ -83,5 +83,8 @@ public static class StringExtensions
     /// Returns the specified <see cref="string"/> ODBC style parameters.
     /// </summary>
     /// <param name="sql">The SQL.</param>
-    public static string? WithOdbcStyleParameters(this string? sql) => string.IsNullOrEmpty(sql) ? null : Regex.Replace(sql, @"\:\w+", "?");
+    public static string? WithOdbcStyleParameters(this string? sql) => string.IsNullOrEmpty(sql) ? null : MatchAllWordsPrefixedWithAColon().Replace(sql,"?");
+
+    [GeneratedRegex(@"\:\w+")]
+    internal static partial Regex MatchAllWordsPrefixedWithAColon();
 }

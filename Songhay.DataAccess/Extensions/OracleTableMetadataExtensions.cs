@@ -15,7 +15,7 @@ public static class OracleTableMetadataExtensions
     /// Converts the <see cref="OracleTableMetadata"/> into a data annotations or <see cref="string.Empty"/>.
     /// </summary>
     /// <param name="metadata">The metadata.</param>
-    public static string ToDataAnnotationsOrEmpty(this OracleTableMetadata metadata)
+    public static string ToDataAnnotationsOrEmpty(this OracleTableMetadata? metadata)
     {
         var annotations = string.Empty;
         if (metadata == null) return annotations;
@@ -54,7 +54,7 @@ public static class OracleTableMetadataExtensions
     /// <remarks>
     /// Reference: “Oracle to .NET type mapping” [https://www.devart.com/dotconnect/oracle/docs/DataTypeMapping.html]
     /// </remarks>
-    public static string? ToDotNetTypeName(this OracleTableMetadata metadata)
+    public static string? ToDotNetTypeName(this OracleTableMetadata? metadata)
     {
         if (metadata == null) return null;
         if (string.IsNullOrEmpty(metadata.DataType)) return "object";

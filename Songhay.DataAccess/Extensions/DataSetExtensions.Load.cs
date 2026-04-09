@@ -58,7 +58,7 @@ public static partial class DataSetExtensions
     {
         if (set == null) throw new ArgumentNullException(nameof(set), "The expected set of data is not here.");
         if (command == null) throw new ArgumentNullException(nameof(command), "The expected command is not here.");
-        if (mappings == null || !mappings.Any()) throw new ArgumentNullException(nameof(mappings), "The expected table mappings are not here.");
+        if (mappings == null || mappings.Count == 0) throw new ArgumentNullException(nameof(mappings), "The expected table mappings are not here.");
         if (string.IsNullOrEmpty(invariantProviderName)) throw new ArgumentNullException(nameof(invariantProviderName), "The expected invariant provider name.");
 
         using DbDataAdapter adapter = (DbDataAdapter)CommonDbmsUtility
