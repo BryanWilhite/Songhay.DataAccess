@@ -36,4 +36,4 @@ The [extension method classes](https://github.com/BryanWilhite/Songhay.DataAcces
 - [DbProviderFactories](https://learn.microsoft.com/en-us/dotnet/framework/data/adonet/dbproviderfactories)
 - “[Obtaining a DbProviderFactory](https://learn.microsoft.com/en-us/dotnet/framework/data/adonet/obtaining-a-dbproviderfactory)”
 
-@[BryanWilhite](https://twitter.com/bryanwilhite)
+[Bryan Wilhite is on LinkedIn](https://www.linkedin.com/in/wilhite)🇺🇸💼
