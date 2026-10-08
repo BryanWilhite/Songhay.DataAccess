@@ -1,5 +1,4 @@
 using System.Data;
-using System.Data.Common;
 using Microsoft.Data.Sqlite;
 using Xunit;
 using Xunit.Abstractions;
@@ -32,16 +31,18 @@ public class SqliteConnectionTests(ITestOutputHelper helper)
     {
         dbPath = ProgramAssemblyUtility.GetPathFromAssembly(GetType().Assembly, dbPath);
         Assert.True(File.Exists(dbPath));
+        CommonDbmsUtility.RegisterMicrosoftSqlite();
 
         //arrange:
-        const string invariantProviderName = "Microsoft.Data.Sqlite";
-        DbProviderFactories.RegisterFactory(invariantProviderName, SqliteFactory.Instance);
         string connectionString = $"Data Source={dbPath}";
 
         helper.WriteLine($"{nameof(connectionString)}: {connectionString}");
 
         //act:
-        using CommonDbms commonDbms = new (invariantProviderName, connectionString, cnn=> Assert.Equal(ConnectionState.Open, cnn.State));
+        using CommonDbms commonDbms = new (
+            CommonDbmsConstants.MicrosoftSqliteProvider,
+            connectionString,
+            cnn=> Assert.Equal(ConnectionState.Open, cnn.State));
 
         //assert:
         Assert.Equal(ConnectionState.Open, commonDbms.Connection.State);
