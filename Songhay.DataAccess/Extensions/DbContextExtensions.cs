@@ -19,7 +19,7 @@ public static class DbContextExtensions
     /// <returns>The number of rows affected.</returns>
     public static int DeleteByKey<TEntityType, TKey>(this DbContext? context, string? keyColumn, TKey? key)
     {
-        string? sql = GetDeleteByKeySql<TEntityType, TKey>(context, keyColumn, key);
+        string? sql = GetDeleteByKeySql<TEntityType>(context, keyColumn);
 
         if (string.IsNullOrWhiteSpace(sql)) return 0;
 
@@ -39,7 +39,7 @@ public static class DbContextExtensions
     {
         if (context == null) return 0;
 
-        string? sql = GetDeleteByKeySql<TEntityType, TKey>(context, keyColumn, key);
+        string? sql = GetDeleteByKeySql<TEntityType>(context, keyColumn);
 
         if (string.IsNullOrWhiteSpace(sql)) return 0;
 
@@ -60,7 +60,7 @@ public static class DbContextExtensions
         context.Entry(entity).State = EntityState.Detached;
     }
 
-    internal static string? GetDeleteByKeySql<TEntityType, TKey>(DbContext? context, string? keyColumn, TKey? key)
+    internal static string? GetDeleteByKeySql<TEntityType>(DbContext? context, string? keyColumn)
     {
         if (context == null) return null;
         if (string.IsNullOrEmpty(keyColumn) || keyColumn.Contains(';')) return null;

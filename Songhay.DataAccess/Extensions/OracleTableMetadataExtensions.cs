@@ -17,17 +17,17 @@ public static class OracleTableMetadataExtensions
     /// <param name="metadata">The metadata.</param>
     public static string ToDataAnnotationsOrEmpty(this OracleTableMetadata? metadata)
     {
-        var annotations = string.Empty;
+        string annotations = string.Empty;
         if (metadata == null) return annotations;
         if (string.IsNullOrEmpty(metadata.DataType)) return annotations;
 
-        var dbTypeName = metadata.DataType.ToLowerInvariant();
-        var isNullable = metadata.IsNullable.HasValue && metadata.IsNullable.GetValueOrDefault();
-        var columnName = metadata.ColumnName.ToCamelCaseFromUnderscores();
-        var newLinePlus4 = "\n    ";
+        string dbTypeName = metadata.DataType.ToLowerInvariant();
+        bool isNullable = metadata.IsNullable.HasValue && metadata.IsNullable.GetValueOrDefault();
+        string? columnName = metadata.ColumnName.ToCamelCaseFromUnderscores();
+        const string newLinePlus4 = "\n    ";
 
-        var maxLengthTemplate = "[MaxLength({0}, ErrorMessage = \"{1} cannot exceed {0} characters.\")]";
-        var minLengthTemplate = "[MinLength({0}, ErrorMessage = \"{1} cannot have less than {0} characters.\")]";
+        const string maxLengthTemplate = "[MaxLength({0}, ErrorMessage = \"{1} cannot exceed {0} characters.\")]";
+        const string minLengthTemplate = "[MinLength({0}, ErrorMessage = \"{1} cannot have less than {0} characters.\")]";
 
         if (dbTypeName.Contains("varchar"))
         {
@@ -59,7 +59,7 @@ public static class OracleTableMetadataExtensions
         if (metadata == null) return null;
         if (string.IsNullOrEmpty(metadata.DataType)) return "object";
 
-        var typeName = "string";
+        string typeName = "string";
 
         switch (metadata.DataType.ToLowerInvariant())
         {

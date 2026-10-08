@@ -123,7 +123,7 @@ public static class IDataRecordExtensions
         }
 
         object o = record.GetValue(ordinal.GetValueOrDefault());
-        
+
         return string.IsNullOrWhiteSpace($"{o}") ? null : o;
     }
 

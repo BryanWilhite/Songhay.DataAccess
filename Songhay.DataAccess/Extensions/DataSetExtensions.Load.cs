@@ -65,7 +65,7 @@ public static partial class DataSetExtensions
             .GetAdapter(invariantProviderName)
             .ToReferenceTypeValueOrThrow();
 
-        adapter.TableMappings.AddRange(mappings.ToArray());
+        adapter.TableMappings.AddRange([.. mappings]);
         adapter.SelectCommand = command;
         adapter.Fill(set);
 

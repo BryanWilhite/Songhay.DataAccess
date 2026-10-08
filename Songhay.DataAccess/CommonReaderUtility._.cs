@@ -109,7 +109,7 @@ public static partial class CommonReaderUtility
         IDbCommand selectCommand = connection.CreateCommand();
 
         IReadOnlyCollection<IDataParameter> parameters = CommonParameterUtility.GetParameters(selectCommand, parameterCollection);
-        selectCommand.CommandType = query.ToLower().Contains("select ") ? CommandType.Text : CommandType.StoredProcedure;
+        selectCommand.CommandType = query.Contains("select ", StringComparison.OrdinalIgnoreCase) ? CommandType.Text : CommandType.StoredProcedure;
         selectCommand.CommandText = query;
         selectCommand.CommandTimeout = timeout;
 

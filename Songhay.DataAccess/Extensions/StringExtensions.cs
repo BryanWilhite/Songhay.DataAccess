@@ -45,7 +45,7 @@ public static partial class StringExtensions
             })
             .ToArray();
 
-        return string.Join(string.Empty, words);
+        return string.Concat(words);
     }
 
     /// <summary>
@@ -58,7 +58,7 @@ public static partial class StringExtensions
     /// Converts the <see cref="string"/> into CSV cell format.
     /// </summary>
     /// <param name="data">The data.</param>
-    public static string ToCsvCell(this string? data) => string.Concat("\"", $"{data}".Replace("\"", "\"\""), "\"");
+    public static string ToCsvCell(this string? data) => $"\"{$"{data}".Replace("\"", "\"\"")}\"";
 
     /// <summary>
     /// Converts the <see cref="string"/> into a nullable boolean.

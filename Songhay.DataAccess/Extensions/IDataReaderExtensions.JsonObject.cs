@@ -32,7 +32,7 @@ public static partial class IDataReaderExtensions
 
         while (reader.Read())
         {
-            JsonObject jO = new();
+            JsonObject jO = [];
             for (int i = 0; i < reader.FieldCount; i++)
             {
                 JsonNode? node = reader.GetValue(i).ToJsonNode();

@@ -15,11 +15,9 @@ public static partial class DataSetExtensions
     /// <exception cref="System.ArgumentNullException">setTableNames;The expected DataSet names are not here.</exception>
     public static IReadOnlyCollection<DataTableMapping> ToDataTableMappings(this IEnumerable<string>? setTableNames)
     {
-        if (setTableNames == null) return Array.Empty<DataTableMapping>();
+        if (setTableNames == null) return [];
 
-        return setTableNames
-            .Select((name, i) => new DataTableMapping($"Table{i}", name))
-            .ToArray();
+        return [.. setTableNames.Select((name, i) => new DataTableMapping($"Table{i}", name))];
     }
 
     /// <summary>
@@ -35,8 +33,6 @@ public static partial class DataSetExtensions
     {
         if (pairs == null) return [];
 
-        return pairs
-            .Select(pair => new DataTableMapping(pair.Key, pair.Value))
-            .ToArray();
+        return [.. pairs.Select(pair => new DataTableMapping(pair.Key, pair.Value))];
     }
 }
