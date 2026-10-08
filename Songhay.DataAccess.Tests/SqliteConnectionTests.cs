@@ -28,7 +28,7 @@ public class SqliteConnectionTests(ITestOutputHelper helper)
 
     [Theory]
     [InlineData("../../../../db/northwind.db")]
-    public void ShouldOpenSqliteConnectionWithCommonDb(string dbPath)
+    public void ShouldOpenSqliteConnectionWithCommonDbms(string dbPath)
     {
         dbPath = ProgramAssemblyUtility.GetPathFromAssembly(GetType().Assembly, dbPath);
         Assert.True(File.Exists(dbPath));
