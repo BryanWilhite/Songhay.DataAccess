@@ -1,4 +1,3 @@
-using System.Data;
 using System.Text.Json.Nodes;
 
 namespace Songhay.DataAccess.Extensions;

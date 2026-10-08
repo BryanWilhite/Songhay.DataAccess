@@ -1,6 +1,3 @@
-using System.Data;
-using Microsoft.Extensions.Logging;
-
 namespace Songhay.DataAccess.Extensions;
 
 /// <summary>

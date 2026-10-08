@@ -1,6 +1,4 @@
-﻿using System.Data;
-
-namespace Songhay.DataAccess.Extensions;
+﻿namespace Songhay.DataAccess.Extensions;
 
 /// <summary>
 /// Extensions of <see cref="IDbCommand"/>

@@ -2,7 +2,7 @@ using System.Linq.Expressions;
 
 namespace Songhay.DataAccess.Abstractions;
 
-public interface IGenericRepository<T, TKey> where T : class where TKey : struct
+public interface IGenericRepository<T, in TKey> where T : class where TKey : struct
 {
     Task<T?> DeleteAsync(TKey key);
 

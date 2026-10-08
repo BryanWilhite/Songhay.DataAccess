@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Data;
-
-namespace Songhay.DataAccess;
+﻿namespace Songhay.DataAccess;
 
 /// <summary>
 /// A few static helper members

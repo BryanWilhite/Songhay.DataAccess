@@ -1,6 +1,4 @@
-﻿using System.Data;
-using System.Text;
-using System.Xml;
+﻿using System.Xml;
 using System.Xml.Linq;
 
 namespace Songhay.DataAccess;

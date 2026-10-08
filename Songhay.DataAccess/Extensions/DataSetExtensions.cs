@@ -1,7 +1,4 @@
-﻿using System.Data;
-using System.Data.Common;
-
-namespace Songhay.DataAccess.Extensions;
+﻿namespace Songhay.DataAccess.Extensions;
 
 /// <summary>
 /// Extensions of <see cref="DataSet"/>
