@@ -11,6 +11,27 @@ public sealed class CommonDbms : IDisposable
     /// <summary>
     /// Initializes a new instance of the <see cref="CommonDbms"/> class.
     /// </summary>
+    /// <param name="invariantProviderName">Name of the invariant provider.</param>
+    /// <param name="connectionString">The connection string.</param>
+    /// <param name="connectionOpenHandler">the action to take when the database connection opens</param>
+    public CommonDbms(string invariantProviderName, string? connectionString, Action<IDbConnection>? connectionOpenHandler = null)
+    {
+        connectionString.ThrowWhenNullOrWhiteSpace();
+
+        InvariantProviderName = invariantProviderName;
+        ProviderFactory = CommonDbmsUtility.GetProviderFactory(InvariantProviderName);
+
+        _connectionOpenHandler = connectionOpenHandler;
+
+        Connection = CommonDbmsUtility.GetConnection(ProviderFactory, connectionString);
+        Connection.Open();
+
+        OnConnectionOpen(Connection);
+    }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="CommonDbms"/> class.
+    /// </summary>
     /// <param name="configuration">the <see cref="IConfiguration"/></param>
     /// <param name="invariantProviderName">Name of the invariant provider.</param>
     /// <param name="connectionStringKey">The connection string key.</param>
@@ -26,10 +47,10 @@ public sealed class CommonDbms : IDisposable
 
         _connectionOpenHandler = connectionOpenHandler;
 
-        _connection = CommonDbmsUtility.GetConnection(ProviderFactory, connectionString);
-        _connection.Open();
+        Connection = CommonDbmsUtility.GetConnection(ProviderFactory, connectionString);
+        Connection.Open();
 
-        OnConnectionOpen(_connection);
+        OnConnectionOpen(Connection);
     }
 
     /// <summary>
@@ -49,9 +70,14 @@ public sealed class CommonDbms : IDisposable
     public DbProviderFactory ProviderFactory { get; }
 
     /// <summary>
+    /// The <see cref="IDbConnection"/>
+    /// </summary>
+    public IDbConnection Connection { get; }
+
+    /// <summary>
     /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
     /// </summary>
-    public void Dispose() => CommonDbmsUtility.Close(_connection);
+    public void Dispose() => CommonDbmsUtility.Close(Connection);
 
     /// <summary>
     /// Called when the <see cref="DbConnection"/> is open.
@@ -59,6 +85,5 @@ public sealed class CommonDbms : IDisposable
     /// <param name="connection">The connection.</param>
     private void OnConnectionOpen(IDbConnection connection) => _connectionOpenHandler?.Invoke(connection);
 
-    private readonly IDbConnection _connection;
     private readonly Action<IDbConnection>? _connectionOpenHandler;
 }
